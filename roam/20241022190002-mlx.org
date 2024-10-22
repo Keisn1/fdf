@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       3b6f4ec2-fac6-44bd-b4a9-8683d8278682
+:END:
+#+title: mlx
+#+date: [2024-10-22 Tue 19:00]
+#+startup: overview

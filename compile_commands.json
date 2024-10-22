@@ -1,0 +1,18 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Imlx_linux",
+      "-c",
+      "-o",
+      "obj/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/kay/workspace/fdf",
+    "file": "/home/kay/workspace/fdf/src/main.c",
+    "output": "/home/kay/workspace/fdf/obj/main.o"
+  }
+]
