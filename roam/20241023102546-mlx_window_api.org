@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       832adb34-a640-4c13-8b33-d49fbf5924a0
+:END:
+#+title: mlx window api
+#+date: [2024-10-23 Wed 10:25]
+#+startup: overview
+
+- windows can be closed by pressing =CTRL-C= in terminal
+* mlx_new_window
+- opens a new window
+- size_x, size_y, title (title bar) as parameters
+- mlx can handle an arbitrary amount of seperate windows
+- returns =NULL= if it fails
+* mlx_clear_window
+- clearing in black
+- return nothing
+* mlx_destroy_window
+- destroying the window
+- return nothing
+* Example
+#+begin_src c
+void* win_ptr = mlx_new_window(mlx_ptr, 1600 , 900, "first_window");
+if (!win_ptr) {
+	ft_putendl_fd("Error: Could not open a window", STDOUT_FILENO);
+	free(mlx_ptr);
+	return 1;
+}
+
+mlx_destroy_window(mlx_ptr, win_ptr);
+free(mlx_ptr);
+#+end_src

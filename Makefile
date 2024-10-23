@@ -18,7 +18,6 @@
 # TEST := test
 # RUN := run
 
-# LIBFT := -Llibft -ft
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
@@ -27,15 +26,16 @@ OBJ := obj
 BIN := bin
 SRC_FILES := $(wildcard $(SRC)/*.c)
 OBJ_FILES := $(SRC_FILES:$(SRC)/%.c=$(OBJ)/%.o)
-INCLUDES := -Imlx_linux
-LIBMX := -Lmlx_linux -lmlx -lXext -lX11
+INCLUDES := -Imlx_linux -Ilibft -Iincludes
+LIBFT := -Llibft -lft
+LIBMX := -Lmlx_linux -lmlx -lXext -lX11 -lm
 
 NAME := fdf
 
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(LIBMX)
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME) $(LIBMX) $(LIBFT)
 
 $(OBJ)/%.o: $(SRC)/%.c
 	@mkdir -p $(OBJ)  # Ensure the obj directory exists

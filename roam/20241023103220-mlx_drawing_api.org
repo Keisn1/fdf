@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       72c4f6ee-2a5b-4140-9300-eb5decbc5748
+:END:
+#+title: mlx drawing api
+#+date: [2024-10-23 Wed 10:32]
+#+startup: overview
+
+- In both functions, it is impossible  to  display  anything outside the specified window, nor display in another window in front of the selected one.
+  - by experimentation, this does not result in any error
+
+* mlx_pixel_put
+- (connection, window, x, y, color)
+- origin is upper left corner
+- y-axis goes down, x-axis is pointing right
+
+* mlx_string_put
+   Parameters  for  mlx_string_put  ()  have the same meaning. Instead of a
+   simple pixel, the specified string will be displayed at ( x , y ).
+
+* [[id:de1cb426-e8ff-4a20-81b3-3067b742bdde][color]]
+* example
+#+begin_src c
+int count1 = 0;
+while (count1++ < 900) {
+        int count2 = 200;
+        while (count2++ < 400) {
+            mlx_pixel_put( mlx_ptr, win_ptr, count2, count1, rgb(255, 255, 255));
+            mlx_pixel_put( mlx_ptr, win_ptr, 2000, 2000, rgb(255, 255, 255));
+        }
+}
+/* putting string */
+mlx_string_put(mlx_ptr, win_ptr, 1200, 450, rgb(255, 255, 255), "hello Kay");
+#+end_src

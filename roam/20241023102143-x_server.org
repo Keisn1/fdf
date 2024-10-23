@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       e8057aa3-7b74-4ef7-83d1-a56bc3cb4d91
+:END:
+#+title: X-Server
+#+date: [2024-10-23 Wed 10:21]
+#+startup: overview
+
+- manages the screen, keyboard and mouse
+- It is often refered to as a "display").

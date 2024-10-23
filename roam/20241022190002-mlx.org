@@ -4,3 +4,20 @@
 #+title: mlx
 #+date: [2024-10-22 Tue 19:00]
 #+startup: overview
+
+https://harm-smits.github.io/42docs/libs/minilibx
+
+* Usage
+** Include
+- mlx.h should be included for a correct use of the MiniLibX API
+** Linking
+- you'll need to link your software with several libraries, including the MiniLibX library itself
+#+begin_src shell
+-lmlx -lXext -lX11
+#+end_src
+- specify path with =-L= flag
+
+* [[id:bde4a506-4119-4411-8ee8-53e003451617][mlx_init]]
+* [[id:832adb34-a640-4c13-8b33-d49fbf5924a0][mlx window api]]
+* [[id:72c4f6ee-2a5b-4140-9300-eb5decbc5748][mlx drawing api]]
+* [[id:5164bfdf-ba98-421c-bd1d-a14ce24cfffc][mlx image api]]

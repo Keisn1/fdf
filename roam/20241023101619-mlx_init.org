@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       bde4a506-4119-4411-8ee8-53e003451617
+:END:
+#+title: mlx_init
+#+date: [2024-10-23 Wed 10:16]
+#+startup: overview
+
+
+initialize the connection between  your  software  and  the  X-SERVER (display).
+#+begin_src c
+void* mlx_ptr = mlx_init();
+if (!mlx_ptr) {
+	ft_putendl_fd("Error: Could not establish a connection", STDOUT_FILENO);
+	return 1;
+}
+#+end_src

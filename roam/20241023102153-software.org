@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       4bb38914-0dd4-4062-bbc8-ef87769e3e71
+:END:
+#+title: Software
+#+date: [2024-10-23 Wed 10:21]
+#+startup: overview
+
+- wants to:
+  - draw something on the screen
+  - get keyboard & mouse entries

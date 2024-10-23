@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       059b4204-132b-4743-bee1-4f86ef27fc3c
+:END:
+#+title: x window concept
+#+date: [2024-10-23 Wed 10:17]
+#+startup: overview
+
+https://en.wikipedia.org/wiki/X_Window_System
+
+X-Window is a network-oriented graphical system for Unix.
+
+- A network connection must be established between these *two entities* to send drawing  orders
+It is based on two main parts:
+  - Software
+  - X-Server
+
+* [[id:4bb38914-0dd4-4062-bbc8-ef87769e3e71][Software]]
+* [[id:e8057aa3-7b74-4ef7-83d1-a56bc3cb4d91][X-Server]]
+* [[id:bde4a506-4119-4411-8ee8-53e003451617][mlx_init]]
