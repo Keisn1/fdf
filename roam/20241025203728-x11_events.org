@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       60dea449-d879-4ff0-b438-6350e4da60a4
+:END:
+#+title: X11 events
+#+date: [2024-10-25 Fri 20:37]
+#+startup: overview
+
+[[https://tronche.com/gui/x/][Xlib Programming manual]]
+[[https://tronche.com/gui/x/xlib/events/][X11 events manual]]

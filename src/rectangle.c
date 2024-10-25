@@ -1,13 +1,13 @@
 #include "fdf.h"
 #include "mlx.h"
 
-void draw_rect_win(void* mlx_ptr, void *win_ptr, t_rectangle rect, t_pos pos) {
+void draw_rect_win(t_mlx_data mlx_data, t_rectangle rect, t_pos pos) {
 	int x = pos.x;
 	int y = pos.y;
 	while (x < rect.width) {
 		y = pos.y;
 		while (y < rect.height)
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y++, rect.color);
+			mlx_pixel_put(mlx_data.mlx_ptr, mlx_data.win_ptr, x, y++, rect.color);
 		x++;
 	}
 }

@@ -1,0 +1,64 @@
+:PROPERTIES:
+:ID:       b98a5552-96aa-4167-b706-8ca5cc1273d6
+:END:
+#+title: mlx handle events
+#+date: [2024-10-25 Fri 18:28]
+#+startup: overview
+
+- need to use *mlx_loop*
+  - never returns
+  - infinite loop that waits for an event
+  - calls a user-defined function associated to that event
+  - only the mlx connection is needed (=mlx_ptr=)
+
+- events
+  - keyboard
+  - mouse
+  - expose event
+    - a part of the window should be re-drawn
+
+- Each window can define a different function for the same event
+
+* event Hook functions
+#+begin_src c
+int mlx_key_hook ( void *win_ptr, int (*funct_ptr)(), void *param );
+int mlx_mouse_hook ( void *win_ptr, int (*funct_ptr)(), void *param );
+int mlx_expose_hook ( void *win_ptr, int (*funct_ptr)(), void *param );
+#+end_src
+** funct_ptr
+- function to be called when an event occurs
+- assignement is specific to the assigned window
+** param
+- used to store the parameters, that the function might need
+- never used nor modified by MiniLibX
+** key_hook params
+#+begin_src c
+key_hook(int keycode,void *param);
+#+end_src
+- keycode tells you which key is pressed
+  #+begin_src c
+#include <keysymdef.h>
+  #+end_src
+** mouse_hook params
+#+begin_src c
+mouse_hook(int button,int x,int y,void *param);
+#+end_src
+- x and y are coordinates of the mouse click in the window
+- button is which button was pressed
+* loop hook
+#+begin_src c
+int mlx_loop_hook ( void *mlx_ptr, int (*funct_ptr)(), void *param );
+#+end_src
+- identical prototype and syntax
+- the function will be called when no events occur
+- params:
+  #+begin_src c
+loop_hook(void *param);
+  #+end_src
+* generic hook
+#+begin_src c
+int mlx_hook(void *win_ptr, int x_event, int x_mask, int (*funct)(), void *param);
+#+end_src
+- mlx_hook is generic access to X-Window events
+- go to ~X.h~
+- x_event and x_mask values are taken from ~X.h~  see [[id:60dea449-d879-4ff0-b438-6350e4da60a4][X11 events]] and [[id:3b6a655c-3eb0-4333-abff-bf68bbfc8f9d][X11 masks]]

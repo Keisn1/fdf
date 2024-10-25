@@ -10,6 +10,42 @@
       "-Iincludes",
       "-c",
       "-o",
+      "obj/circle.o",
+      "src/circle.c"
+    ],
+    "directory": "/home/kay/workspace/fdf",
+    "file": "/home/kay/workspace/fdf/src/circle.c",
+    "output": "/home/kay/workspace/fdf/obj/circle.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Imlx_linux",
+      "-Ilibft",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "obj/gradient.o",
+      "src/gradient.c"
+    ],
+    "directory": "/home/kay/workspace/fdf",
+    "file": "/home/kay/workspace/fdf/src/gradient.c",
+    "output": "/home/kay/workspace/fdf/obj/gradient.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Imlx_linux",
+      "-Ilibft",
+      "-Iincludes",
+      "-c",
+      "-o",
       "obj/helpers.o",
       "src/helpers.c"
     ],
@@ -28,12 +64,12 @@
       "-Iincludes",
       "-c",
       "-o",
-      "obj/main.o",
-      "src/main.c"
+      "obj/line.o",
+      "src/line.c"
     ],
     "directory": "/home/kay/workspace/fdf",
-    "file": "/home/kay/workspace/fdf/src/main.c",
-    "output": "/home/kay/workspace/fdf/obj/main.o"
+    "file": "/home/kay/workspace/fdf/src/line.c",
+    "output": "/home/kay/workspace/fdf/obj/line.o"
   },
   {
     "arguments": [
@@ -52,5 +88,83 @@
     "directory": "/home/kay/workspace/fdf",
     "file": "/home/kay/workspace/fdf/src/rectangle.c",
     "output": "/home/kay/workspace/fdf/obj/rectangle.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Imlx_linux",
+      "-Ilibft",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "obj/triangle.o",
+      "src/triangle.c"
+    ],
+    "directory": "/home/kay/workspace/fdf",
+    "file": "/home/kay/workspace/fdf/src/triangle.c",
+    "output": "/home/kay/workspace/fdf/obj/triangle.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "obj/circle.o",
+      "obj/gradient.o",
+      "obj/helpers.o",
+      "obj/line.o",
+      "obj/rectangle.o",
+      "obj/triangle.o",
+      "-Imlx_linux",
+      "-Ilibft",
+      "-Iincludes",
+      "-o",
+      "fdf",
+      "run/main.c"
+    ],
+    "directory": "/home/kay/workspace/fdf",
+    "file": "/home/kay/workspace/fdf/run/main.c",
+    "output": "/home/kay/workspace/fdf/fdf"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Imlx_linux",
+      "-Ilibft",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "obj/test_gradient.o",
+      "tests/test_gradient.cpp"
+    ],
+    "directory": "/home/kay/workspace/fdf",
+    "file": "/home/kay/workspace/fdf/tests/test_gradient.cpp",
+    "output": "/home/kay/workspace/fdf/obj/test_gradient.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Imlx_linux",
+      "-Ilibft",
+      "-Iincludes",
+      "-c",
+      "-o",
+      "obj/test_main.o",
+      "tests/test_main.cpp"
+    ],
+    "directory": "/home/kay/workspace/fdf",
+    "file": "/home/kay/workspace/fdf/tests/test_main.cpp",
+    "output": "/home/kay/workspace/fdf/obj/test_main.o"
   }
 ]
