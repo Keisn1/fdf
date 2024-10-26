@@ -5,8 +5,9 @@
 #+date: [2024-10-23 Wed 10:17]
 #+startup: overview
 
-https://en.wikipedia.org/wiki/X_Window_System
+[[https://www.x.org/releases/X11R7.6/doc/xproto/x11protocol.html][x window system protocol]]
 [[https://tronche.com/gui/x/][Xlib Programming manual]]
+https://en.wikipedia.org/wiki/X_Window_System
 
 X-Window is a network-oriented graphical system for Unix.
 - A network connection must be established between these *two entities* to send drawing  orders

@@ -62,3 +62,4 @@ int mlx_hook(void *win_ptr, int x_event, int x_mask, int (*funct)(), void *param
 - mlx_hook is generic access to X-Window events
 - go to ~X.h~
 - x_event and x_mask values are taken from ~X.h~  see [[id:60dea449-d879-4ff0-b438-6350e4da60a4][X11 events]] and [[id:3b6a655c-3eb0-4333-abff-bf68bbfc8f9d][X11 masks]]
+* [[id:45f306ef-6757-42f2-b80c-bd1bdac7c808][keycode vs keysym]]

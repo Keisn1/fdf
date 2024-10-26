@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       a07b146c-3d0e-4b08-b3f8-1c079241f450
+:END:
+#+title: axonometric projection
+#+date: [2024-10-26 Sat 12:16]
+#+startup: overview
+
+[[id:7c5e3a94-89c4-428f-ad6a-08f023224b6a][orthographic projection]]
+
+- where object is rotated around one or more of its axes
