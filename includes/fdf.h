@@ -2,35 +2,43 @@
 #define FDF_H
 
 /* gradient */
-#include "libft.h"
 # ifdef __cplusplus
 
 extern "C"
 {
 # endif
 
+#include <stdbool.h>
+
+struct			s_bres
+{
+	int			dx;
+	int			sx;
+	int			dy;
+	int			sy;
+	int			err;
+	int			e2;
+};
 
 typedef struct s_point{
 	int x;
 	int y;
 } t_point;
 
-typedef struct s_points{
-	t_point* points;
-	size_t length;
-} t_points;
+/* mlx */
+typedef struct s_mlx_data {
+	void *mlx_ptr;
+	void *win_ptr;
+} t_mlx_data;
 
+typedef int (*PixelPutFunc)(void*, void*, int, int, int);
 int my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
-void test_fun(void *mlx_ptr, void *win_ptr, int x, int y);
-t_points bres_line(t_point p_0, t_point p_1);
+void bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1, PixelPutFunc pixel_put);
+
+/* void draw_rect_win(void* mlx_ptr, void* win_ptr, int p1, int p2, PixelPutFunc pixel_put); */
 /* /\* the real stuff *\/ */
 /* t_points new_circle(t_point mp, double r, size_t size); */
 
-/* /\* mlx *\/ */
-/* typedef struct s_mlx_data { */
-/* 	void *mlx_ptr; */
-/* 	void *win_ptr; */
-/* } t_mlx_data; */
 
 /* typedef struct s_img{ */
 /* 	void *img; 				/\* pointer to image in X-Server *\/ */

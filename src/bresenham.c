@@ -1,42 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bresenham.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 11:32/02 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/10/28 11:32:02 by kfreyer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "libft.h"
-#include <stdlib.h>
-#include "mlx.h"
 
-
-void test_fun(void *mlx_ptr, void *win_ptr, int x, int y) {
-	my_mlx_pixel_put(mlx_ptr,  win_ptr, x, y, 0xFF00FF);
-}
-
-t_points bres_line(t_point p_0, t_point p_1) {
-	if (p_1.x) {
-	}
-	t_point* points = (t_point*)malloc(sizeof(t_point) * 2);
-	if (!points)
-		return (t_points){NULL, 0};
-
-	points[0] = p_0;
-
-	return (t_points){points, 1};
-}
-
-void plotLine(int x0, int y0, int x1, int y1)
+int	lt(int x, int y)
 {
-	int dx =  abs(x1-x0), sx = x0<x1 ? 1 : -1;
-	int dy = -abs(y1-y0), sy = y0<y1 ? 1 : -1;
-	int err = dx+dy, e2;                                  /* error value e_xy */
+	if (x < y)
+	{
+		return (1);
+	}
+	return (-1);
+}
 
-	for (;;) {                                                        /* loop */
-/* setPixel(x0,y0); */
-/* to test this function we would need to stub it or mock it (good case actually) */
-		e2 = 2*err;
-		if (e2 >= dy) {                                       /* e_xy+e_x > 0 */
-			if (x0 == x1) break;
-			err += dy; x0 += sx;
+struct s_bres	new_bres(t_point p_0, t_point p_1)
+{
+	struct s_bres	ret;
+
+	ret.dx = ft_abs(p_1.x - p_0.x);
+	ret.dy = -ft_abs(p_1.y - p_0.y);
+	ret.sx = lt(p_0.x, p_1.x);
+	ret.sy = lt(p_0.y, p_1.y);
+	ret.err = ret.dx + ret.dy;
+	ret.e2 = 0;
+	return (ret);
+}
+
+void	bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
+		PixelPutFunc pixel_put)
+{
+	struct s_bres	bres;
+
+	bres = new_bres(p_0, p_1);
+	while (true)
+	{
+		pixel_put(mlx_data.mlx_ptr, mlx_data.win_ptr, p_0.x, p_0.y, 0xFF00FF);
+		bres.e2 = 2 * bres.err;
+		if (bres.e2 >= bres.dy)
+		{
+			if (p_0.x == p_1.x)
+				break ;
+			bres.err += bres.dy;
+			p_0.x += bres.sx;
 		}
-		if (e2 <= dx) {                                       /* e_xy+e_y < 0 */
-			if (y0 == y1) break;
-			err += dx; y0 += sy;
+		if (bres.e2 <= bres.dx)
+		{
+			if (p_0.y == p_1.y)
+				break ;
+			bres.err += bres.dx;
+			p_0.y += bres.sy;
 		}
 	}
 }

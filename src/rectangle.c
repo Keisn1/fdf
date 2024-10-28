@@ -23,3 +23,16 @@
 /* 		x++; */
 /* 	} */
 /* } */
+
+
+/* void draw_rect_win(void* mlx_ptr, void* win_ptr, int p1, int p2, PixelPutFunc pixel_put) { */
+/*     int x = p1; */
+/*     int y = p2; */
+/*     while (x < 100) { */
+/*         y = p2; */
+/*         while (y < 200) { */
+/*             pixel_put(mlx_ptr, win_ptr, x, y++, 0xFF00FF); */
+/*         } */
+/*         x++; */
+/*     } */
+/* } */
