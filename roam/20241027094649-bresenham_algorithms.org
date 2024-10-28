@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       c9832c2d-bfe9-42b3-b12a-f974f509f625
+:END:
+#+title: bresenham algorithms
+#+date: [2024-10-27 Sun 09:46]
+#+startup: overview
+
+https://zingl.github.io/bresenham.html
+https://zingl.github.io/Bresenham.pdf
+
+* [[id:e5b5f88a-e6c3-41a1-98be-b5a6d08563fe][bresenham line algorithm]]
+* [[id:33868528-c7af-4433-9ef5-9fc5dfe34b6c][bresenham circle algorithm]]

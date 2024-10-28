@@ -12,8 +12,13 @@
 - (connection, window, x, y, color)
 - origin is upper left corner
 - y-axis goes down, x-axis is pointing right
-
+#+begin_src c
+int mlx_pixel_put ( void *mlx_ptr, void *win_ptr, int x, int y, int color );
+#+end_src
 * mlx_string_put
+#+begin_src c
+int mlx_string_put  ( void *mlx_ptr, void *win_ptr, int x, int y, int color, char *string );
+#+end_src
    Parameters  for  mlx_string_put  ()  have the same meaning. Instead of a
    simple pixel, the specified string will be displayed at ( x , y ).
 

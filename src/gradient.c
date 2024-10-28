@@ -1,13 +1,6 @@
 #include "fdf.h"
 #include <unistd.h>
 
-unsigned int *gradient(int width) {
-	if (width) {
-
-	}
-	return NULL;
-}
-
 /* unsigned int *get_grad(int pixels) { */
 /* 	unsigned int *grad = (unsigned int*)malloc(sizeof(unsigned int) * pixels); */
 /* 	if (!grad) */

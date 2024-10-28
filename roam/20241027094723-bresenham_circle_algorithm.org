@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       33868528-c7af-4433-9ef5-9fc5dfe34b6c
+:END:
+#+title: bresenham circle algorithm (midpoint circle algorithm)
+#+date: [2024-10-27 Sun 09:47]
+#+startup: overview
+
+https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/

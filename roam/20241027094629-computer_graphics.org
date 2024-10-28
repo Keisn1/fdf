@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       f12deeff-40c8-49eb-aad6-595d506a8f68
+:END:
+#+title: computer graphics
+#+date: [2024-10-27 Sun 09:46]
+#+startup: overview
+
+* [[id:c9832c2d-bfe9-42b3-b12a-f974f509f625][bresenham algorithms]]
