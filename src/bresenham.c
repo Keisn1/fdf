@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 #include "libft.h"
+#include <stdio.h>
 
 int	lt(int x, int y)
 {
@@ -60,4 +61,46 @@ void	bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
 			p_0.y += bres.sy;
 		}
 	}
+}
+
+
+void	add_back_point(t_list **l, unsigned int x, unsigned int y)
+{
+	t_point	*new;
+
+	new = (t_point *)malloc(sizeof(t_point) * 1);
+	new->x = x;
+	new->y = y;
+	ft_lstadd_back(l, ft_lstnew(new));
+}
+
+t_list *get_bres_line(t_point p_0, t_point p_1) {
+	struct s_bres	bres;
+	t_list *points;
+
+	bres = new_bres(p_0, p_1);
+	points = NULL;
+
+	while (true)
+	{
+		add_back_point(&points, p_0.x, p_0.y);
+		bres.e2 = 2 * bres.err;
+		if (bres.e2 >= bres.dy)
+		{
+			if (p_0.x == p_1.x)
+				break ;
+			bres.err += bres.dy;
+			p_0.x += bres.sx;
+		}
+		if (bres.e2 <= bres.dx)
+		{
+			if (p_0.y == p_1.y)
+				break ;
+			bres.err += bres.dx;
+			p_0.y += bres.sy;
+		}
+	}
+
+	return points;
+
 }

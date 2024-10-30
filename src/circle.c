@@ -23,24 +23,24 @@
 /* 	} */
 /* } */
 
-t_points new_circle(t_point mp, double r, size_t size) {
-	if (mp.x) {
-		if (r) {
-		}
-	}
-	t_point* points = (t_point*)malloc(sizeof(t_point) * size);
-	if (!points) {
-		return (t_points){NULL, 0};
-	}
+/* t_points new_circle(t_point mp, double r, size_t size) { */
+/* 	if (mp.x) { */
+/* 		if (r) { */
+/* 		} */
+/* 	} */
+/* 	t_point* points = (t_point*)malloc(sizeof(t_point) * size); */
+/* 	if (!points) { */
+/* 		return (t_points){NULL, 0}; */
+/* 	} */
 
-	size_t count = 0;
-	double step = 2*M_PI / (double)size;
-	double phi = 0;
-	while (count < size) {
-		double x = mp.x + r * cos(phi);
-		double y = mp.y + r * sin(phi);
-		points[count++] = (t_point){x, y};
-		phi += step;
-	}
-	return (t_points){points, size};
-}
+/* 	size_t count = 0; */
+/* 	double step = 2*M_PI / (double)size; */
+/* 	double phi = 0; */
+/* 	while (count < size) { */
+/* 		double x = mp.x + r * cos(phi); */
+/* 		double y = mp.y + r * sin(phi); */
+/* 		points[count++] = (t_point){x, y}; */
+/* 		phi += step; */
+/* 	} */
+/* 	return (t_points){points, size}; */
+/* } */

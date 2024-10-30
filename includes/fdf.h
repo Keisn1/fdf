@@ -9,6 +9,7 @@ extern "C"
 # endif
 
 # include <stdbool.h>
+# include "libft.h"
 
 	struct		s_bres
 	{
@@ -22,8 +23,8 @@ extern "C"
 
 	typedef struct s_point
 	{
-		int		x;
-		int		y;
+		unsigned int		x;
+		unsigned int		y;
 	} t_point;
 
 	/* mlx */
@@ -37,16 +38,25 @@ extern "C"
 	int my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 	void bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
 		PixelPutFunc pixel_put);
+	t_list *get_bres_line(t_point p_0, t_point p_1);
 
 	typedef struct s_mat
 	{
-		int		**mat;
+		double		**mat;
 		int		m;
 		int		n;
 	} t_mat;
 
 	void free_matrix(t_mat M);
 	t_mat mat_mul(t_mat X, t_mat Y);
+
+	typedef struct s_idx_pair
+	{
+		unsigned int i;
+		unsigned int j;
+	} t_idx_pair;
+
+	t_list *get_wireframe_indices(size_t wf_m, size_t wf_n);
 
 	/* void draw_rect_win(void* mlx_ptr, void* win_ptr, int p1, int p2,
 		PixelPutFunc pixel_put); */
