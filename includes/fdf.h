@@ -23,8 +23,8 @@ extern "C"
 
 	typedef struct s_point
 	{
-		unsigned int		x;
-		unsigned int		y;
+		unsigned int		i;
+		unsigned int		j;
 	} t_point;
 
 	/* mlx */
@@ -50,29 +50,29 @@ extern "C"
 	void free_matrix(t_mat M);
 	t_mat mat_mul(t_mat X, t_mat Y);
 
-	typedef struct s_idx_pair
-	{
-		unsigned int i;
-		unsigned int j;
-	} t_idx_pair;
-
 	t_list *get_wireframe_indices(size_t wf_m, size_t wf_n);
+
+	/* helpers */
+	void	add_back_point(t_list **l, t_point p);
 
 	/* void draw_rect_win(void* mlx_ptr, void* win_ptr, int p1, int p2,
 		PixelPutFunc pixel_put); */
 	/* /\* the real stuff *\/ */
 	/* t_points new_circle(t_point mp, double r, size_t size); */
 
-	/* typedef struct s_img{ */
-	/* 	void *img; 				/\* pointer to image in X-Server *\/ */
-	/* 	char *img_pixels;		/\* address of image data *\/ */
-	/* 	int bpp;				/\* bits per pixel *\/ */
-	/* 	int size_line; */
-	/* 	int endian; */
-	/* 	int width; */
-	/* 	int height; */
-	/* } t_img; */
+	typedef struct s_img{
+		void *img; 				/* pointer to image in X-Server */
+		char *img_pixels;		/* address of image data */
+		int bpp;				/* bits per pixel */
+		int size_line;
+		int endian;
+		int width;
+		int height;
+	} t_img;
 
+	t_img new_img(void *mlx_ptr, int width, int height);
+	void img_put_pixel(void *mlx_ptr, t_img *img, t_point pos, unsigned int color);
+	void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf);
 	/* /\* helpers *\/ */
 	/* int	create_rgb( int r, int g, int b); */
 	/* void img_put_pixel(void *mlx_ptr, t_img *data, t_point pos,

@@ -13,18 +13,8 @@
 #include "fdf.h"
 #include "libft.h"
 #include <stddef.h>
-#include <stdlib.h>
 #include <stdio.h>
-
-void	add_back_idx_pair(t_list **l, unsigned int i, unsigned int j)
-{
-	t_idx_pair	*new;
-
-	new = (t_idx_pair *)malloc(sizeof(t_idx_pair) * 1);
-	new->i = i;
-	new->j = j;
-	ft_lstadd_back(l, ft_lstnew(new));
-}
+#include <stdlib.h>
 
 t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
 {
@@ -42,16 +32,36 @@ t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
 		count_n = 0;
 		while (count_n < wf_n)
 		{
-			if (count_n < wf_n-1) {
-				add_back_idx_pair(&ret, idx, idx+1);
-			}
-			if (count_m < wf_m) {
-				add_back_idx_pair(&ret, idx, idx + wf_n);
-			}
-			/* add_back_idx_pair(&ret, count_n, count_n + 1); */
+			if (count_n < wf_n - 1)
+				add_back_point(&ret, (t_point){idx, idx + 1});
+			if (count_m < wf_m)
+				add_back_point(&ret, (t_point){idx, idx + wf_n});
 			count_n++;
 			idx++;
 		}
 	}
 	return (ret);
+}
+
+void	wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf)
+{
+	t_point	*idx;
+	t_list	*line;
+	t_list	*head;
+
+	while (wf)
+	{
+		idx = (t_point *)(wf->content);
+		line = get_bres_line((t_point){M.mat[0][idx->i], M.mat[1][idx->i]},
+				(t_point){M.mat[0][idx->j], M.mat[1][idx->j]});
+		head = line;
+		while (head)
+		{
+			img_put_pixel(mlx_data.mlx_ptr, &img, *(t_point *)head->content,
+				0xFF00FF);
+			head = head->next;
+		}
+		ft_lstclear(&line, free);
+		wf = wf->next;
+	}
 }

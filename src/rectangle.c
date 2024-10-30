@@ -1,5 +1,5 @@
-#include "fdf.h"
-#include "mlx.h"
+/* #include "fdf.h" */
+/* #include "mlx.h" */
 
 /* void draw_rect_win(t_mlx_data mlx_data, t_rectangle rect, t_point pos) { */
 /* 	int x = pos.x; */

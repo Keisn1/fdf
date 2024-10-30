@@ -74,8 +74,8 @@ TEST_P(bresenhamGetLineTest, BresenhamGetLineTest) {
 	t_list *head = got;
 	while (head) {
 		t_point *p = (t_point*)head->content;
-		EXPECT_EQ(params.want[count][0], p->x);
-		EXPECT_EQ(params.want[count][1], p->y);
+		EXPECT_EQ(params.want[count][0], p->i);
+		EXPECT_EQ(params.want[count][1], p->j);
 		count++;
 		head = head->next;
 	}

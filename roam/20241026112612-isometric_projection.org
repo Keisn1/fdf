@@ -82,5 +82,12 @@ M_{\textit{isometric}}= \begin{bmatrix}
 \end{bmatrix}
 \]
 ** orthogonal projection
-- from here we ignor the z-axis since you can see from the image that we have obtained our desired output ([[id:ac7a56b5-ecf1-4415-9694-c4c0b6e65903][second rotation around x-axis]])
-- we are looking from the [1,1,1] direction to the middle of the coordinate system
+- from here we ignore the z-axis since you can see from the image that we have obtained our desired output ([[id:ac7a56b5-ecf1-4415-9694-c4c0b6e65903][second rotation around x-axis]])
+- we are then looking from the [1,1,1] direction to the middle of the coordinate system
+
+\[
+M_{\textit{}}= \begin{bmatrix}
+\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}} & 0 \\
+\frac{1}{\sqrt{6}} & \frac{1}{\sqrt{6}} & -\frac{\sqrt{2}}{\sqrt{3}} \\
+\end{bmatrix}
+\]
