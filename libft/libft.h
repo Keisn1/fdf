@@ -94,6 +94,26 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+	/* get_next_line */
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+# define MAX_FD 1024
+/* type definitions */
+typedef enum _OP
+{
+	GET_STASH = 0,
+	SET_STASH,
+	UPDATE_STASH,
+	DELETE_STASH
+}		t_op;
+
+
+char *get_next_line(int fd);
+
 #  ifdef __cplusplus
 
 }
