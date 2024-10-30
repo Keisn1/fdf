@@ -34,11 +34,23 @@ TEST(parseMapTest, parseMapTest) {
 	free(M[0]);
 	free(M);
 
-	// filename = "tests/test_maps/1-3.fdf";
-	// M = parse_map(filename.c_str());
-	// EXPECT_EQ(5, M[0][0]);
-	// EXPECT_EQ(6, M[0][1]);
-	// EXPECT_EQ(7, M[0][2]);
-	// free(M[0]);
-	// free(M);
+	filename = "tests/test_maps/1-3.fdf";
+	M = parse_map(filename.c_str());
+	EXPECT_EQ(5, M[0][0]);
+	EXPECT_EQ(6, M[0][1]);
+	EXPECT_EQ(7, M[0][2]);
+	free(M[0]);
+	free(M);
+
+	filename = "tests/test_maps/2-3.fdf";
+	M = parse_map(filename.c_str());
+	EXPECT_EQ(1, M[0][0]);
+	EXPECT_EQ(2, M[0][1]);
+	EXPECT_EQ(3, M[0][2]);
+	EXPECT_EQ(5, M[1][0]);
+	EXPECT_EQ(6, M[1][1]);
+	EXPECT_EQ(7, M[1][2]);
+	free(M[0]);
+	free(M[1]);
+	free(M);
 }
