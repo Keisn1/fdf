@@ -34,7 +34,7 @@ void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 	return (new);
 }
 
-double	*parse_line(char *line)
+void parse_line(char *line, double** row1)
 {
 	double	*row;
 	size_t	size;
@@ -50,7 +50,8 @@ double	*parse_line(char *line)
 			line++;
 		line = ft_strchr(line, ' ');
 	}
-	return (row);
+	*row1 = row;
+	return;
 }
 
 double	**parse_map(const char *filename)
@@ -70,7 +71,8 @@ double	**parse_map(const char *filename)
 	{
 		M = (double **)ft_realloc(M, sizeof(double *) * (size + 1),
 				sizeof(double *) * size);
-		M[size++] = parse_line(line);
+		parse_line(line, M+size);
+		size++;
 		free(line);
 		line = get_next_line(fd);
 	}
