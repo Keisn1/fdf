@@ -55,13 +55,15 @@ extern "C"
 	/* helpers */
 	void	add_back_point(t_list **l, t_point p);
 	/* parsing */
-	double **parse_map(const char *filename);
-
         typedef struct s_map {
 			double** map;
 			unsigned int** color;
+			unsigned int m;
+			unsigned int n;
 
         } t_map;
+	t_map parse_map(const char *filename);
+
 
 
 	/* void draw_rect_win(void* mlx_ptr, void* win_ptr, int p1, int p2,

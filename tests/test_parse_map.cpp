@@ -1,82 +1,64 @@
+#include "gtest/gtest.h"
 #include <gtest/gtest.h>
 #include "fdf.h"
 #include <fcntl.h>
+#include <vector>
+
+struct parseMapTestParams {
+	std::string filename;
+	std::vector<std::vector<double>> want_M;
+	std::vector<std::vector<double>> want_color;
+};
+
+class parseMapTest : public testing::TestWithParam<parseMapTestParams>{};
 
 
-TEST(parseMapTest, parseMapTest) {
-	std::string filename = "../tests/test_maps/empty.fdf";
-	double** M = parse_map(filename.c_str());
-	EXPECT_EQ(nullptr, M);
+TEST_P(parseMapTest, parseMapTest) {
+	parseMapTestParams params = GetParam();
 
-	filename = "tests/test_maps/1-1-0.fdf";
-	M = parse_map(filename.c_str());
-	EXPECT_EQ(0, M[0][0]);
-	free(M[0]);
-	free(M);
+	t_map map = parse_map(params.filename.c_str());
+	if (params.want_M.size() == 0) {
+		EXPECT_EQ(nullptr, map.map);
+		EXPECT_EQ(nullptr, map.color);
+		EXPECT_EQ(params.want_M.size(), map.m);
+		EXPECT_EQ(params.want_M.size(), map.n);
+		return;
+	}
 
-	filename = "tests/test_maps/1-1-1.fdf";
-	M = parse_map(filename.c_str());
-	EXPECT_EQ(1, M[0][0]);
-	free(M[0]);
-	free(M);
+	EXPECT_EQ(params.want_M.size(), map.m);
+	EXPECT_EQ(params.want_M[0].size(), map.n);
+	size_t c1 = 0;
+	size_t c2 = 0;
+	while (c1 < params.want_M.size()) {
+		c2 = 0;
+		while (c2 < params.want_M[0].size()) {
+			EXPECT_EQ(params.want_M[c1][c2], map.map[c1][c2]);
+			EXPECT_EQ(params.want_color[c1][c2], map.color[c1][c2]);
+			c2++;
+			}
+		c1++;
+	}
 
-	filename = "tests/test_maps/1-2.fdf";
-	M = parse_map(filename.c_str());
-	EXPECT_EQ(0, M[0][0]);
-	EXPECT_EQ(1, M[0][1]);
-	free(M[0]);
-	free(M);
-
-	filename = "tests/test_maps/1-2-other.fdf";
-	M = parse_map(filename.c_str());
-	EXPECT_EQ(2, M[0][0]);
-	EXPECT_EQ(3, M[0][1]);
-	free(M[0]);
-	free(M);
-
-	filename = "tests/test_maps/1-3.fdf";
-	M = parse_map(filename.c_str());
-	EXPECT_EQ(5, M[0][0]);
-	EXPECT_EQ(6, M[0][1]);
-	EXPECT_EQ(7, M[0][2]);
-	free(M[0]);
-	free(M);
-
-	filename = "tests/test_maps/2-3.fdf";
-	M = parse_map(filename.c_str());
-	EXPECT_EQ(1, M[0][0]);
-	EXPECT_EQ(2, M[0][1]);
-	EXPECT_EQ(3, M[0][2]);
-	EXPECT_EQ(5, M[1][0]);
-	EXPECT_EQ(6, M[1][1]);
-	EXPECT_EQ(7, M[1][2]);
-	free(M[0]);
-	free(M[1]);
-	free(M);
-
-	filename = "tests/test_maps/3-3.fdf";
-	M = parse_map(filename.c_str());
-	EXPECT_EQ(1, M[0][0]);
-	EXPECT_EQ(2, M[0][1]);
-	EXPECT_EQ(3, M[0][2]);
-	EXPECT_EQ(4, M[1][0]);
-	EXPECT_EQ(5, M[1][1]);
-	EXPECT_EQ(6, M[1][2]);
-	EXPECT_EQ(7, M[2][0]);
-	EXPECT_EQ(8, M[2][1]);
-	EXPECT_EQ(9, M[2][2]);
-	free(M[0]);
-	free(M[1]);
-	free(M[2]);
-	free(M);
-
-	filename = "tests/test_maps/3-1.fdf";
-	M = parse_map(filename.c_str());
-	EXPECT_EQ(1, M[0][0]);
-	EXPECT_EQ(2, M[1][0]);
-	EXPECT_EQ(3, M[2][0]);
-	free(M[0]);
-	free(M[1]);
-	free(M[2]);
-	free(M);
+	c1 = 0;
+	while (c1 < params.want_M.size()) {
+		free(map.map[c1]);
+		free(map.color[c1]);
+		c1++;
+	}
+	free(map.map);
+	free(map.color);
 }
+
+INSTANTIATE_TEST_SUITE_P(parseMapTests, parseMapTest,
+                         testing::Values(
+							 parseMapTestParams{"", {}, {}},
+							 parseMapTestParams{"tests/test_maps/1-1-0.fdf", {{0}}, {{0x000000}}},
+							 parseMapTestParams{"tests/test_maps/1-1-1.fdf", {{1}}, {{0x000000}}},
+							 parseMapTestParams{"tests/test_maps/1-2.fdf", {{0, 1}}, {{0x000000, 0x000000}}},
+							 parseMapTestParams{"tests/test_maps/1-2-other.fdf", {{2, 3}}, {{0x000000, 0x000000}}},
+							 parseMapTestParams{"tests/test_maps/1-3.fdf", {{5, 6, 7}}, {{0x000000, 0x000000, 0x000000}}},
+							 parseMapTestParams{"tests/test_maps/2-3.fdf", {{1, 2, 3}, {5, 6, 7}}, {{0x000000, 0x000000, 0x000000},{0x000000, 0x000000, 0x000000}}},
+							 parseMapTestParams{"tests/test_maps/3-3.fdf", {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, {{0x000000, 0x000000, 0x000000}, {0x000000, 0x000000, 0x000000},{0x000000, 0x000000, 0x000000}}},
+							 parseMapTestParams{"tests/test_maps/3-1.fdf", {{1}, {2}, {3}}, {{0x000000}, {0x000000},{0x000000}}}
+                             ));
+
