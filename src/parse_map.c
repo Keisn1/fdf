@@ -36,22 +36,19 @@ void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 
 double	*parse_line(char *line)
 {
-	char	*wspace;
 	double	*row;
 	size_t	size;
 
-	wspace = ft_strchr(line, ' ');
-	row = (double *)malloc(sizeof(double));
-	row[0] = ft_atoi(line);
-	size = 1;
-	while (wspace)
+	row = NULL;
+	size = 0;
+	while (line)
 	{
 		row = (double *)ft_realloc(row, sizeof(double) * (size + 1),
 				sizeof(double) * size);
-		row[size++] = ft_atoi(wspace);
-		while (*wspace == ' ')
-			wspace++;
-		wspace = ft_strchr(wspace, ' ');
+		row[size++] = ft_atoi(line);
+		while (*line == ' ')
+			line++;
+		line = ft_strchr(line, ' ');
 	}
 	return (row);
 }
@@ -61,13 +58,21 @@ double	**parse_map(const char *filename)
 	double	**M;
 	int		fd;
 	char	*line;
+	size_t	size;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	M = (double **)malloc(sizeof(double *));
 	line = get_next_line(fd);
-	M[0] = parse_line(line);
-	free(line);
+	size = 0;
+	M = NULL;
+	while (line)
+	{
+		M = (double **)ft_realloc(M, sizeof(double *) * (size + 1),
+				sizeof(double *) * size);
+		M[size++] = parse_line(line);
+		free(line);
+		line = get_next_line(fd);
+	}
 	return (M);
 }
