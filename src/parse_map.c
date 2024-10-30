@@ -13,6 +13,7 @@
 #include "fdf.h"
 #include "libft.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 {
@@ -20,7 +21,6 @@ void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 
 	if (!ptr)
 		return (malloc(size));
-	;
 	if (size == 0)
 	{
 		free(ptr);
@@ -34,27 +34,68 @@ void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 	return (new);
 }
 
+unsigned int	ft_hex_to_unsigned(char *hex_str)
+{
+	int				size;
+	unsigned int	res;
+	char			c;
+	unsigned int	base;
+
+	hex_str = hex_str + 2;
+	size = 0;
+	res = 0;
+	base = 1;
+	while (ft_isalnum(hex_str[size]))
+		size++;
+	while (--size)
+	{
+		c = hex_str[size];
+		if (ft_isdigit(c))
+			res += (c - '0') * base;
+		else
+		{
+			c = ft_tolower(c);
+			res += ((c - 'a') + 10) * base;
+		}
+		base *= 16;
+	}
+	return (res);
+}
+
+char	*advance_to_comma_or_ws(char *str)
+{
+	while (*str)
+	{
+		if (*str == ',' || *str == ' ')
+			return (str);
+		str++;
+	}
+	return (str);
+}
+
 unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
 {
-	double			*row;
-	unsigned int	*row_color;
-	size_t			size;
+	size_t	size;
 
-	row = NULL;
-	row_color = NULL;
+	*M_row = NULL;
+	*c_row = NULL;
 	size = 0;
 	while (line)
 	{
-		row = (double *)ft_realloc(row, sizeof(double) * (size + 1), sizeof(double) * size);
-		row_color = (unsigned int *)ft_realloc(row_color, sizeof(unsigned int) * (size + 1), sizeof(unsigned int) * size);
-		row_color[size] = 0x000000;
-		row[size++] = ft_atoi(line);
+		*M_row = (double *)ft_realloc(*M_row, sizeof(double) * (size + 1),
+				sizeof(double) * size);
+		*c_row = (unsigned int *)ft_realloc(*c_row, sizeof(unsigned int) * (size
+					+ 1), sizeof(unsigned int) * size);
+		(*c_row)[size] = 0x000000;
+		(*M_row)[size] = ft_atoi(line);
 		while (*line == ' ')
 			line++;
+		line = advance_to_comma_or_ws(line);
+		if (*line == ',')
+			(*c_row)[size] = ft_hex_to_unsigned(line);
+		size++;
 		line = ft_strchr(line, ' ');
 	}
-	*M_row = row;
-	*c_row = row_color;
 	return (size);
 }
 
@@ -81,6 +122,8 @@ t_map	parse_map(const char *filename)
 		map.color = (unsigned int **)ft_realloc(map.color,
 				sizeof(unsigned int *) * (map.m + 1), sizeof(unsigned int *)
 				* map.m);
+		if (!map.map || !map.color)
+			return ((t_map){NULL, NULL, 0, 0});
 		map.n = parse_line(line, map.map + map.m, map.color + map.m);
 		map.m++;
 		free(line);

@@ -59,6 +59,7 @@ INSTANTIATE_TEST_SUITE_P(parseMapTests, parseMapTest,
 							 parseMapTestParams{"tests/test_maps/1-3.fdf", {{5, 6, 7}}, {{0x000000, 0x000000, 0x000000}}},
 							 parseMapTestParams{"tests/test_maps/2-3.fdf", {{1, 2, 3}, {5, 6, 7}}, {{0x000000, 0x000000, 0x000000},{0x000000, 0x000000, 0x000000}}},
 							 parseMapTestParams{"tests/test_maps/3-3.fdf", {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, {{0x000000, 0x000000, 0x000000}, {0x000000, 0x000000, 0x000000},{0x000000, 0x000000, 0x000000}}},
-							 parseMapTestParams{"tests/test_maps/3-1.fdf", {{1}, {2}, {3}}, {{0x000000}, {0x000000},{0x000000}}}
+							 parseMapTestParams{"tests/test_maps/3-1.fdf", {{1}, {2}, {3}}, {{0x000000}, {0x000000},{0x000000}}},
+							 parseMapTestParams{"tests/test_maps/1-1-0-wc.fdf", {{0}}, {{0xff}}},
+							 parseMapTestParams{"tests/test_maps/3-2-wc.fdf", {{1, 2}, {4, 5}, {7, 8} }, {{0x00,0x09}, {0xAA, 0x00}, {0x00, 0x11}}}
                              ));
-
