@@ -57,6 +57,11 @@ extern "C"
 	/* parsing */
 	double **parse_map(const char *filename);
 
+        typedef struct s_map {
+			double** map;
+			unsigned int** color;
+
+        } t_map;
 
 
 	/* void draw_rect_win(void* mlx_ptr, void* win_ptr, int p1, int p2,
