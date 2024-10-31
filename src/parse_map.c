@@ -79,6 +79,16 @@ t_map	new_map(void)
 	return ((t_map){NULL, NULL, 0, 0});
 }
 
+bool end_of_line(char *line) {
+	if (!line)
+		return true;
+	while (*line == ' ')
+		line++;
+	if (*line == '\n' || *line == 0)
+		return true;
+	return false;
+}
+
 unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
 {
 	size_t	size;
@@ -86,7 +96,7 @@ unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
 	*M_row = NULL;
 	*c_row = NULL;
 	size = 0;
-	while (line)
+	while (true)
 	{
 		while (*line == ' ')
 			line++;
@@ -101,13 +111,8 @@ unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
 			(*c_row)[size] = ft_hex_to_unsigned(line);
 		size++;
 		line = ft_strchr(line, ' ');
-		/* if (size == 10) { */
-		/* 	ft_putnbr_fd((int)size, STDOUT_FILENO); */
-		/* 	ft_putendl_fd("", STDOUT_FILENO); */
-		/* 	ft_putnbr_fd(ft_strlen(line), STDOUT_FILENO); */
-		/* 	ft_putendl_fd("", STDOUT_FILENO); */
-		/* 	ft_putendl_fd("", STDOUT_FILENO); */
-		/* } */
+		if (end_of_line(line))
+			break;
 	}
 	return (size);
 }

@@ -54,10 +54,10 @@ t_mat	mat_mul(t_mat X, t_mat Y)
 		while (count_n < Y.n)
 		{
 			count_k = 0;
+			mat[count_m][count_n] = 0;
 			while (count_k < X.n)
 			{
-				mat[count_m][count_n] = X.mat[count_m][count_k]
-					* Y.mat[count_k][count_n];
+				mat[count_m][count_n] += X.mat[count_m][count_k] * Y.mat[count_k][count_n];
 				count_k++;
 			}
 			count_n++;
