@@ -13,6 +13,26 @@
 #include "fdf.h"
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
+
+void print_matrix(double** matrix, unsigned int m, unsigned int n) {
+	unsigned int i = 0;
+	unsigned int j = 0;
+
+	printf("m: %d\n", m);
+	printf("n: %d\n", n);
+	while (i < m) {
+		j = 0;
+		while (j < n) {
+			printf("%f ", matrix[i][j]);
+			j++;
+		}
+
+		printf("\n");
+		i++;
+
+	}
+}
 
 t_mat	mat_mul(t_mat X, t_mat Y)
 {

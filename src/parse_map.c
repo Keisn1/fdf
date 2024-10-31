@@ -14,6 +14,7 @@
 #include "libft.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 {
@@ -87,19 +88,26 @@ unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
 	size = 0;
 	while (line)
 	{
+		while (*line == ' ')
+			line++;
 		*M_row = (double *)ft_realloc(*M_row, sizeof(double) * (size + 1),
 				sizeof(double) * size);
 		*c_row = (unsigned int *)ft_realloc(*c_row, sizeof(unsigned int) * (size
 					+ 1), sizeof(unsigned int) * size);
 		(*c_row)[size] = 0x000000;
 		(*M_row)[size] = ft_atoi(line);
-		while (*line == ' ')
-			line++;
 		line = advance_to_comma_or_ws(line);
 		if (*line == ',')
 			(*c_row)[size] = ft_hex_to_unsigned(line);
 		size++;
 		line = ft_strchr(line, ' ');
+		/* if (size == 10) { */
+		/* 	ft_putnbr_fd((int)size, STDOUT_FILENO); */
+		/* 	ft_putendl_fd("", STDOUT_FILENO); */
+		/* 	ft_putnbr_fd(ft_strlen(line), STDOUT_FILENO); */
+		/* 	ft_putendl_fd("", STDOUT_FILENO); */
+		/* 	ft_putendl_fd("", STDOUT_FILENO); */
+		/* } */
 	}
 	return (size);
 }
@@ -133,34 +141,38 @@ t_map	parse_map(const char *filename)
 	return (map);
 }
 
-t_mat extract_points(t_map map) {
-	if (map.m == 0) {
-		return (t_mat){NULL, 0, 0};
-	}
-	unsigned int n = map.m * map.n;
+t_mat	extract_points(t_map map)
+{
+	unsigned int	size;
+	t_mat			points;
+	size_t			i;
+	size_t			j;
+	size_t			count;
 
-	t_mat points;
-	points.mat = (double**)malloc(sizeof(double*) * 3);
-	points.mat[0] = (double*)malloc(sizeof(double) * n);
-	points.mat[1] = (double*)malloc(sizeof(double) * n);
-	points.mat[2] = (double*)malloc(sizeof(double) * n);
+	if (map.m == 0)
+		return ((t_mat){NULL, 0, 0});
+	size = map.m * map.n;
+	points.mat = (double **)malloc(sizeof(double *) * 3);
+	points.mat[0] = (double *)malloc(sizeof(double) * size);
+	points.mat[1] = (double *)malloc(sizeof(double) * size);
+	points.mat[2] = (double *)malloc(sizeof(double) * size);
 
-	size_t i = 0;
-	size_t j = 0;
-	size_t count = 0;
-	while (i < map.m) {
-		while (j < map.n) {
-			points.mat[0][count] = i;
-			points.mat[1][count] = j;
+	i = 0;
+	count = 0;
+	while (i < map.m)
+	{
+		j = 0;
+		while (j < map.n)
+		{
+			points.mat[0][count] = j;
+			points.mat[1][count] = i;
 			points.mat[2][count] = map.map[i][j];
 			count++;
 			j++;
 		}
 		i++;
-
 	}
-
 	points.m = 3;
-	points.n = n;
-	return points;
+	points.n = size;
+	return (points);
 }

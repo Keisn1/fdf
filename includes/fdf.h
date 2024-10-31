@@ -54,6 +54,7 @@ extern "C"
 
 	/* helpers */
 	void add_back_point(t_list **l, t_point p);
+	void print_matrix(double** matrix, unsigned int m, unsigned int n);
 
 	/* parsing */
 	typedef struct s_map
