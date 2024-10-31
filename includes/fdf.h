@@ -90,6 +90,7 @@ extern "C"
 	void img_put_pixel(void *mlx_ptr, t_img *img, t_point pos,
 		unsigned int color);
 	void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf);
+	/* void	wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_map map); */
 	/* /\* helpers *\/ */
 	/* int	create_rgb( int r, int g, int b); */
 	/* void img_put_pixel(void *mlx_ptr, t_img *data, t_point pos,

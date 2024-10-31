@@ -132,30 +132,48 @@ unsigned int get_length_line(char *line) {
 	return size;
 }
 
+void get_sizes_file(const char *filename, unsigned int *m, unsigned int *n) {
+
+	int count = 0;
+	int fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return;
+	char* line = get_next_line(fd);
+	*n = get_length_line(line);
+	while (line) {
+		count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	*m = count;
+	return;
+
+}
+
 t_map	parse_map(const char *filename)
 {
 	t_map	map;
 	int		fd;
 	char	*line;
 
+	map = new_map();
+	get_sizes_file(filename, &map.m, &map.n);
+
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return ((t_map){NULL, NULL, 0, 0});
 	line = get_next_line(fd);
 
-	map = new_map();
-	map.n = get_length_line(line);
+	map.map = (double **)malloc(sizeof(double *) * map.m);
+	map.color = (unsigned int **)malloc( sizeof(unsigned int *) * map.m);
+	int count = 0;
 	while (line)
 	{
-		map.map = (double **)ft_realloc(map.map, sizeof(double *) * (map.m + 1),
-				sizeof(double *) * map.m);
-		map.color = (unsigned int **)ft_realloc(map.color,
-				sizeof(unsigned int *) * (map.m + 1), sizeof(unsigned int *)
-				* map.m);
 		if (!map.map || !map.color)
 			return ((t_map){NULL, NULL, 0, 0});
-		parse_line(line, map.map + map.m, map.color + map.m, map.n);
-		map.m++;
+		parse_line(line, map.map + count, map.color + count, map.n);
+		count++;
 		free(line);
 		line = get_next_line(fd);
 	}
