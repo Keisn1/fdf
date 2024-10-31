@@ -60,6 +60,7 @@ t_mat	mat_mul(t_mat X, t_mat Y)
 				mat[count_m][count_n] += X.mat[count_m][count_k] * Y.mat[count_k][count_n];
 				count_k++;
 			}
+			/* mat[count_m][count_n] += ; */
 			count_n++;
 		}
 		count_m++;
