@@ -89,27 +89,26 @@ bool end_of_line(char *line) {
 	return false;
 }
 
-unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
+unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row, unsigned int size)
 {
-	size_t	size;
+	size_t	count;
 
 	*M_row = NULL;
 	*c_row = NULL;
-	size = 0;
+	count = 0;
+
+	*M_row = (double *)malloc(size * sizeof(double));
+	*c_row = (unsigned int *)malloc(size * sizeof(unsigned int));
 	while (true)
 	{
 		while (*line == ' ')
 			line++;
-		*M_row = (double *)ft_realloc(*M_row, sizeof(double) * (size + 1),
-				sizeof(double) * size);
-		*c_row = (unsigned int *)ft_realloc(*c_row, sizeof(unsigned int) * (size
-					+ 1), sizeof(unsigned int) * size);
-		(*c_row)[size] = 0x000000;
-		(*M_row)[size] = ft_atoi(line);
+		(*c_row)[count] = 0x000000;
+		(*M_row)[count] = ft_atoi(line);
 		line = advance_to_comma_or_ws(line);
 		if (*line == ',')
-			(*c_row)[size] = ft_hex_to_unsigned(line);
-		size++;
+			(*c_row)[count] = ft_hex_to_unsigned(line);
+		count++;
 		line = ft_strchr(line, ' ');
 		if (end_of_line(line))
 			break;
@@ -143,6 +142,7 @@ t_map	parse_map(const char *filename)
 	if (fd == -1)
 		return ((t_map){NULL, NULL, 0, 0});
 	line = get_next_line(fd);
+
 	map = new_map();
 	map.n = get_length_line(line);
 	while (line)
@@ -154,7 +154,7 @@ t_map	parse_map(const char *filename)
 				* map.m);
 		if (!map.map || !map.color)
 			return ((t_map){NULL, NULL, 0, 0});
-		parse_line(line, map.map + map.m, map.color + map.m);
+		parse_line(line, map.map + map.m, map.color + map.m, map.n);
 		map.m++;
 		free(line);
 		line = get_next_line(fd);
