@@ -73,6 +73,11 @@ char	*advance_to_comma_or_ws(char *str)
 	return (str);
 }
 
+t_map	new_map(void)
+{
+	return ((t_map){NULL, NULL, 0, 0});
+}
+
 unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
 {
 	size_t	size;
@@ -97,11 +102,6 @@ unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
 		line = ft_strchr(line, ' ');
 	}
 	return (size);
-}
-
-t_map	new_map(void)
-{
-	return ((t_map){NULL, NULL, 0, 0});
 }
 
 t_map	parse_map(const char *filename)
@@ -129,5 +129,38 @@ t_map	parse_map(const char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	return (map);
+}
+
+t_mat extract_points(t_map map) {
+	if (map.m == 0) {
+		return (t_mat){NULL, 0, 0};
+	}
+	unsigned int n = map.m * map.n;
+
+	t_mat points;
+	points.mat = (double**)malloc(sizeof(double*) * 3);
+	points.mat[0] = (double*)malloc(sizeof(double) * n);
+	points.mat[1] = (double*)malloc(sizeof(double) * n);
+	points.mat[2] = (double*)malloc(sizeof(double) * n);
+
+	size_t i = 0;
+	size_t j = 0;
+	size_t count = 0;
+	while (i < map.m) {
+		while (j < map.n) {
+			points.mat[0][count] = i;
+			points.mat[1][count] = j;
+			points.mat[2][count] = map.map[i][j];
+			count++;
+			j++;
+		}
+		i++;
+
+	}
+
+	points.m = 3;
+	points.n = n;
+	return points;
 }

@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include <gtest/gtest.h>
 #include "fdf.h"
+#include "test_fdf.hpp"
 #include <fcntl.h>
 #include <vector>
 
@@ -12,6 +13,25 @@ struct parseMapTestParams {
 
 class parseMapTest : public testing::TestWithParam<parseMapTestParams>{};
 
+void comp_map(
+	std::vector<std::vector<double>> want_M,
+	std::vector<std::vector<double>> want_color,
+	t_map map
+) {
+	EXPECT_EQ(want_M.size(), map.m);
+	EXPECT_EQ(want_M[0].size(), map.n);
+	size_t c1 = 0;
+	size_t c2 = 0;
+	while (c1 < want_M.size()) {
+		c2 = 0;
+		while (c2 < want_M[0].size()) {
+			EXPECT_EQ(want_M[c1][c2], map.map[c1][c2]);
+			EXPECT_EQ(want_color[c1][c2], map.color[c1][c2]);
+			c2++;
+			}
+		c1++;
+	}
+}
 
 TEST_P(parseMapTest, parseMapTest) {
 	parseMapTestParams params = GetParam();
@@ -25,21 +45,9 @@ TEST_P(parseMapTest, parseMapTest) {
 		return;
 	}
 
-	EXPECT_EQ(params.want_M.size(), map.m);
-	EXPECT_EQ(params.want_M[0].size(), map.n);
-	size_t c1 = 0;
-	size_t c2 = 0;
-	while (c1 < params.want_M.size()) {
-		c2 = 0;
-		while (c2 < params.want_M[0].size()) {
-			EXPECT_EQ(params.want_M[c1][c2], map.map[c1][c2]);
-			EXPECT_EQ(params.want_color[c1][c2], map.color[c1][c2]);
-			c2++;
-			}
-		c1++;
-	}
+	comp_map(params.want_M, params.want_color, map);
 
-	c1 = 0;
+	size_t c1 = 0;
 	while (c1 < params.want_M.size()) {
 		free(map.map[c1]);
 		free(map.color[c1]);
@@ -63,3 +71,69 @@ INSTANTIATE_TEST_SUITE_P(parseMapTests, parseMapTest,
 							 parseMapTestParams{"tests/test_maps/1-1-0-wc.fdf", {{0}}, {{0xff}}},
 							 parseMapTestParams{"tests/test_maps/3-2-wc.fdf", {{1, 2}, {4, 5}, {7, 8} }, {{0x00,0x09}, {0xAA, 0x00}, {0x00, 0x11}}}
                              ));
+
+struct extractPointsTestParams {
+	t_map map;
+};
+
+class extractPointsTest : public testing::TestWithParam<extractPointsTestParams> {};
+
+t_map create_map(std::vector<std::vector<double>> map_matrix) {
+	t_map map;
+	map.map = create_matrix(map_matrix);
+	map.m = map_matrix.size();
+	if (map.m) {
+		map.n = map_matrix[0].size();
+	} else {
+		map.n = 0;
+    }
+	return map;
+};
+
+TEST_P(extractPointsTest, extractPointsTest) {
+	extractPointsTestParams params = GetParam();
+
+	t_mat points = extract_points(params.map);
+	if (params.map.m == 0) {
+		EXPECT_EQ(nullptr, points.mat);
+		EXPECT_EQ(0, points.m);
+		EXPECT_EQ(0, points.n);
+		return;
+	}
+
+	unsigned int want_n = params.map.m * params.map.n;
+
+	ASSERT_EQ(3, points.m);
+	ASSERT_EQ(want_n, points.n);
+	size_t i = 0;
+	size_t j = 0;
+	size_t count = 0;
+	while (i < params.map.m) {
+		while (j < params.map.n) {
+			EXPECT_EQ(i, points.mat[0][count]);
+			EXPECT_EQ(j, points.mat[1][count]);
+			EXPECT_EQ(params.map.map[i][j], points.mat[2][count]);
+			count++;
+			j++;
+		}
+		i++;
+	}
+	EXPECT_EQ(0, points.mat[0][0]);
+	EXPECT_EQ(0, points.mat[1][0]);
+	EXPECT_EQ(10, points.mat[2][0]);
+
+	free(params.map.map[0]);
+	free(params.map.map);
+	free(points.mat[0]);
+	free(points.mat[1]);
+	free(points.mat[2]);
+	free(points.mat);
+}
+
+INSTANTIATE_TEST_SUITE_P(extractPointsTest, extractPointsTest,
+                         testing::Values(
+										 extractPointsTestParams{create_map({})},
+										 extractPointsTestParams{create_map({{10}})},
+										 extractPointsTestParams{create_map({{10, 11}})}
+                                         )
+                         );

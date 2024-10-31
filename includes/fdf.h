@@ -8,33 +8,33 @@ extern "C"
 {
 # endif
 
-# include <stdbool.h>
 # include "libft.h"
+# include <stdbool.h>
 
-	struct		s_bres
+	struct				s_bres
 	{
-		int		dx;
-		int		sx;
-		int		dy;
-		int		sy;
-		int		err;
-		int		e2;
+		int				dx;
+		int				sx;
+		int				dy;
+		int				sy;
+		int				err;
+		int				e2;
 	};
 
 	typedef struct s_point
 	{
-		unsigned int		i;
-		unsigned int		j;
+		unsigned int	i;
+		unsigned int	j;
 	} t_point;
 
 	/* mlx */
 	typedef struct s_mlx_data
 	{
-		void	*mlx_ptr;
-		void	*win_ptr;
+		void			*mlx_ptr;
+		void			*win_ptr;
 	} t_mlx_data;
 
-	typedef int	(*PixelPutFunc)(void *, void *, int, int, int);
+	typedef int			(*PixelPutFunc)(void *, void *, int, int, int);
 	int my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 	void bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
 		PixelPutFunc pixel_put);
@@ -42,9 +42,9 @@ extern "C"
 
 	typedef struct s_mat
 	{
-		double		**mat;
-		int		m;
-		int		n;
+		double			**mat;
+		int				m;
+		int				n;
 	} t_mat;
 
 	void free_matrix(t_mat M);
@@ -53,36 +53,40 @@ extern "C"
 	t_list *get_wireframe_indices(size_t wf_m, size_t wf_n);
 
 	/* helpers */
-	void	add_back_point(t_list **l, t_point p);
+	void add_back_point(t_list **l, t_point p);
+
 	/* parsing */
-        typedef struct s_map {
-			double** map;
-			unsigned int** color;
-			unsigned int m;
-			unsigned int n;
+	typedef struct s_map
+	{
+		double			**map;
+		unsigned int	**color;
+		unsigned int	m;
+		unsigned int	n;
 
-        } t_map;
+	} t_map;
+
 	t_map parse_map(const char *filename);
-
-
+	t_mat extract_points(t_map map);
 
 	/* void draw_rect_win(void* mlx_ptr, void* win_ptr, int p1, int p2,
 		PixelPutFunc pixel_put); */
 	/* /\* the real stuff *\/ */
 	/* t_points new_circle(t_point mp, double r, size_t size); */
 
-	typedef struct s_img{
-		void *img; 				/* pointer to image in X-Server */
-		char *img_pixels;		/* address of image data */
-		int bpp;				/* bits per pixel */
-		int size_line;
-		int endian;
-		int width;
-		int height;
+	typedef struct s_img
+	{
+		void *img;        /* pointer to image in X-Server */
+		char *img_pixels; /* address of image data */
+		int bpp;          /* bits per pixel */
+		int				size_line;
+		int				endian;
+		int				width;
+		int				height;
 	} t_img;
 
 	t_img new_img(void *mlx_ptr, int width, int height);
-	void img_put_pixel(void *mlx_ptr, t_img *img, t_point pos, unsigned int color);
+	void img_put_pixel(void *mlx_ptr, t_img *img, t_point pos,
+		unsigned int color);
 	void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf);
 	/* /\* helpers *\/ */
 	/* int	create_rgb( int r, int g, int b); */
