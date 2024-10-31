@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 void print_matrix(double** matrix, unsigned int m, unsigned int n) {
 	unsigned int i = 0;
@@ -60,10 +61,27 @@ t_mat	mat_mul(t_mat X, t_mat Y)
 				mat[count_m][count_n] += X.mat[count_m][count_k] * Y.mat[count_k][count_n];
 				count_k++;
 			}
-			/* mat[count_m][count_n] += ; */
 			count_n++;
 		}
 		count_m++;
 	}
 	return ((t_mat){.mat = mat, .m = X.m, .n = Y.n});
+}
+
+t_mat get_rot_matrix() {
+	t_mat rot_M;
+	rot_M.m = 2;
+	rot_M.n = 3;
+	rot_M.mat = (double**)malloc(sizeof(double*) * rot_M.m);
+	rot_M.mat[0] = (double*)malloc(sizeof(double*) * rot_M.n);
+	rot_M.mat[1] = (double*)malloc(sizeof(double*) * rot_M.n);
+
+	rot_M.mat[0][0] = 1. / sqrt(2);
+	rot_M.mat[0][1] = -1. / sqrt(2);
+	rot_M.mat[0][2] = 0;
+	rot_M.mat[1][0] = 1. / sqrt(6);
+	rot_M.mat[1][1] = 1. / sqrt(6);
+	rot_M.mat[1][2] = - sqrt(2.) / sqrt(3);
+	return rot_M;
+
 }

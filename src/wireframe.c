@@ -15,6 +15,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
 {
@@ -52,8 +53,14 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf)
 	while (wf)
 	{
 		idx = (t_point *)(wf->content);
-		line = get_bres_line((t_point){M.mat[0][idx->i], M.mat[1][idx->i]},
-				(t_point){M.mat[0][idx->j], M.mat[1][idx->j]});
+		line = get_bres_line((t_point){
+				(int)round(M.mat[0][idx->i]) + (img.width / 2),
+				(int)round(M.mat[1][idx->i]) + (img.height / 2)
+			},
+			(t_point){
+				(int)round(M.mat[0][idx->j]) + (img.width / 2),
+				(int)round(M.mat[1][idx->j]) + (img.height / 2)
+			} );
 		head = line;
 		while (head)
 		{

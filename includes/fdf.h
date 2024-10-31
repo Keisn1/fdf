@@ -49,6 +49,7 @@ extern "C"
 
 	void free_matrix(t_mat M);
 	t_mat mat_mul(t_mat X, t_mat Y);
+	t_mat get_rot_matrix();
 
 	t_list *get_wireframe_indices(size_t wf_m, size_t wf_n);
 
