@@ -117,6 +117,22 @@ unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row)
 	return (size);
 }
 
+unsigned int get_length_line(char *line) {
+	unsigned int size = 0;
+
+	if (end_of_line(line))
+		return size;
+	while (true) {
+		while (*line == ' ')
+			line++;
+		line = ft_strchr(line, ' ');
+		size++;
+		if (end_of_line(line))
+			break;
+	}
+	return size;
+}
+
 t_map	parse_map(const char *filename)
 {
 	t_map	map;
@@ -128,6 +144,7 @@ t_map	parse_map(const char *filename)
 		return ((t_map){NULL, NULL, 0, 0});
 	line = get_next_line(fd);
 	map = new_map();
+	map.n = get_length_line(line);
 	while (line)
 	{
 		map.map = (double **)ft_realloc(map.map, sizeof(double *) * (map.m + 1),
@@ -137,7 +154,7 @@ t_map	parse_map(const char *filename)
 				* map.m);
 		if (!map.map || !map.color)
 			return ((t_map){NULL, NULL, 0, 0});
-		map.n = parse_line(line, map.map + map.m, map.color + map.m);
+		parse_line(line, map.map + map.m, map.color + map.m);
 		map.m++;
 		free(line);
 		line = get_next_line(fd);
