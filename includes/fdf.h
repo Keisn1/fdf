@@ -89,8 +89,20 @@ extern "C"
 	t_img new_img(void *mlx_ptr, int width, int height);
 	void img_put_pixel(void *mlx_ptr, t_img *img, t_point pos,
 		unsigned int color);
+
+	
 	/* void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf); */
 	void	wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_map map);
+
+	typedef struct s_limits {
+		double min_x;
+		double min_y;
+		double max_x;
+		double max_y;
+	} t_limits;
+
+	t_limits get_limits(t_mat M);
+	unsigned int get_scale(unsigned int size_x, unsigned int size_y, t_limits limits);
 	/* /\* helpers *\/ */
 	/* int	create_rgb( int r, int g, int b); */
 	/* void img_put_pixel(void *mlx_ptr, t_img *data, t_point pos,

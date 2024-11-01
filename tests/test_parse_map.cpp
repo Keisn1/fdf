@@ -1,4 +1,3 @@
-#include "gtest/gtest.h"
 #include <gtest/gtest.h>
 #include "fdf.h"
 #include "test_fdf.hpp"

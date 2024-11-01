@@ -83,5 +83,4 @@ t_mat get_rot_matrix() {
 	rot_M.mat[1][1] = 1. / sqrt(6);
 	rot_M.mat[1][2] = - sqrt(2.) / sqrt(3);
 	return rot_M;
-
 }
