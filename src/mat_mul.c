@@ -84,3 +84,20 @@ t_mat get_rot_matrix() {
 	rot_M.mat[1][2] = - sqrt(2.) / sqrt(3);
 	return rot_M;
 }
+
+/* t_mat get_rot_matrix() { */
+/* 	t_mat rot_M; */
+/* 	rot_M.m = 2; */
+/* 	rot_M.n = 3; */
+/* 	rot_M.mat = (double**)malloc(sizeof(double*) * rot_M.m); */
+/* 	rot_M.mat[0] = (double*)malloc(sizeof(double*) * rot_M.n); */
+/* 	rot_M.mat[1] = (double*)malloc(sizeof(double*) * rot_M.n); */
+
+/* 	rot_M.mat[0][0] = sqrt(3.) / sqrt(6); */
+/* 	rot_M.mat[0][1] = 0 / sqrt(6); */
+/* 	rot_M.mat[0][2] = -sqrt(3.) / sqrt(6); */
+/* 	rot_M.mat[1][0] = 1. / sqrt(6); */
+/* 	rot_M.mat[1][1] = 1. / sqrt(6); */
+/* 	rot_M.mat[1][2] = 2. / sqrt(6); */
+/* 	return rot_M; */
+/* } */

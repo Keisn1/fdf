@@ -64,12 +64,12 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_map map)
 		while (count_n < map.n) {
 			if (count_n < map.n -1) {
 				line = get_bres_line((t_point){
-						(int)round(M.mat[0][idx]) + (img.width / 2),
-						(int)round(M.mat[1][idx]) + (img.height / 2)
+						(int)round(M.mat[0][idx]),
+						(int)round(M.mat[1][idx])
 					},
 					(t_point){
-						(int)round(M.mat[0][idx+1]) + (img.width / 2),
-						(int)round(M.mat[1][idx+1]) + (img.height / 2)
+						(int)round(M.mat[0][idx+1]),
+						(int)round(M.mat[1][idx+1])
 					} );
 
 				head = line;
@@ -83,12 +83,12 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_map map)
 			}
 			if (count_m < map.m-1) {
 				line = get_bres_line((t_point){
-						(int)round(M.mat[0][idx]) + (img.width / 2),
-						(int)round(M.mat[1][idx]) + (img.height / 2)
+						(int)round(M.mat[0][idx]),
+						(int)round(M.mat[1][idx])
 					},
 					(t_point){
-						(int)round(M.mat[0][idx+map.n]) + (img.width / 2),
-						(int)round(M.mat[1][idx+map.n]) + (img.height / 2)
+						(int)round(M.mat[0][idx+map.n]),
+						(int)round(M.mat[1][idx+map.n])
 					} );
 
 				head = line;
