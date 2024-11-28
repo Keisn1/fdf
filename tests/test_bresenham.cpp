@@ -1,7 +1,4 @@
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
-#include "fdf.h"
-#include "libft.h"
+#include "test_fdf.hpp"
 
 // Mock class that wraps mlx_pixel_put
 class MLXWrapper {

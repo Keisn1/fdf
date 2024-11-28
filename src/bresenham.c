@@ -10,16 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "bresenham.h"
 #include "fdf.h"
 #include "libft.h"
 #include <stdio.h>
 
-int	lower(int x, int y)
+int	lt(int x, int y)
 {
 	if (x < y)
-	{
 		return (1);
-	}
 	return (-1);
 }
 
@@ -29,15 +28,15 @@ struct s_bres	new_bres(t_point p_0, t_point p_1)
 
 	ret.dx = ft_abs(p_1.i - p_0.i);
 	ret.dy = -ft_abs(p_1.j - p_0.j);
-	ret.sx = lower(p_0.i, p_1.i);
-	ret.sy = lower(p_0.j, p_1.j);
+	ret.sx = lt(p_0.i, p_1.i);
+	ret.sy = lt(p_0.j, p_1.j);
 	ret.err = ret.dx + ret.dy;
 	ret.e2 = 0;
 	return (ret);
 }
 
 void	bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
-		PixelPutFunc pixel_put)
+		t_pixel_put_func pixel_put)
 {
 	struct s_bres	bres;
 

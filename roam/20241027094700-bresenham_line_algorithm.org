@@ -27,7 +27,9 @@ https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
   - therefore the correct pixel can be choosen
 
 ** integer only arithmetic
+
 https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#Algorithm_for_integer_arithmetic
+
 - define difference:
 \(\Delta D_i = f(x_{i+1}, y_{i}+\frac{1}{2}) - f(x_0, y_0)\)
 - simplify
@@ -50,6 +52,9 @@ plotLine(x0, y0, x1, y1)
         D = D + 2*dy
 #+end_src
 * algorithm
+:PROPERTIES:
+:ID:       33827d84-dd96-48a0-9842-87e6feb66dfd
+:END:
 ** pseudo-all-octant
 [[pdf:~/workspace/fdf/BresenhamRasterizingCurves.pdf::1++0.00][BresenhamRasterizingCurves.pdf: Page 1]]
 

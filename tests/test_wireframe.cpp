@@ -1,8 +1,4 @@
-#include "fdf.h"
-#include "libft.h"
-#include "gtest/gtest.h"
-#include <gtest/gtest.h>
-#include <vector>
+#include "test_fdf.hpp"
 
 struct getWireFrameParams {
 	int wf_m;

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "bresenham.h"
 #include "fdf.h"
 #include "libft.h"
 #include <stddef.h>

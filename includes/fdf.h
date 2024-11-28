@@ -1,164 +1,83 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/28 16:35/19 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/11/28 16:35:19 by kfreyer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
-/* gradient */
-# ifdef __cplusplus
-
-extern "C"
-{
-# endif
-
 # include "libft.h"
+# include "mlx_helper.h"
 # include <stdbool.h>
+# include <unistd.h>
 
-	struct				s_bres
-	{
-		int				dx;
-		int				sx;
-		int				dy;
-		int				sy;
-		int				err;
-		int				e2;
-	};
+typedef struct s_mat
+{
+	double			**mat;
+	int				m;
+	int				n;
+}					t_mat;
 
-	typedef struct s_point
-	{
-		unsigned int	i;
-		unsigned int	j;
-	} t_point;
+void				free_matrix(t_mat M);
+t_mat				mat_mul(t_mat X, t_mat Y);
+t_mat				get_rot_matrix(void);
 
-	/* mlx */
-	typedef struct s_mlx_data
-	{
-		void			*mlx_ptr;
-		void			*win_ptr;
-	} t_mlx_data;
+t_list				*get_wireframe_indices(size_t wf_m, size_t wf_n);
 
-	typedef int			(*PixelPutFunc)(void *, void *, int, int, int);
-	int my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
-	void bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
-		PixelPutFunc pixel_put);
-	t_list *get_bres_line(t_point p_0, t_point p_1);
+/* helpers */
+void				add_back_point(t_list **l, t_point p);
+void				print_matrix(double **matrix, unsigned int m,
+						unsigned int n);
 
-	typedef struct s_mat
-	{
-		double			**mat;
-		int				m;
-		int				n;
-	} t_mat;
+/* parsing */
+typedef struct s_map
+{
+	double			**map;
+	unsigned int	**color;
+	unsigned int	m;
+	unsigned int	n;
 
-	void free_matrix(t_mat M);
-	t_mat mat_mul(t_mat X, t_mat Y);
-	t_mat get_rot_matrix();
+}					t_map;
 
-	t_list *get_wireframe_indices(size_t wf_m, size_t wf_n);
+t_map				parse_map(const char *filename);
+t_mat				extract_points(t_map map);
 
-	/* helpers */
-	void add_back_point(t_list **l, t_point p);
-	void print_matrix(double** matrix, unsigned int m, unsigned int n);
+typedef struct s_img
+{
+	void *img;        /* pointer to image in X-Server */
+	char *img_pixels; /* address of image data */
+	int bpp;          /* bits per pixel */
+	int				size_line;
+	int				endian;
+	int				width;
+	int				height;
+}					t_img;
 
-	/* parsing */
-	typedef struct s_map
-	{
-		double			**map;
-		unsigned int	**color;
-		unsigned int	m;
-		unsigned int	n;
+t_img				new_img(void *mlx_ptr, int width, int height);
+void				img_put_pixel(void *mlx_ptr, t_img *img, t_point pos,
+						unsigned int color);
 
-	} t_map;
+/* void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf); */
+void				wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M,
+						t_map map);
 
-	t_map parse_map(const char *filename);
-	t_mat extract_points(t_map map);
+typedef struct s_limits
+{
+	double			min_x;
+	double			min_y;
+	double			max_x;
+	double			max_y;
+}					t_limits;
 
-	/* void draw_rect_win(void* mlx_ptr, void* win_ptr, int p1, int p2,
-		PixelPutFunc pixel_put); */
-	/* /\* the real stuff *\/ */
-	/* t_points new_circle(t_point mp, double r, size_t size); */
-
-	typedef struct s_img
-	{
-		void *img;        /* pointer to image in X-Server */
-		char *img_pixels; /* address of image data */
-		int bpp;          /* bits per pixel */
-		int				size_line;
-		int				endian;
-		int				width;
-		int				height;
-	} t_img;
-
-	t_img new_img(void *mlx_ptr, int width, int height);
-	void img_put_pixel(void *mlx_ptr, t_img *img, t_point pos,
-		unsigned int color);
-
-	
-	/* void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf); */
-	void	wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_map map);
-
-	typedef struct s_limits {
-		double min_x;
-		double min_y;
-		double max_x;
-		double max_y;
-	} t_limits;
-
-	t_limits get_limits(t_mat M);
-	unsigned int get_scale(unsigned int size_x, unsigned int size_y, t_limits limits);
-	/* /\* helpers *\/ */
-	/* int	create_rgb( int r, int g, int b); */
-	/* void img_put_pixel(void *mlx_ptr, t_img *data, t_point pos,
-		unsigned int color); */
-	/* void fill_img(void *mlx_ptr, t_img *img, unsigned int color); */
-	/* t_img new_img(void *mlx_ptr, int width, int height); */
-
-	/* /\* line *\/ */
-	/* typedef struct s_line{ */
-	/* 	double length; */
-	/* 	double phi; */
-	/* 	unsigned int color; */
-	/* } t_line; */
-
-	/* void draw_line_img(void *mlx_ptr, t_img *img, t_line line,
-		t_point pos); */
-
-	/* /\* rectangle *\/ */
-	/* typedef struct s_rectangle{ */
-	/* 	int width; */
-	/* 	int height; */
-	/* 	unsigned int color; */
-	/* } t_rectangle; */
-
-	/* void draw_rect_win(t_mlx_data mlx_data, t_rectangle rect,
-		t_point pos); */
-	/* void draw_rect_img(void *mlx_ptr, t_img *img, t_rectangle rect,
-		t_point pos); */
-	/* t_rectangle new_rect(double width, double height, unsigned int color); */
-
-	/* /\* circle *\/ */
-	/* typedef struct s_circ { */
-	/* 	double r; */
-	/* 	unsigned int color; */
-	/* } t_circ; */
-
-	/* void draw_circ_win(t_mlx_data mlx_data, t_circ circ, t_point pos); */
-	/* void draw_circ_img(void *mlx_ptr, t_img *img, t_circ circ,
-		t_point pos); */
-
-	/* /\* triangle *\/ */
-	/* typedef struct s_triangle{ */
-	/* 	double a; */
-	/* 	double b; */
-	/* 	double c; */
-	/* 	double alpha; */
-	/* 	double beta; */
-	/* 	double gamma; */
-	/* } t_triangle; */
-
-	/* t_triangle new_triangle(double a, double b, double c); */
-	/* void draw_triangle_img(void *mlx_ptr, t_img *img, t_triangle t,
-		t_point pos); */
-
-# ifdef __cplusplus
-}
-# endif
+t_limits			get_limits(t_mat M);
+unsigned int		get_scale(unsigned int size_x, unsigned int size_y,
+						t_limits limits);
 
 #endif // FDF_H

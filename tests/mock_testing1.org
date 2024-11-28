@@ -4,7 +4,8 @@
 :GPTEL_SYSTEM: You are a large language model living in Emacs and a helpful assistant. Avoid long answers.
 :GPTEL_BOUNDS: ((988 . 3978) (4063 . 6917) (7016 . 7135) (7144 . 7187) (7504 . 9214) (11177 . 12249) (12345 . 14823) (15034 . 17622) (17727 . 19402) (19484 . 22060))
 :END:
-
+* fdf
+** chat
 *** I'm using minilibX in a C-project. Inside minilibX (include <mlx.h>), there is a function:
 #+begin_src c
 int mlx_pixel_put ( void *mlx_ptr, void *win_ptr, int x, int y, int color );

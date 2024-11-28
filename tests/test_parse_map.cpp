@@ -1,8 +1,4 @@
-#include <gtest/gtest.h>
-#include "fdf.h"
 #include "test_fdf.hpp"
-#include <fcntl.h>
-#include <vector>
 
 struct parseMapTestParams {
 	std::string filename;

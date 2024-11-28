@@ -1,8 +1,4 @@
 #include "test_fdf.hpp"
-#include "gtest/gtest.h"
-#include <gtest/gtest.h>
-#include <vector>
-#include "fdf.h"
 
 TEST(scaleTest, scaleTest) {
 	t_limits limits = {-23.3, -33.5, 44.5, 22.5};
@@ -13,10 +9,6 @@ TEST(scaleTest, scaleTest) {
 
 	EXPECT_EQ( 32, scale);		// 1080 / 33.5 = 32 is the lowest
 
-	// size_x = 1920;
-	// size_y = 1080;
-	// max_x = 22.2;
-	// max_y = 43.3;
 	limits = {-89.3, -21.5, 44.5, 22.5};
 	scale = get_scale(size_x, size_y, limits);
 	EXPECT_EQ( 21, scale);

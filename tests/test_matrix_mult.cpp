@@ -1,4 +1,3 @@
-#include "fdf.h"
 #include "test_fdf.hpp"
 
 struct MatMulTestParam {
