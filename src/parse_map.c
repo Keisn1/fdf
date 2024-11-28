@@ -181,16 +181,16 @@ t_map	parse_map(const char *filename)
 	return (map);
 }
 
-t_mat	extract_points(t_map map)
+t_matrix	extract_points(t_map map)
 {
 	unsigned int	size;
-	t_mat			points;
+	t_matrix			points;
 	size_t			i;
 	size_t			j;
 	size_t			count;
 
 	if (map.m == 0)
-		return ((t_mat){NULL, 0, 0});
+		return ((t_matrix){NULL, 0, 0});
 	size = map.m * map.n;
 	points.mat = (double **)malloc(sizeof(double *) * 3);
 	points.mat[0] = (double *)malloc(sizeof(double) * size);

@@ -52,7 +52,7 @@ INSTANTIATE_TEST_SUITE_P(scaleTest, minMaxTest,
 TEST_P(minMaxTest, minMaxTest) {
 	minMaxTestParams params = GetParam();
 	double** matrix = create_matrix(params.M);
-	t_mat M = {matrix, 0, 0};
+	t_matrix M = {matrix, 0, 0};
 
 	if (params.M.size() > 0) {
 		M.m = params.M.size();

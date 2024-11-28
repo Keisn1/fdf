@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void print_matrix(double** matrix, unsigned int m, unsigned int n) {
+void print_matrixrix(double** matrix, unsigned int m, unsigned int n) {
 	unsigned int i = 0;
 	unsigned int j = 0;
 
@@ -35,7 +35,7 @@ void print_matrix(double** matrix, unsigned int m, unsigned int n) {
 	}
 }
 
-t_mat	mat_mul(t_mat X, t_mat Y)
+t_matrix	mat_mul(t_matrix X, t_matrix Y)
 {
 	double	**mat;
 	int		count_m;
@@ -43,9 +43,9 @@ t_mat	mat_mul(t_mat X, t_mat Y)
 	int		count_k;
 
 	if (X.m == 0 || X.n == 0 || Y.m == 0 || Y.n == 0)
-		return ((t_mat){NULL, 0, 0});
+		return ((t_matrix){NULL, 0, 0});
 	if (X.n != Y.m)
-		return ((t_mat){NULL, 0, 0});
+		return ((t_matrix){NULL, 0, 0});
 	mat = (double **)malloc(sizeof(double *) * X.m);
 	count_m = 0;
 	while (count_m < X.m)
@@ -65,11 +65,11 @@ t_mat	mat_mul(t_mat X, t_mat Y)
 		}
 		count_m++;
 	}
-	return ((t_mat){.mat = mat, .m = X.m, .n = Y.n});
+	return ((t_matrix){.mat = mat, .m = X.m, .n = Y.n});
 }
 
-t_mat get_rot_matrix() {
-	t_mat rot_M;
+t_matrix get_rot_matrix() {
+	t_matrix rot_M;
 	rot_M.m = 2;
 	rot_M.n = 3;
 	rot_M.mat = (double**)malloc(sizeof(double*) * rot_M.m);
@@ -85,8 +85,8 @@ t_mat get_rot_matrix() {
 	return rot_M;
 }
 
-/* t_mat get_rot_matrix() { */
-/* 	t_mat rot_M; */
+/* t_matrix get_rot_matrix() { */
+/* 	t_matrix rot_M; */
 /* 	rot_M.m = 2; */
 /* 	rot_M.n = 3; */
 /* 	rot_M.mat = (double**)malloc(sizeof(double*) * rot_M.m); */

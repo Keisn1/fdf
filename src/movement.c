@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 double	ft_abs_double(double x)
 {
@@ -22,7 +21,7 @@ double	ft_abs_double(double x)
 
 /* takes 2xn Matrix */
 /* returns min max of rows*/
-t_limits get_limits(t_mat M)
+t_limits get_limits(t_matrix M)
 {
 	if (M.m == 0)
 		return (t_limits){0, 0, 0, 0};

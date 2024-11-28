@@ -9,8 +9,8 @@ struct MatMulTestParam {
 class MatMulTest : public testing::TestWithParam<MatMulTestParam> {};
 
 
-t_mat new_matrix(std::vector<std::vector<double>> A) {
-	t_mat M;
+t_matrix new_matrix(std::vector<std::vector<double>> A) {
+	t_matrix M;
 	M.mat = create_matrix(A);
 	M.m = A.size();
 	if (A.size() == 0) {
@@ -23,11 +23,11 @@ t_mat new_matrix(std::vector<std::vector<double>> A) {
 
 TEST_P(MatMulTest, MatMulTest) {
 	MatMulTestParam params = GetParam();
-	t_mat X = new_matrix(params.X);
-	t_mat Y = new_matrix(params.Y);
-	t_mat want = new_matrix(params.want);
+	t_matrix X = new_matrix(params.X);
+	t_matrix Y = new_matrix(params.Y);
+	t_matrix want = new_matrix(params.want);
 
-	t_mat got = mat_mul(X, Y);
+	t_matrix got = mat_mul(X, Y);
 
 	EXPECT_EQ(want.m, got.m);
 	EXPECT_EQ(want.n, got.n);

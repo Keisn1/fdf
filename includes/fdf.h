@@ -23,11 +23,11 @@ typedef struct s_mat
 	double			**mat;
 	int				m;
 	int				n;
-}					t_mat;
+}					t_matrix;
 
-void				free_matrix(t_mat M);
-t_mat				mat_mul(t_mat X, t_mat Y);
-t_mat				get_rot_matrix(void);
+void				free_matrix(t_matrix M);
+t_matrix			mat_mul(t_matrix X, t_matrix Y);
+t_matrix			get_rot_matrix(void);
 
 t_list				*get_wireframe_indices(size_t wf_m, size_t wf_n);
 
@@ -47,7 +47,7 @@ typedef struct s_map
 }					t_map;
 
 t_map				parse_map(const char *filename);
-t_mat				extract_points(t_map map);
+t_matrix			extract_points(t_map map);
 
 typedef struct s_img
 {
@@ -65,7 +65,7 @@ void				img_put_pixel(void *mlx_ptr, t_img *img, t_point pos,
 						unsigned int color);
 
 /* void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf); */
-void				wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M,
+void				wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M,
 						t_map map);
 
 typedef struct s_limits
@@ -76,7 +76,7 @@ typedef struct s_limits
 	double			max_y;
 }					t_limits;
 
-t_limits			get_limits(t_mat M);
+t_limits			get_limits(t_matrix M);
 unsigned int		get_scale(unsigned int size_x, unsigned int size_y,
 						t_limits limits);
 

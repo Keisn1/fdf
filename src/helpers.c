@@ -42,7 +42,7 @@ int my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color) {
 	return mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
 }
 
-void free_matrix(t_mat M) {
+void free_matrix(t_matrix M) {
 	int m_count = 0;
 	while (m_count < M.m) {
 		free(M.mat[m_count]);

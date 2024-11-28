@@ -48,7 +48,7 @@ t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
 	return (ret);
 }
 
-void	wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_map map)
+void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 {
 	t_list	*line;
 	t_list	*head;
