@@ -20,3 +20,15 @@ double **create_matrix(std::vector<std::vector<double>> M) {
 	}
 	return ret;
 };
+
+t_matrix new_matrix(std::vector<std::vector<double>> A) {
+	t_matrix M;
+	M.mat = create_matrix(A);
+	M.m = A.size();
+	if (A.size() == 0) {
+		M.n = 0;
+		return M;
+	}
+	M.n = A[0].size();
+	return M;
+}

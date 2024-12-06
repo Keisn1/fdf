@@ -48,6 +48,7 @@ t_limits get_limits(t_matrix M)
 	return limits;
 }
 
+/* scaling down so that everything fits into size_x and size_y */
 unsigned int get_scale(unsigned int size_x, unsigned int size_y, t_limits limits){
 	double max_abs_x;
 	double max_abs_y;
