@@ -28,7 +28,8 @@ mlx_pixel_put( mlx_ptr, win_ptr, count2, count1, 0x00000000)));
 #+end_src
 
 * endian problems
-- Endian problems refer to inconsistencies in the way data is stored and accessed in computer memory.
-- While filling the integer, make sure you avoid endian problems. Remember that the "blue" byte should always be the least significant one.
+- Endian problems refer to inconsistencies in the way data is stored and accessed in computer memory
+- While filling the integer, make sure you avoid endian problems
+  - Remember that the "blue" byte should always be the least significant one
 - This can cause issues when moving data between systems that use different byte order formats, such as big-endian and little-endian.
 - Most modern systems, including x86-based processors (such as Intel and AMD), ARM processors, and many others, use the little-endian byte ordering format.

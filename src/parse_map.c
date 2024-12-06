@@ -74,10 +74,6 @@ char	*advance_to_comma_or_ws(char *str)
 	return (str);
 }
 
-t_map	new_map(void)
-{
-	return ((t_map){NULL, NULL, 0, 0});
-}
 
 bool end_of_line(char *line) {
 	if (!line)
@@ -132,6 +128,7 @@ unsigned int get_length_line(char *line) {
 	return size;
 }
 
+/* counts the number of lines in file filename */
 void get_sizes_file(const char *filename, unsigned int *m, unsigned int *n) {
 
 	int count = 0;
@@ -157,7 +154,7 @@ t_map	parse_map(const char *filename)
 	int		fd;
 	char	*line;
 
-	map = new_map();
+	map = ((t_map){NULL, NULL, 0, 0});
 	get_sizes_file(filename, &map.m, &map.n);
 
 	fd = open(filename, O_RDONLY);
