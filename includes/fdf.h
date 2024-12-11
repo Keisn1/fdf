@@ -15,8 +15,23 @@
 
 # include "libft.h"
 # include "mlx_helper.h"
+# include <X11/keysym.h>
+# include <limits.h>
 # include <stdbool.h>
+# include <sys/wait.h>
 # include <unistd.h>
+
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
 
 typedef struct s_mat
 {

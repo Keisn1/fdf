@@ -11,7 +11,7 @@ CFLAGS := -Wall -Wextra -Werror
 CXX := g++
 CXXFLAGS := -Wall -Wextra -Werror
 GTEST_LIBS := -lgtest -lgtest_main -pthread -lgmock #for googletests
-FSANITIZE := -fsanitize=address
+FSANITIZE :=
 
 # dirs
 SRC_DIR := src

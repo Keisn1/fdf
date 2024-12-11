@@ -11,29 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stddef.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <math.h>
-
-void print_matrixrix(double** matrix, unsigned int m, unsigned int n) {
-	unsigned int i = 0;
-	unsigned int j = 0;
-
-	printf("m: %d\n", m);
-	printf("n: %d\n", n);
-	while (i < m) {
-		j = 0;
-		while (j < n) {
-			printf("%f ", matrix[i][j]);
-			j++;
-		}
-
-		printf("\n");
-		i++;
-
-	}
-}
 
 t_matrix	mat_mul(t_matrix X, t_matrix Y)
 {
@@ -58,7 +36,8 @@ t_matrix	mat_mul(t_matrix X, t_matrix Y)
 			mat[count_m][count_n] = 0;
 			while (count_k < X.n)
 			{
-				mat[count_m][count_n] += X.mat[count_m][count_k] * Y.mat[count_k][count_n];
+				mat[count_m][count_n] += X.mat[count_m][count_k]
+					* Y.mat[count_k][count_n];
 				count_k++;
 			}
 			count_n++;
@@ -68,36 +47,20 @@ t_matrix	mat_mul(t_matrix X, t_matrix Y)
 	return ((t_matrix){.mat = mat, .m = X.m, .n = Y.n});
 }
 
-t_matrix get_rot_matrix() {
-	t_matrix rot_M;
+t_matrix	get_rot_matrix(void)
+{
+	t_matrix	rot_M;
+
 	rot_M.m = 2;
 	rot_M.n = 3;
-	rot_M.mat = (double**)malloc(sizeof(double*) * rot_M.m);
-	rot_M.mat[0] = (double*)malloc(sizeof(double*) * rot_M.n);
-	rot_M.mat[1] = (double*)malloc(sizeof(double*) * rot_M.n);
-
+	rot_M.mat = (double **)malloc(sizeof(double *) * rot_M.m);
+	rot_M.mat[0] = (double *)malloc(sizeof(double *) * rot_M.n);
+	rot_M.mat[1] = (double *)malloc(sizeof(double *) * rot_M.n);
 	rot_M.mat[0][0] = 1. / sqrt(2);
 	rot_M.mat[0][1] = -1. / sqrt(2);
 	rot_M.mat[0][2] = 0;
 	rot_M.mat[1][0] = 1. / sqrt(6);
 	rot_M.mat[1][1] = 1. / sqrt(6);
-	rot_M.mat[1][2] = - sqrt(2.) / sqrt(3);
-	return rot_M;
+	rot_M.mat[1][2] = -sqrt(2.) / sqrt(3);
+	return (rot_M);
 }
-
-/* t_matrix get_rot_matrix() { */
-/* 	t_matrix rot_M; */
-/* 	rot_M.m = 2; */
-/* 	rot_M.n = 3; */
-/* 	rot_M.mat = (double**)malloc(sizeof(double*) * rot_M.m); */
-/* 	rot_M.mat[0] = (double*)malloc(sizeof(double*) * rot_M.n); */
-/* 	rot_M.mat[1] = (double*)malloc(sizeof(double*) * rot_M.n); */
-
-/* 	rot_M.mat[0][0] = sqrt(3.) / sqrt(6); */
-/* 	rot_M.mat[0][1] = 0 / sqrt(6); */
-/* 	rot_M.mat[0][2] = -sqrt(3.) / sqrt(6); */
-/* 	rot_M.mat[1][0] = 1. / sqrt(6); */
-/* 	rot_M.mat[1][1] = 1. / sqrt(6); */
-/* 	rot_M.mat[1][2] = 2. / sqrt(6); */
-/* 	return rot_M; */
-/* } */
