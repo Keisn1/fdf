@@ -26,18 +26,21 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra -fsanitize=address")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -fsanitize=address")
 
 add_subdirectory(libft)
+
+set(MLX_DIR "${CMAKE_SOURCE_DIR}/minilibx-linux")
+link_directories(${MLX_DIR})
 # Add libft subdirectory
 if(BUILD_TEST)
   file(GLOB FDF_SOURCES "src/*.c")
   file(GLOB TEST_FILES "tests/*.cpp")
   set(TEST_NAME "run_tests")
+
   add_executable(${TEST_NAME} ${FDF_SOURCES} ${TEST_FILES})
+  target_link_libraries(${TEST_NAME} gtest gmock gtest_main pthread ft mlx_Linux Xext X11)
 
-  target_link_libraries(${TEST_NAME} gtest gmock gtest_main pthread ft mlx Xext X11)
-
+  target_include_directories(${TEST_NAME} PRIVATE ${MLX_DIR})
   target_include_directories(${TEST_NAME} PRIVATE includes)
   target_include_directories(${TEST_NAME} PRIVATE libft)
-  target_include_directories(${TEST_NAME} PRIVATE minilibx-linux)
   target_include_directories(${TEST_NAME} PRIVATE ${gtest_SOURCE_DIR}/googletest/include)
 
   include(GoogleTest)
@@ -48,8 +51,10 @@ endif()
 if(BUILD_FDF)
   file(GLOB FDF_SOURCES "src/*.c")
   add_executable(fdf ${FDF_SOURCES} run/main.c)
-  target_link_libraries(fdf ft mlx Xext X11)
+
+  target_link_libraries(fdf ft mlx_linux Xext X11)
+
   target_include_directories(fdf PRIVATE includes)
   target_include_directories(fdf PRIVATE libft)
-  target_include_directories(fdf PRIVATE minilibx-linux)
+  target_include_directories(fdf PRIVATE ${MLX_DIR})
 endif()

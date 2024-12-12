@@ -17,7 +17,7 @@ BIN_DIR := bin
 BUILD_DIR := build
 
 # libs
-INCLUDES := -Imlx_linux -Ilibft -Iincludes
+INCLUDES := -Iminilibx-linux -Ilibft -Iincludes
 LIBFT := -Llibft -lft
 LIBMLX := -Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 

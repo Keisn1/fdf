@@ -14,7 +14,6 @@
 #include "mlx.h"
 
 
-
 int	main(void)
 {
 	t_mlx_data	mlx_data;
