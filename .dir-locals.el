@@ -1,2 +1,2 @@
-((nil . ((org-roam-directory . "/home/kay/workspace/fdf/roam")
-         (org-roam-db-location . "/home/kay/workspace/fdf/roam/fdf.db"))))
+((nil . ((org-roam-directory . "~/workspace/fdf/roam")
+         (org-roam-db-location . "~/workspace/fdf/roam/fdf.db"))))
