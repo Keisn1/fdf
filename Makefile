@@ -23,7 +23,7 @@ TEST_DIR := tests
 # libs
 INCLUDES := -Imlx_linux -Ilibft -Iincludes
 LIBFT := -Llibft -lft
-LIBMLX := -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+LIBMLX := -Lminilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 
 # files
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
