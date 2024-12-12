@@ -9,23 +9,23 @@ struct parseMapTestParams {
 class parseMapTest : public testing::TestWithParam<parseMapTestParams>{};
 
 void comp_map(
-    std::vector<std::vector<double>> want_M,
-    std::vector<std::vector<double>> want_color,
-    t_map map
-    ) {
-    EXPECT_EQ(want_M.size(), map.m);
-    EXPECT_EQ(want_M[0].size(), map.n);
-    size_t c1 = 0;
-    size_t c2 = 0;
-    while (c1 < want_M.size()) {
-        c2 = 0;
-        while (c2 < want_M[0].size()) {
-            EXPECT_EQ(want_M[c1][c2], map.map[c1][c2]);
-            EXPECT_EQ(want_color[c1][c2], map.color[c1][c2]);
-            c2++;
-        }
-        c1++;
-    }
+	std::vector<std::vector<double>> want_M,
+	std::vector<std::vector<double>> want_color,
+	t_map map
+	) {
+	EXPECT_EQ(want_M.size(), map.m);
+	EXPECT_EQ(want_M[0].size(), map.n);
+	size_t c1 = 0;
+	size_t c2 = 0;
+	while (c1 < want_M.size()) {
+		c2 = 0;
+		while (c2 < want_M[0].size()) {
+			EXPECT_EQ(want_M[c1][c2], map.map[c1][c2]);
+			EXPECT_EQ(want_color[c1][c2], map.color[c1][c2]);
+			c2++;
+		}
+		c1++;
+	}
 }
 
 TEST_P(parseMapTest, parseMapTest) {
@@ -42,8 +42,8 @@ TEST_P(parseMapTest, parseMapTest) {
 
 	comp_map(params.want_M, params.want_color, map);
 
-    size_t c1 = 0;
-    while (c1 < params.want_M.size()) {
+	size_t c1 = 0;
+	while (c1 < params.want_M.size()) {
 		free(map.map[c1]);
 		free(map.color[c1]);
 		c1++;
@@ -89,7 +89,7 @@ INSTANTIATE_TEST_SUITE_P(
 			 {0x00, 0x00, 0x00, 0x00},
 			 {0x00, 0x00, 0x00, 0x00}}},
 		parseMapTestParams{
-			"maps/10-2.fdf",
+			"tests/test_maps/10-2.fdf",
 			{{1, 0, 0, -1, -1, 0, 1, 1, 0, 0},
 			 {-1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
 			 {-1, 1, 0, 0, -1, 1, 0, 0, 0, 1},

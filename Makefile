@@ -18,6 +18,7 @@ SRC_DIR := src
 RUN_DIR := run
 OBJ_DIR := obj
 BIN_DIR := bin
+BUILD_DIR := build
 TEST_DIR := tests
 
 # libs
@@ -59,16 +60,29 @@ $(BIN_DIR):
 
 ############ PHONY ##################
 clean:
+	$(MAKE)	-C libft $@
 	rm -f $(OBJ_FILES) $(TEST_OBJ_FILES)
 
 fclean: clean
+	$(MAKE)	-C libft $@
 	rm -f $(BIN_DIR)/*
+	rm -f $(BUILD_DIR)/*
 	rm -f fdf
 
 re: fclean all
 
-test: $(TEST_TARGET)
-	- $(TEST_TARGET)
+test:
+	cmake -S . -B build -DBUILD_TEST=ON && \
+	cmake --build build && \
+	./build/run_tests
+
+# test: $(TEST_TARGET)
+# 	- $(TEST_TARGET)
+
+compile_commands:
+	cmake -S . -B build -DBUILD_TEST=ON -DBUILD_FDF=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
+	rm -f compile_commands.json
+	mv build/compile_commands.json ./compile_commands.json
 
 libft:
 	$(MAKE) -C libft

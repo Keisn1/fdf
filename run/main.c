@@ -134,16 +134,16 @@ int	main(void)
 
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, size_win_x, size_win_y, "wireframe");
 
-	/* mlx_destroy_image(mlx_data.mlx_ptr, img.img); */
-	/* mlx_clear_window(mlx_data.mlx_ptr, mlx_data.win_ptr); */
-	/* mlx_destroy_window(mlx_data.mlx_ptr, mlx_data.win_ptr); */
-	/* mlx_destroy_display(mlx_data.mlx_ptr); */
-	/* free(mlx_data.mlx_ptr); */
+	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);
+
+	mlx_destroy_image(mlx_data.mlx_ptr, img.img);
+	mlx_destroy_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
+	mlx_destroy_display(mlx_data.mlx_ptr);
+	free(mlx_data.mlx_ptr);
 
 
 	/* put image to window */
-	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);
-	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, exit_program, &mlx_data);
-	mlx_loop(mlx_data.mlx_ptr);
+	/* mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, exit_program, &mlx_data); */
+	/* mlx_loop(mlx_data.mlx_ptr); */
 	return (0);
 }

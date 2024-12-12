@@ -135,12 +135,12 @@ void get_sizes_file(const char *filename, unsigned int *m, unsigned int *n) {
 	int fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return;
-	char* line = get_next_line(fd);
+	char* line = get_next_line(fd, false);
 	*n = get_length_line(line);
 	while (line) {
 		count++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, false);
 	}
 	close(fd);
 	*m = count;
@@ -160,7 +160,7 @@ t_map	parse_map(const char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return ((t_map){NULL, NULL, 0, 0});
-	line = get_next_line(fd);
+	line = get_next_line(fd, false);
 
 	map.map = (double **)malloc(sizeof(double *) * map.m);
 	map.color = (unsigned int **)malloc( sizeof(unsigned int *) * map.m);
@@ -172,7 +172,7 @@ t_map	parse_map(const char *filename)
 		parse_line(line, map.map + count, map.color + count, map.n);
 		count++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, false);
 	}
 	close(fd);
 	return (map);
