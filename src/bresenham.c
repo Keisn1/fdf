@@ -20,9 +20,9 @@ int	lt(int x, int y)
 	return (-1);
 }
 
-struct s_bres	new_bres(t_point p_0, t_point p_1)
+t_bres	new_bres(t_point p_0, t_point p_1)
 {
-	struct s_bres	ret;
+	t_bres	ret;
 
 	ret.dx = ft_abs(p_1.i - p_0.i);
 	ret.dy = -ft_abs(p_1.j - p_0.j);
@@ -42,7 +42,7 @@ struct s_bres	new_bres(t_point p_0, t_point p_1)
 void	bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
 		t_pixel_put_func pixel_put)
 {
-	struct s_bres	bres;
+	t_bres	bres;
 
 	bres = new_bres(p_0, p_1);
 	while (true)
@@ -78,7 +78,7 @@ void	add_back_point(t_list **l, t_point p)
 
 t_list	*get_bres_line(t_point p_0, t_point p_1)
 {
-	struct s_bres	bres;
+	t_bres	bres;
 	t_list			*points;
 
 	bres = new_bres(p_0, p_1);
