@@ -34,7 +34,7 @@ if(BUILD_TEST)
   set(TEST_NAME "run_tests")
   add_executable(${TEST_NAME} ${FDF_SOURCES} ${TEST_FILES})
 
-  target_link_libraries(${TEST_NAME} gtest gmock gtest_main pthread ft mlx Xext X11 m z)
+  target_link_libraries(${TEST_NAME} gtest gmock gtest_main pthread ft mlx Xext X11)
 
   target_include_directories(${TEST_NAME} PRIVATE includes)
   target_include_directories(${TEST_NAME} PRIVATE libft)
@@ -47,8 +47,11 @@ endif()
 
 # Building philo ##################################################
 if(BUILD_FDF)
+  add_subdirectory(libft)
+
+  file(GLOB FDF_SOURCES "src/*.c")
   add_executable(fdf ${FDF_SOURCES} run/main.c)
-  target_link_libraries(fdf ft mlx Cest X11)
+  target_link_libraries(fdf ft mlx Xext X11)
   target_include_directories(fdf PRIVATE includes)
   target_include_directories(fdf PRIVATE libft)
   target_include_directories(fdf PRIVATE minilibx-linux)

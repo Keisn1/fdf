@@ -33,27 +33,27 @@ TEST_P(MatMulTest, MatMulTest) {
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    MatMulTests, MatMulTest,
-    testing::Values(MatMulTestParam{{}, {}, {}},
-                    MatMulTestParam{{{}}, {{}}, {}},
-                    MatMulTestParam{{{1}}, {}, {}},
-                    MatMulTestParam{{{1}}, {{}}, {}},
-                    MatMulTestParam{{{2}}, {{3}}, {{6}}},
-                    MatMulTestParam{{{2}}, {{4}}, {{8}}},
-                    MatMulTestParam{{{2, 2}}, {{4}}, {}},
-                    MatMulTestParam{{{2}, {2}}, {{4}}, {{8}, {8}}},
-                    MatMulTestParam{{{4}}, {{2, 2}}, {{8, 8}}},
-                    MatMulTestParam{{{2, 2}}, {{2}, {2}}, {{8}}},
-                    MatMulTestParam{{{2, 2}}, {{2, 2}}, {}},
-                    MatMulTestParam{{{1, 2, 3}, {4, 5, 6}},
-                                    {{1, 1, 1}, {2, 2, 2}, {3, 3, 3}},
-                                    {
-                                        {14, 14, 14},
-                                        {32, 32, 32}}},
-                    MatMulTestParam{{{1, 2, 3}, {4, 5, 6}},
-                                    {{1, 2, 3}, {1, 2, 3}, {1, 2, 3}},
-                                    {
-                                        {6, 12, 18},
-                                        {15, 30, 45}}}
+	MatMulTests, MatMulTest,
+	testing::Values(MatMulTestParam{{}, {}, {}},
+					MatMulTestParam{{{}}, {{}}, {}},
+					MatMulTestParam{{{1}}, {}, {}},
+					MatMulTestParam{{{1}}, {{}}, {}},
+					MatMulTestParam{{{2}}, {{3}}, {{6}}},
+					MatMulTestParam{{{2}}, {{4}}, {{8}}},
+					MatMulTestParam{{{2, 2}}, {{4}}, {}},
+					MatMulTestParam{{{2}, {2}}, {{4}}, {{8}, {8}}},
+					MatMulTestParam{{{4}}, {{2, 2}}, {{8, 8}}},
+					MatMulTestParam{{{2, 2}}, {{2}, {2}}, {{8}}},
+					MatMulTestParam{{{2, 2}}, {{2, 2}}, {}},
+					MatMulTestParam{{{1, 2, 3}, {4, 5, 6}},
+									{{1, 1, 1}, {2, 2, 2}, {3, 3, 3}},
+									{
+										{14, 14, 14},
+										{32, 32, 32}}},
+					MatMulTestParam{{{1, 2, 3}, {4, 5, 6}},
+									{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}},
+									{
+										{6, 12, 18},
+										{15, 30, 45}}}
 		)
 	);

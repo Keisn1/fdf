@@ -10,9 +10,9 @@ class getWireFrameTest : public testing::TestWithParam<getWireFrameParams> {};
 
 void check_in_want(std::vector<std::vector<unsigned int>> want_indices, t_point *idx_pair) {
 	bool present = false;
-    for (std::vector<unsigned int> value : want_indices) {
-      if (value[0] == idx_pair->i && value[1] == idx_pair->j)
-		  present = true;
+	for (std::vector<unsigned int> value : want_indices) {
+		if (value[0] == idx_pair->i && value[1] == idx_pair->j)
+			present = true;
 	}
 	if (!present) {
 		std::cout << "i: " << idx_pair->i << '\n';
@@ -60,22 +60,22 @@ TEST_P(getWireFrameTest, getWireFrameTest) {
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    wireframeTestSuite, getWireFrameTest,
-    testing::Values(
-        getWireFrameParams{1, 1, {}}, getWireFrameParams{1, 2, {{0, 1}}},
-        getWireFrameParams{1, 3, {{0, 1}, {1, 2}}},
-        getWireFrameParams{1, 3, {{1, 2}, {0, 1}}},
-        getWireFrameParams{2, 2, {{0, 1}, {0, 2}, {1, 3}, {2, 3}}},
-        getWireFrameParams{
-            2, 3, {{0, 1}, {1, 2}, {0, 3}, {1, 4}, {2, 5}, {3, 4}, {4, 5}}},
-        getWireFrameParams{
-            3, 2, {{0, 1}, {2, 3}, {4, 5}, {0, 2}, {1, 3}, {2, 4}, {3, 5}}},
-        getWireFrameParams{
-            3,
-            5,
-            {{0, 1},  {1, 2},  {2, 3},   {3, 4},   {5, 6},   {6, 7},
-             {7, 8},  {8, 9},  {10, 11}, {11, 12}, {12, 13}, {13, 14},
-             {0, 5},  {1, 6},  {2, 7},   {3, 8},   {4, 9},   {5, 10},
-             {6, 11}, {7, 12}, {8, 13},  {9, 14}}}
-            )
+	wireframeTestSuite, getWireFrameTest,
+	testing::Values(
+		getWireFrameParams{1, 1, {}}, getWireFrameParams{1, 2, {{0, 1}}},
+		getWireFrameParams{1, 3, {{0, 1}, {1, 2}}},
+		getWireFrameParams{1, 3, {{1, 2}, {0, 1}}},
+		getWireFrameParams{2, 2, {{0, 1}, {0, 2}, {1, 3}, {2, 3}}},
+		getWireFrameParams{
+			2, 3, {{0, 1}, {1, 2}, {0, 3}, {1, 4}, {2, 5}, {3, 4}, {4, 5}}},
+		getWireFrameParams{
+			3, 2, {{0, 1}, {2, 3}, {4, 5}, {0, 2}, {1, 3}, {2, 4}, {3, 5}}},
+		getWireFrameParams{
+			3,
+			5,
+			{{0, 1},  {1, 2},  {2, 3},   {3, 4},   {5, 6},   {6, 7},
+			 {7, 8},  {8, 9},  {10, 11}, {11, 12}, {12, 13}, {13, 14},
+			 {0, 5},  {1, 6},  {2, 7},   {3, 8},   {4, 9},   {5, 10},
+			 {6, 11}, {7, 12}, {8, 13},  {9, 14}}}
+		)
 	);

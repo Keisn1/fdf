@@ -9,5 +9,5 @@ auto main(int argc, char *argv[]) -> int {
     // ::testing::GTEST_FLAG(filter) = "extractPointsTest*";
     // ::testing::GTEST_FLAG(filter) = "scaleTest*";
 
-	return RUN_ALL_TESTS();
+    return RUN_ALL_TESTS();
 }

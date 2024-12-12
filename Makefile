@@ -76,9 +76,6 @@ test:
 	cmake --build build && \
 	./build/run_tests
 
-# test: $(TEST_TARGET)
-# 	- $(TEST_TARGET)
-
 compile_commands:
 	cmake -S . -B build -DBUILD_TEST=ON -DBUILD_FDF=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
 	rm -f compile_commands.json
