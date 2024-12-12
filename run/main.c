@@ -13,42 +13,7 @@
 #include "fdf.h"
 #include "mlx.h"
 
-int	mouse_hook(int button, int x, int y, void *param)
-{
-	t_mlx_data	mlx_data;
 
-	mlx_data = *(t_mlx_data *)param;
-	if (button == 1)
-		mlx_pixel_put(mlx_data.mlx_ptr, mlx_data.win_ptr, x, y, 0x008000FF);
-	return (1);
-}
-
-int	exit_program(int keycode, t_mlx_data *data)
-{
-	if (keycode == XK_Escape)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-		exit(0);
-	}
-	return (0);
-}
-
-void	free_map(t_map map)
-{
-	unsigned int	c1;
-
-	c1 = 0;
-	while (c1 < map.m)
-	{
-		free(map.map[c1]);
-		free(map.color[c1]);
-		c1++;
-	}
-	free(map.map);
-	free(map.color);
-}
 
 int	main(void)
 {

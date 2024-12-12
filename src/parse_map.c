@@ -213,3 +213,18 @@ t_matrix	extract_points(t_map map)
 	points.n = size;
 	return (points);
 }
+
+void	free_map(t_map map)
+{
+	unsigned int	c1;
+
+	c1 = 0;
+	while (c1 < map.m)
+	{
+		free(map.map[c1]);
+		free(map.color[c1]);
+		c1++;
+	}
+	free(map.map);
+	free(map.color);
+}

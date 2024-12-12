@@ -25,10 +25,9 @@ option(BUILD_FDF "Build fdf (for_compile_commands)" OFF)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra -fsanitize=address")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -fsanitize=address")
 
+add_subdirectory(libft)
 # Add libft subdirectory
 if(BUILD_TEST)
-  add_subdirectory(libft)
-
   file(GLOB FDF_SOURCES "src/*.c")
   file(GLOB TEST_FILES "tests/*.cpp")
   set(TEST_NAME "run_tests")
@@ -47,8 +46,6 @@ endif()
 
 # Building philo ##################################################
 if(BUILD_FDF)
-  add_subdirectory(libft)
-
   file(GLOB FDF_SOURCES "src/*.c")
   add_executable(fdf ${FDF_SOURCES} run/main.c)
   target_link_libraries(fdf ft mlx Xext X11)

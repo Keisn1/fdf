@@ -12,8 +12,6 @@
 
 #include "bresenham.h"
 #include "fdf.h"
-#include "libft.h"
-#include <stdio.h>
 
 int	lt(int x, int y)
 {
@@ -28,8 +26,14 @@ struct s_bres	new_bres(t_point p_0, t_point p_1)
 
 	ret.dx = ft_abs(p_1.i - p_0.i);
 	ret.dy = -ft_abs(p_1.j - p_0.j);
-	ret.sx = lt(p_0.i, p_1.i);
-	ret.sy = lt(p_0.j, p_1.j);
+	if (p_0.i < p_1.i)
+		ret.sx = 1;
+	else
+		ret.sx = -1;
+	if (p_0.j < p_1.j)
+		ret.sy = 1;
+	else
+		ret.sy = -1;
 	ret.err = ret.dx + ret.dy;
 	ret.e2 = 0;
 	return (ret);

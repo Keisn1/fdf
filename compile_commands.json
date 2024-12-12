@@ -21,6 +21,11 @@
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/hooks.c.o -c /home/kfreyer/workspace/fdf/src/hooks.c",
+  "file": "/home/kfreyer/workspace/fdf/src/hooks.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/fdf/build",
   "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/line.c.o -c /home/kfreyer/workspace/fdf/src/line.c",
   "file": "/home/kfreyer/workspace/fdf/src/line.c"
 },
@@ -108,6 +113,11 @@
   "directory": "/home/kfreyer/workspace/fdf/build",
   "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/helpers.c.o -c /home/kfreyer/workspace/fdf/src/helpers.c",
   "file": "/home/kfreyer/workspace/fdf/src/helpers.c"
+},
+{
+  "directory": "/home/kfreyer/workspace/fdf/build",
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/hooks.c.o -c /home/kfreyer/workspace/fdf/src/hooks.c",
+  "file": "/home/kfreyer/workspace/fdf/src/hooks.c"
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",

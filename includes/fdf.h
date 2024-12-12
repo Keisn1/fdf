@@ -32,7 +32,6 @@ enum
 	ON_DESTROY = 17
 };
 
-
 typedef struct s_mat
 {
 	double			**mat;
@@ -63,6 +62,7 @@ typedef struct s_map
 
 t_map				parse_map(const char *filename);
 t_matrix			extract_points(t_map map);
+void				free_map(t_map map);
 
 typedef struct s_img
 {
