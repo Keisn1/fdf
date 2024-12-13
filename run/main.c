@@ -20,8 +20,6 @@ int	main(void)
 	t_mlx_data	mlx_data;
 	char		*filename;
 	t_map		map;
-	t_matrix	vectors;
-	t_matrix	mat_isometric_projection;
 	t_matrix	isometric_projection;
 	t_limits	limits;
 	double		x_translation;
@@ -37,15 +35,7 @@ int	main(void)
 	/* parse map */
 	filename = "test_maps/42.fdf";
 	map = parse_map(filename);
-
-	/* map -> matrix */
-	vectors = map_to_vectors(map);
-	/* calculate isometric projection matrix */
-	mat_isometric_projection = get_rot_matrix();
-	isometric_projection = mat_mul(mat_isometric_projection, vectors);
-
-	free_matrix(vectors);
-	free_matrix(mat_isometric_projection);
+	isometric_projection = get_isometric_projection(map);
 
 	/* translatation by minimum */
 	limits = get_limits(isometric_projection);
