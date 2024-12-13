@@ -56,7 +56,7 @@ typedef struct s_map
 }					t_map;
 
 t_map				parse_map(const char *filename);
-t_matrix			extract_points(t_map map);
+t_matrix			map_to_vectors(t_map map);
 void				free_map(t_map map);
 
 /* void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf); */

@@ -187,7 +187,7 @@ void reserve_space_points(size_t size, t_matrix *points) {
 	points->n = size;
 }
 
-t_matrix	extract_points(t_map map)
+t_matrix	map_to_vectors(t_map map)
 {
 	t_matrix			points;
 	size_t			i;

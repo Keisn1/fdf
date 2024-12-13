@@ -138,7 +138,7 @@ t_map create_map(std::vector<std::vector<double>> map_matrix) {
 TEST_P(extractPointsTest, extractPointsTest) {
 	extractPointsTestParams params = GetParam();
 
-	t_matrix points = extract_points(params.map);
+	t_matrix points = map_to_vectors(params.map);
 	if (params.map.m == 0) {
 		EXPECT_EQ(nullptr, points.mat);
 		EXPECT_EQ(0, points.m);

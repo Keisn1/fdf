@@ -39,7 +39,7 @@ int	main(void)
 	map = parse_map(filename);
 
 	/* map -> matrix */
-	vectors = extract_points(map);
+	vectors = map_to_vectors(map);
 	/* calculate isometric projection matrix */
 	mat_isometric_projection = get_rot_matrix();
 	isometric_projection = mat_mul(mat_isometric_projection, vectors);
