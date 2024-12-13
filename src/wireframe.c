@@ -13,9 +13,6 @@
 #include "bresenham.h"
 #include "fdf.h"
 #include "libft.h"
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 
 t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
