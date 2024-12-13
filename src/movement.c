@@ -21,12 +21,12 @@ double	ft_abs_double(double x)
 
 /* takes 2xn Matrix */
 /* returns min max of rows*/
-t_limits get_limits(t_matrix M)
+t_extrema get_extrema(t_matrix M)
 {
 	if (M.m == 0)
-		return (t_limits){0, 0, 0, 0};
+		return (t_extrema){0, 0, 0, 0};
 
-	t_limits limits = {M.mat[0][0], M.mat[1][0], M.mat[0][0], M.mat[1][0]};
+	t_extrema limits = {M.mat[0][0], M.mat[1][0], M.mat[0][0], M.mat[1][0]};
 	double x;
 	double y;
 
@@ -49,7 +49,7 @@ t_limits get_limits(t_matrix M)
 }
 
 /* scaling down so that everything fits into size_x and size_y */
-unsigned int get_scale(unsigned int size_x, unsigned int size_y, t_limits limits){
+unsigned int get_scale(unsigned int size_x, unsigned int size_y, t_extrema limits){
 	double max_abs_x;
 	double max_abs_y;
 

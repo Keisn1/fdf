@@ -58,21 +58,8 @@ t_map				parse_map(const char *filename);
 t_matrix			map_to_vectors(t_map map);
 t_matrix			get_isometric_projection(t_map map);
 void				free_map(t_map map);
-
-/* void wf_to_img(t_mlx_data mlx_data, t_img img, t_mat M, t_list *wf); */
-void				wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M,
-						t_map map);
-
-typedef struct s_limits
-{
-	double			min_x;
-	double			min_y;
-	double			max_x;
-	double			max_y;
-}					t_limits;
-
-t_limits			get_limits(t_matrix M);
+void				wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map);
 unsigned int		get_scale(unsigned int size_x, unsigned int size_y,
-						t_limits limits);
+						t_extrema limits);
 
 #endif // FDF_H

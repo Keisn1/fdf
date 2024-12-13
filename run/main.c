@@ -13,62 +13,93 @@
 #include "fdf.h"
 #include "libft.h"
 #include "mlx.h"
+#include <unistd.h>
 
+void translate_matrix(t_matrix *m, double x, double y) {
+	unsigned int c2;
+	c2 = 0;
+	while (c2 < m->n)
+	{
+		m->mat[0][c2] += x;
+		m->mat[1][c2] += y;
+		c2++;
+	}
+}
 
-int	main(void)
+double get_max(t_extrema extrema) {
+	if (extrema.max_x < extrema.max_y)
+		return extrema.max_y;
+	return extrema.max_x;
+}
+
+void norm_matrix(t_matrix *m, t_extrema extrema) {
+	double max = get_max(extrema);
+	unsigned int i;
+	unsigned int j;
+
+	i = 0;
+	while (i < m->m) {
+		j = 0;
+		while (j < m->n) {
+			m->mat[i][j] /= max;
+			j++;
+		}
+		i++;
+	}
+}
+
+void scale_matrix(t_matrix *m, double scale) {
+	unsigned int i;
+	unsigned int j;
+
+	i = 0;
+	while (i < m->m) {
+		j = 0;
+		while (j < m->n) {
+			m->mat[i][j] *= scale;
+			j++;
+		}
+		i++;
+	}
+}
+
+int	main(int argc, char** argv)
 {
 	t_mlx_data	mlx_data;
 	char		*filename;
 	t_map		map;
 	t_matrix	isometric_projection;
-	t_limits	limits;
+	t_extrema	extrema;
 	double		x_translation;
 	double		y_translation;
 	size_t		size_win_x;
 	size_t		size_win_y;
-	double		scale;
-	unsigned int			c1;
-	unsigned int			c2;
 	t_img		img;
 
-
+	(void)argc;
 	/* parse map */
-	filename = "test_maps/42.fdf";
+	filename = argv[1];
 	map = parse_map(filename);
 	isometric_projection = get_isometric_projection(map);
 
 	/* translatation by minimum */
-	limits = get_limits(isometric_projection);
-	x_translation = limits.min_x;
-	y_translation = limits.min_y;
+	extrema = get_extrema(isometric_projection);
 
-	c2 = 0;
-	while (c2 < isometric_projection.n)
-	{
-		isometric_projection.mat[0][c2] -= x_translation;
-		isometric_projection.mat[1][c2] -= y_translation;
-		c2++;
-	}
-	limits.min_x -= x_translation;
-	limits.max_x -= x_translation;
-	limits.min_y -= y_translation;
-	limits.max_y -= y_translation;
+	x_translation = extrema.min_x;
+	y_translation = extrema.min_y;
 
-	/* scaling to window size */
-	size_win_x = 480;
-	size_win_y = 270;
-	scale = get_scale(size_win_x, size_win_y, limits);
-	c1 = 0;
-	while (c1 < isometric_projection.m)
-	{
-		c2 = 0;
-		while (c2 < isometric_projection.n)
-		{
-			isometric_projection.mat[c1][c2] *= scale;
-			c2++;
-		}
-		c1++;
-	}
+	translate_matrix(&isometric_projection, -extrema.min_x, -extrema.min_y);
+
+	extrema.min_x -= x_translation;
+	extrema.max_x -= x_translation;
+	extrema.min_y -= y_translation;
+	extrema.max_y -= y_translation;
+
+	size_win_x = 3840;
+	size_win_y = 2160;
+	norm_matrix(&isometric_projection, extrema);
+	scale_matrix(&isometric_projection, size_win_y);
+
 
 	mlx_data.mlx_ptr = mlx_init();
 	if (!(mlx_data.mlx_ptr))

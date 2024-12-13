@@ -1,7 +1,7 @@
 #include "test_fdf.hpp"
 
 TEST(scaleTest, scaleTest) {
-	t_limits limits = {-23.3, -33.5, 44.5, 22.5};
+	t_extrema limits = {-23.3, -33.5, 44.5, 22.5};
 	unsigned int size_x = 1920;
 	unsigned int size_y = 1080;
 
@@ -47,7 +47,7 @@ TEST_P(minMaxTest, minMaxTest) {
 		M.n = params.M[0].size();
 	}
 
-	t_limits limits_M =	get_limits(M);
+	t_extrema limits_M =	get_extrema(M);
 
 	EXPECT_EQ(params.want_min_x, limits_M.min_x);
 	EXPECT_EQ(params.want_min_y, limits_M.min_y);

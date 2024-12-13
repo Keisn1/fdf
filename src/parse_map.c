@@ -157,6 +157,7 @@ t_map	parse_map(const char *filename)
 	map = ((t_map){(t_matrix){NULL, 0, 0}, NULL});
 	get_sizes_file(filename, &map.map.m, &map.map.n);
 
+	ft_putendl_fd("here", STDOUT_FILENO);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return map;
