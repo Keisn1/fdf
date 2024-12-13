@@ -8,7 +8,7 @@ struct getWireFrameParams {
 
 class getWireFrameTest : public testing::TestWithParam<getWireFrameParams> {};
 
-void check_in_want(std::vector<std::vector<unsigned int>> want_indices, t_point *idx_pair) {
+void check_in_want(std::vector<std::vector<unsigned int>> want_indices, t_pixel *idx_pair) {
 	bool present = false;
 	for (std::vector<unsigned int> value : want_indices) {
 		if (value[0] == idx_pair->i && value[1] == idx_pair->j)
@@ -24,7 +24,7 @@ void check_in_want(std::vector<std::vector<unsigned int>> want_indices, t_point 
 void check_in_got(std::vector<unsigned int> want, t_list *got) {
 	bool present = false;
 	while (got) {
-		t_point *idx_pair = (t_point*)(got->content);
+		t_pixel *idx_pair = (t_pixel*)(got->content);
 		if (want[0] == idx_pair->i && want[1] == idx_pair->j)
 			present = true;
 		got = got->next;
@@ -47,7 +47,7 @@ TEST_P(getWireFrameTest, getWireFrameTest) {
 	int count = 0;
 	t_list* head = got;
 	while (head) {
-		check_in_want(params.want, (t_point*)(head->content));
+		check_in_want(params.want, (t_pixel*)(head->content));
 		count++;
 		head = head->next;
 	}

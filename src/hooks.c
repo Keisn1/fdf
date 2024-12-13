@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "fdf.h"
+#include "mlx.h"
 
 int	mouse_hook(int button, int x, int y, void *param)
 {
@@ -23,13 +23,30 @@ int	mouse_hook(int button, int x, int y, void *param)
 	return (1);
 }
 
-int	exit_program(int keycode, t_mlx_data *data)
+void	destroy_imgs(t_list *imgs, void *mlx_ptr)
+{
+	t_list	*head;
+	t_list	*tmp;
+
+	head = imgs;
+	tmp = NULL;
+	while (head)
+	{
+		mlx_destroy_image(mlx_ptr, ((t_img *)head->content)->img);
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+}
+
+int	exit_program(int keycode, t_mlx_data *mlx_data)
 {
 	if (keycode == XK_Escape)
 	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
+		destroy_imgs(mlx_data->imgs, mlx_data->mlx_ptr);
+		mlx_destroy_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
+		mlx_destroy_display(mlx_data->mlx_ptr);
+		free(mlx_data->mlx_ptr);
 		exit(0);
 	}
 	return (0);

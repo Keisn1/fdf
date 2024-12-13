@@ -28,8 +28,8 @@ typedef struct	s_bres
 	int	e2;
 } t_bres;
 
-void	bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
+void	bres_plotline(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 			t_pixel_put_func pixel_put);
-t_list	*get_bres_line(t_point p_0, t_point p_1);
+t_list	*get_bres_line(t_pixel p_0, t_pixel p_1);
 
 #endif // BRESENHAM_H

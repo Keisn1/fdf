@@ -178,9 +178,17 @@ t_map	parse_map(const char *filename)
 	return (map);
 }
 
+void reserve_space_points(size_t size, t_matrix *points) {
+	points->mat = malloc(3 * sizeof(double*));
+	points->mat[0] = (double *)malloc(sizeof(double) * size);
+	points->mat[1] = (double *)malloc(sizeof(double) * size);
+	points->mat[2] = (double *)malloc(sizeof(double) * size);
+	points->m = 3;
+	points->n = size;
+}
+
 t_matrix	extract_points(t_map map)
 {
-	unsigned int	size;
 	t_matrix			points;
 	size_t			i;
 	size_t			j;
@@ -188,11 +196,7 @@ t_matrix	extract_points(t_map map)
 
 	if (map.m == 0)
 		return ((t_matrix){NULL, 0, 0});
-	size = map.m * map.n;
-	points.mat = (double **)malloc(sizeof(double *) * 3);
-	points.mat[0] = (double *)malloc(sizeof(double) * size);
-	points.mat[1] = (double *)malloc(sizeof(double) * size);
-	points.mat[2] = (double *)malloc(sizeof(double) * size);
+	reserve_space_points(map.m * map.n, &points);
 
 	i = 0;
 	count = 0;
@@ -203,14 +207,10 @@ t_matrix	extract_points(t_map map)
 		{
 			points.mat[0][count] = j;
 			points.mat[1][count] = i;
-			points.mat[2][count] = map.map[i][j];
-			count++;
-			j++;
+			points.mat[2][count++] = map.map[i][j++];
 		}
 		i++;
 	}
-	points.m = 3;
-	points.n = size;
 	return (points);
 }
 

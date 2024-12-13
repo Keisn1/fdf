@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "libft.h"
 #include "mlx.h"
 
 
@@ -19,7 +20,7 @@ int	main(void)
 	t_mlx_data	mlx_data;
 	char		*filename;
 	t_map		map;
-	t_matrix	points;
+	t_matrix	vectors;
 	t_matrix	mat_isometric_projection;
 	t_matrix	isometric_projection;
 	t_limits	limits;
@@ -38,12 +39,12 @@ int	main(void)
 	map = parse_map(filename);
 
 	/* map -> matrix */
-	points = extract_points(map);
-
+	vectors = extract_points(map);
 	/* calculate isometric projection matrix */
 	mat_isometric_projection = get_rot_matrix();
-	isometric_projection = mat_mul(mat_isometric_projection, points);
-	free_matrix(points);
+	isometric_projection = mat_mul(mat_isometric_projection, vectors);
+
+	free_matrix(vectors);
 	free_matrix(mat_isometric_projection);
 
 	/* translatation by minimum */
@@ -88,6 +89,7 @@ int	main(void)
 
 	/* create the image */
 	img = new_img(mlx_data.mlx_ptr, size_win_x, size_win_y);
+	mlx_data.imgs = ft_lstnew(&img);
 
 	/* put the wireframe to image */
 	wf_to_img(mlx_data, img, isometric_projection, map);
@@ -100,14 +102,9 @@ int	main(void)
 
 	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);
 
-	mlx_destroy_image(mlx_data.mlx_ptr, img.img);
-	mlx_destroy_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
-	mlx_destroy_display(mlx_data.mlx_ptr);
-	free(mlx_data.mlx_ptr);
-
 
 	/* put image to window */
-	/* mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, exit_program, &mlx_data); */
-	/* mlx_loop(mlx_data.mlx_ptr); */
+	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, exit_program, &mlx_data);
+	mlx_loop(mlx_data.mlx_ptr);
 	return (0);
 }

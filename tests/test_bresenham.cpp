@@ -39,9 +39,9 @@ TEST_P(bresenhamPlotLineTest, BresenhamLineTest) {
 						));
 	}
 
-	bres_plotline(t_mlx_data{NULL, NULL},
-				  (t_point){params.x_0, params.y_0},
-				  (t_point){params.x_1, params.y_1},
+	bres_plotline(t_mlx_data{NULL, NULL, NULL},
+				  (t_pixel){params.x_0, params.y_0},
+				  (t_pixel){params.x_1, params.y_1},
 				  mock_pixel_put);
 }
 
@@ -63,14 +63,14 @@ class bresenhamGetLineTest : public testing::TestWithParam<bresenhamLineTestPara
 TEST_P(bresenhamGetLineTest, BresenhamGetLineTest) {
 	bresenhamLineTestParams params = GetParam();
 
-	t_point p_0 = {params.x_0, params.y_0};
-	t_point p_1 = {params.x_1, params.y_1};
+	t_pixel p_0 = {params.x_0, params.y_0};
+	t_pixel p_1 = {params.x_1, params.y_1};
 	t_list* got = get_bres_line(p_0, p_1);
 
 	int count = 0;
 	t_list *head = got;
 	while (head) {
-		t_point *p = (t_point*)head->content;
+		t_pixel *p = (t_pixel*)head->content;
 		EXPECT_EQ(params.want[count][0], p->i);
 		EXPECT_EQ(params.want[count][1], p->j);
 		count++;

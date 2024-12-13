@@ -35,9 +35,9 @@ t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
 		while (count_n < wf_n)
 		{
 			if (count_n < wf_n - 1)
-				add_back_point(&ret, (t_point){idx, idx + 1});
+				add_back_point(&ret, (t_pixel){idx, idx + 1});
 			if (count_m < wf_m)
-				add_back_point(&ret, (t_point){idx, idx + wf_n});
+				add_back_point(&ret, (t_pixel){idx, idx + wf_n});
 			count_n++;
 			idx++;
 		}
@@ -64,11 +64,11 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 		count_n = 0;
 		while (count_n < map.n) {
 			if (count_n < map.n -1) {
-				line = get_bres_line((t_point){
+				line = get_bres_line((t_pixel){
 						(int)round(M.mat[0][idx]),
 						(int)round(M.mat[1][idx])
 					},
-					(t_point){
+					(t_pixel){
 						(int)round(M.mat[0][idx+1]),
 						(int)round(M.mat[1][idx+1])
 					} );
@@ -76,18 +76,18 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 				head = line;
 				while (head)
 				{
-					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_point *)head->content,
+					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content,
 								  0xFF00FF);
 					head = head->next;
 				}
 				ft_lstclear(&line, free);
 			}
 			if (count_m < map.m-1) {
-				line = get_bres_line((t_point){
+				line = get_bres_line((t_pixel){
 						(int)round(M.mat[0][idx]),
 						(int)round(M.mat[1][idx])
 					},
-					(t_point){
+					(t_pixel){
 						(int)round(M.mat[0][idx+map.n]),
 						(int)round(M.mat[1][idx+map.n])
 					} );
@@ -95,7 +95,7 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 				head = line;
 				while (head)
 				{
-					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_point *)head->content,
+					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content,
 								  0xFF00FF);
 					head = head->next;
 				}

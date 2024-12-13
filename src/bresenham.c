@@ -20,7 +20,7 @@ int	lt(int x, int y)
 	return (-1);
 }
 
-t_bres	new_bres(t_point p_0, t_point p_1)
+t_bres	new_bres(t_pixel p_0, t_pixel p_1)
 {
 	t_bres	ret;
 
@@ -39,7 +39,7 @@ t_bres	new_bres(t_point p_0, t_point p_1)
 	return (ret);
 }
 
-void	bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
+void	bres_plotline(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 		t_pixel_put_func pixel_put)
 {
 	t_bres	bres;
@@ -66,17 +66,17 @@ void	bres_plotline(t_mlx_data mlx_data, t_point p_0, t_point p_1,
 	}
 }
 
-void	add_back_point(t_list **l, t_point p)
+void	add_back_point(t_list **l, t_pixel p)
 {
-	t_point	*new;
+	t_pixel	*new;
 
-	new = (t_point *)malloc(sizeof(t_point) * 1);
+	new = (t_pixel *)malloc(sizeof(t_pixel) * 1);
 	new->i = p.i;
 	new->j = p.j;
 	ft_lstadd_back(l, ft_lstnew(new));
 }
 
-t_list	*get_bres_line(t_point p_0, t_point p_1)
+t_list	*get_bres_line(t_pixel p_0, t_pixel p_1)
 {
 	t_bres	bres;
 	t_list			*points;

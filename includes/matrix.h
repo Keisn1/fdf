@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.h                                              :+:      :+:    :+:   */
+/*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfreyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 17:00/48 by kfreyer           #+#    #+#             */
-/*   Updated: 2024/11/28 17:00:48 by kfreyer          ###   ########.fr       */
+/*   Created: 2024/12/13 12:05/53 by kfreyer           #+#    #+#             */
+/*   Updated: 2024/12/13 12:05:53 by kfreyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_HELPER_H
-# define MLX_HELPER_H
+#ifndef MATRIX_H
+#define MATRIX_H
 
-# include "libft.h"
-/* mlx */
-typedef struct s_mlx_data
+typedef struct s_mat
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	t_list			*imgs;
-}					t_mlx_data;
+	double			**mat;
+	int				m;
+	int				n;
+}					t_matrix;
 
-typedef int			(*t_pixel_put_func)(void *, void *, int, int, int);
+void				free_matrix(t_matrix M);
+t_matrix			mat_mul(t_matrix X, t_matrix Y);
 
-typedef struct s_pixel
-{
-	unsigned int	i;
-	unsigned int	j;
-}					t_pixel;
-
-#endif
+#endif // MATRIX_H
