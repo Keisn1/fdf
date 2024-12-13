@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "matrix.h"
+#include <stdlib.h>
 
 void	free_matrix(t_matrix M)
 {
-	int	m_count;
+	unsigned int	m_count;
 
 	m_count = 0;
 	while (m_count < M.m)

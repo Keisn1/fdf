@@ -20,8 +20,8 @@ TEST_P(MatMulTest, MatMulTest) {
 
 	EXPECT_EQ(want.m, got.m);
 	EXPECT_EQ(want.n, got.n);
-	for (int i = 0; i < want.m ; i++) {
-		for (int j = 0; j < want.n ; j++) {
+	for (unsigned int i = 0; i < want.m ; i++) {
+		for (unsigned int j = 0; j < want.n ; j++) {
 			EXPECT_EQ(want.mat[i][j], got.mat[i][j]);
 		}
 	}

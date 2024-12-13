@@ -154,22 +154,22 @@ t_map	parse_map(const char *filename)
 	int		fd;
 	char	*line;
 
-	map = ((t_map){NULL, NULL, 0, 0});
-	get_sizes_file(filename, &map.m, &map.n);
+	map = ((t_map){(t_matrix){NULL, 0, 0}, NULL});
+	get_sizes_file(filename, &map.map.m, &map.map.n);
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return ((t_map){NULL, NULL, 0, 0});
+		return map;
 	line = get_next_line(fd, false);
 
-	map.map = (double **)malloc(sizeof(double *) * map.m);
-	map.color = (unsigned int **)malloc( sizeof(unsigned int *) * map.m);
+	map.map.mat = (double **)malloc(sizeof(double *) * map.map.m);
+	map.color = (unsigned int **)malloc( sizeof(unsigned int *) * map.map.m);
 	int count = 0;
 	while (line)
 	{
-		if (!map.map || !map.color)
-			return ((t_map){NULL, NULL, 0, 0});
-		parse_line(line, map.map + count, map.color + count, map.n);
+		if (!map.map.mat || !map.color)
+			return ((t_map){(t_matrix){NULL, 0, 0}, NULL});
+		parse_line(line, map.map.mat + count, map.color + count, map.map.n);
 		count++;
 		free(line);
 		line = get_next_line(fd, false);
@@ -194,20 +194,20 @@ t_matrix	map_to_vectors(t_map map)
 	size_t			j;
 	size_t			count;
 
-	if (map.m == 0)
+	if (map.map.m == 0)
 		return ((t_matrix){NULL, 0, 0});
-	reserve_space_points(map.m * map.n, &points);
+	reserve_space_points(map.map.m * map.map.n, &points);
 
 	i = 0;
 	count = 0;
-	while (i < map.m)
+	while (i < map.map.m)
 	{
 		j = 0;
-		while (j < map.n)
+		while (j < map.map.n)
 		{
 			points.mat[0][count] = j;
 			points.mat[1][count] = i;
-			points.mat[2][count++] = map.map[i][j++];
+			points.mat[2][count++] = map.map.mat[i][j++];
 		}
 		i++;
 	}
@@ -219,12 +219,12 @@ void	free_map(t_map map)
 	unsigned int	c1;
 
 	c1 = 0;
-	while (c1 < map.m)
+	while (c1 < map.map.m)
 	{
-		free(map.map[c1]);
+		free(map.map.mat[c1]);
 		free(map.color[c1]);
 		c1++;
 	}
-	free(map.map);
+	free(map.map.mat);
 	free(map.color);
 }

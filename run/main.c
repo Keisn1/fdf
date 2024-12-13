@@ -26,11 +26,11 @@ int	main(void)
 	t_limits	limits;
 	double		x_translation;
 	double		y_translation;
-	int			c2;
 	size_t		size_win_x;
 	size_t		size_win_y;
 	double		scale;
-	int			c1;
+	unsigned int			c1;
+	unsigned int			c2;
 	t_img		img;
 
 

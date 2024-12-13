@@ -54,16 +54,16 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 	t_list	*head;
 
 
-	size_t	count_m;
-	size_t	count_n;
+	unsigned int	count_m;
+	unsigned int	count_n;
 	size_t idx;
 
 	count_m = 0;
 	idx = 0;
-	while (count_m < map.m) {
+	while (count_m < map.map.m) {
 		count_n = 0;
-		while (count_n < map.n) {
-			if (count_n < map.n -1) {
+		while (count_n < map.map.n) {
+			if (count_n < map.map.n -1) {
 				line = get_bres_line((t_pixel){
 						(int)round(M.mat[0][idx]),
 						(int)round(M.mat[1][idx])
@@ -82,14 +82,14 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 				}
 				ft_lstclear(&line, free);
 			}
-			if (count_m < map.m-1) {
+			if (count_m < map.map.m-1) {
 				line = get_bres_line((t_pixel){
 						(int)round(M.mat[0][idx]),
 						(int)round(M.mat[1][idx])
 					},
 					(t_pixel){
-						(int)round(M.mat[0][idx+map.n]),
-						(int)round(M.mat[1][idx+map.n])
+						(int)round(M.mat[0][idx+map.map.n]),
+						(int)round(M.mat[1][idx+map.map.n])
 					} );
 
 				head = line;

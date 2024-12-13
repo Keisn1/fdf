@@ -13,14 +13,14 @@ void comp_map(
 	std::vector<std::vector<double>> want_color,
 	t_map map
 	) {
-	EXPECT_EQ(want_M.size(), map.m);
-	EXPECT_EQ(want_M[0].size(), map.n);
+	EXPECT_EQ(want_M.size(), map.map.m);
+	EXPECT_EQ(want_M[0].size(), map.map.n);
 	size_t c1 = 0;
 	size_t c2 = 0;
 	while (c1 < want_M.size()) {
 		c2 = 0;
 		while (c2 < want_M[0].size()) {
-			EXPECT_EQ(want_M[c1][c2], map.map[c1][c2]);
+			EXPECT_EQ(want_M[c1][c2], map.map.mat[c1][c2]);
 			EXPECT_EQ(want_color[c1][c2], map.color[c1][c2]);
 			c2++;
 		}
@@ -33,10 +33,10 @@ TEST_P(parseMapTest, parseMapTest) {
 
 	t_map map = parse_map(params.filename.c_str());
 	if (params.want_M.size() == 0) {
-		EXPECT_EQ(nullptr, map.map);
+		EXPECT_EQ(nullptr, map.map.mat);
 		EXPECT_EQ(nullptr, map.color);
-		EXPECT_EQ(params.want_M.size(), map.m);
-		EXPECT_EQ(params.want_M.size(), map.n);
+		EXPECT_EQ(params.want_M.size(), map.map.m);
+		EXPECT_EQ(params.want_M.size(), map.map.n);
 		return;
 	}
 
@@ -44,11 +44,11 @@ TEST_P(parseMapTest, parseMapTest) {
 
 	size_t c1 = 0;
 	while (c1 < params.want_M.size()) {
-		free(map.map[c1]);
+		free(map.map.mat[c1]);
 		free(map.color[c1]);
 		c1++;
 	}
-	free(map.map);
+	free(map.map.mat);
 	free(map.color);
 }
 
@@ -125,12 +125,12 @@ class extractPointsTest : public testing::TestWithParam<extractPointsTestParams>
 
 t_map create_map(std::vector<std::vector<double>> map_matrix) {
 	t_map map;
-	map.map = create_matrix(map_matrix);
-	map.m = map_matrix.size();
-	if (map.m) {
-		map.n = map_matrix[0].size();
+	map.map.mat = create_matrix(map_matrix);
+	map.map.m = map_matrix.size();
+	if (map.map.m) {
+		map.map.n = map_matrix[0].size();
 	} else {
-		map.n = 0;
+		map.map.n = 0;
 	}
 	return map;
 };
@@ -139,26 +139,26 @@ TEST_P(extractPointsTest, extractPointsTest) {
 	extractPointsTestParams params = GetParam();
 
 	t_matrix points = map_to_vectors(params.map);
-	if (params.map.m == 0) {
+	if (params.map.map.m == 0) {
 		EXPECT_EQ(nullptr, points.mat);
 		EXPECT_EQ(0, points.m);
 		EXPECT_EQ(0, points.n);
 		return;
 	}
 
-	unsigned int want_n = params.map.m * params.map.n;
+	unsigned int want_n = params.map.map.m * params.map.map.n;
 
 	ASSERT_EQ(3, points.m);
 	ASSERT_EQ(want_n, points.n);
 	size_t i = 0;
 	size_t j = 0;
 	size_t count = 0;
-	while (i < params.map.m) {
+	while (i < params.map.map.m) {
 		j = 0;
-		while (j < params.map.n) {
+		while (j < params.map.map.n) {
 			EXPECT_EQ(j, points.mat[0][count]);
 			EXPECT_EQ(i, points.mat[1][count]);
-			EXPECT_EQ(params.map.map[i][j], points.mat[2][count]);
+			EXPECT_EQ(params.map.map.mat[i][j], points.mat[2][count]);
 			count++;
 			j++;
 		}
@@ -166,12 +166,12 @@ TEST_P(extractPointsTest, extractPointsTest) {
 	}
 
 	count = 0;
-	while (count < params.map.m) {
-		free(params.map.map[count]);
+	while (count < params.map.map.m) {
+		free(params.map.map.mat[count]);
 		count++;
 	}
 
-	free(params.map.map);
+	free(params.map.map.mat);
 	free(points.mat[0]);
 	free(points.mat[1]);
 	free(points.mat[2]);

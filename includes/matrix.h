@@ -16,8 +16,8 @@
 typedef struct s_mat
 {
 	double			**mat;
-	int				m;
-	int				n;
+	unsigned int				m;
+	unsigned int				n;
 }					t_matrix;
 
 void				free_matrix(t_matrix M);

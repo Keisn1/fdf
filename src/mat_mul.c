@@ -16,9 +16,9 @@
 t_matrix	mat_mul(t_matrix X, t_matrix Y)
 {
 	double	**mat;
-	int		count_m;
-	int		count_n;
-	int		count_k;
+	unsigned int		count_m;
+	unsigned int		count_n;
+	unsigned int		count_k;
 
 	if (X.m == 0 || X.n == 0 || Y.m == 0 || Y.n == 0)
 		return ((t_matrix){NULL, 0, 0});

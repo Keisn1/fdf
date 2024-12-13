@@ -30,7 +30,7 @@ t_limits get_limits(t_matrix M)
 	double x;
 	double y;
 
-	int count = 1;
+	unsigned int count = 1;
 	while (count < M.n) {
 		x = M.mat[0][count];
 		y = M.mat[1][count];

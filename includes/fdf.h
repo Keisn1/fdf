@@ -48,11 +48,8 @@ void				print_matrix(double **matrix, unsigned int m,
 /* parsing */
 typedef struct s_map
 {
-	double			**map;
+	t_matrix		map;
 	unsigned int	**color;
-	unsigned int	m;
-	unsigned int	n;
-
 }					t_map;
 
 t_map				parse_map(const char *filename);
