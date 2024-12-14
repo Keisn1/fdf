@@ -128,24 +128,26 @@ unsigned int get_length_line(char *line) {
 	return size;
 }
 
-/* counts the number of lines in file filename */
-void get_sizes_file(const char *filename, unsigned int *m, unsigned int *n) {
+t_map resize_map(t_map map) {
+	t_map new_map;
 
-	int count = 0;
-	int fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return;
-	char* line = get_next_line(fd, false);
-	*n = get_length_line(line);
-	while (line) {
+	new_map.map.m = map.map.m + 1;
+	new_map.map.n = map.map.n;
+	new_map.map.mat = (double **)malloc(sizeof(double *) * (new_map.map.m));
+	new_map.color = (unsigned int **)malloc( sizeof(unsigned int *) * (new_map.map.m));
+
+	if (!new_map.map.mat || !new_map.color)
+		return ((t_map){(t_matrix){NULL, 0, 0}, NULL});
+
+	unsigned int count = 0;
+	while (count < map.map.m) {
+		new_map.map.mat[count] = map.map.mat[count];
+		new_map.color[count] = map.color[count];
 		count++;
-		free(line);
-		line = get_next_line(fd, false);
 	}
-	close(fd);
-	*m = count;
-	return;
-
+	free(map.map.mat);
+	free(map.color);
+	return new_map;
 }
 
 t_map	parse_map(const char *filename)
@@ -155,20 +157,16 @@ t_map	parse_map(const char *filename)
 	char	*line;
 
 	map = ((t_map){(t_matrix){NULL, 0, 0}, NULL});
-	get_sizes_file(filename, &map.map.m, &map.map.n);
-
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return map;
 	line = get_next_line(fd, false);
-
-	map.map.mat = (double **)malloc(sizeof(double *) * map.map.m);
-	map.color = (unsigned int **)malloc( sizeof(unsigned int *) * map.map.m);
+	map.map.n = get_length_line(line);
+	map.map.m = 0;
 	int count = 0;
 	while (line)
 	{
-		if (!map.map.mat || !map.color)
-			return ((t_map){(t_matrix){NULL, 0, 0}, NULL});
+		map = resize_map(map);
 		parse_line(line, map.map.mat + count, map.color + count, map.map.n);
 		count++;
 		free(line);

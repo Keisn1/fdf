@@ -11,6 +11,25 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <math.h>
+
+t_matrix	get_rot_matrix(void)
+{
+	t_matrix	rot_matrix;
+
+	rot_matrix.m = 2;
+	rot_matrix.n = 3;
+	rot_matrix.mat = (double **)malloc(sizeof(double *) * rot_matrix.m);
+	rot_matrix.mat[0] = (double *)malloc(sizeof(double *) * rot_matrix.n);
+	rot_matrix.mat[1] = (double *)malloc(sizeof(double *) * rot_matrix.n);
+	rot_matrix.mat[0][0] = 1. / sqrt(2);
+	rot_matrix.mat[0][1] = -1. / sqrt(2);
+	rot_matrix.mat[0][2] = 0;
+	rot_matrix.mat[1][0] = 1. / sqrt(6);
+	rot_matrix.mat[1][1] = 1. / sqrt(6);
+	rot_matrix.mat[1][2] = -sqrt(2.) / sqrt(3);
+	return (rot_matrix);
+}
 
 t_matrix	get_isometric_projection(t_map map)
 {
@@ -26,13 +45,35 @@ t_matrix	get_isometric_projection(t_map map)
 	return (isometric_projection);
 }
 
-void translate_vectors(t_matrix *m, double x, double y) {
+void translate_vectors_to_first_octant(t_matrix *mat) {
+	t_extrema	extrema;
+	/* translatation by minimum */
+	extrema = get_extrema(*mat);
+	translate_vectors(mat, -extrema.min_x, -extrema.min_y);
+}
+
+void translate_vectors(t_matrix *mat, double x, double y) {
 	unsigned int c2;
 	c2 = 0;
-	while (c2 < m->n)
+	while (c2 < mat->n)
 	{
-		m->mat[0][c2] += x;
-		m->mat[1][c2] += y;
+		mat->mat[0][c2] += x;
+		mat->mat[1][c2] += y;
 		c2++;
 	}
+}
+
+void norm_vectors(t_matrix *mat) {
+	double max_norm= 0;
+	double norm = 0;
+	size_t c1 = 0;
+	while (c1 < mat->n) {
+		double x_squared = pow(mat->mat[0][c1], 2);
+		double y_squared = pow(mat->mat[1][c1], 2);
+		norm = sqrt(x_squared + y_squared);
+		if (norm > max_norm)
+			max_norm = norm;
+		c1++;
+	}
+	scale_matrix(mat, 1/max_norm);
 }

@@ -6,21 +6,6 @@
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/circle.c.o -c /home/kfreyer/workspace/fdf/src/circle.c",
-  "file": "/home/kfreyer/workspace/fdf/src/circle.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/gradient.c.o -c /home/kfreyer/workspace/fdf/src/gradient.c",
-  "file": "/home/kfreyer/workspace/fdf/src/gradient.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/helpers.c.o -c /home/kfreyer/workspace/fdf/src/helpers.c",
-  "file": "/home/kfreyer/workspace/fdf/src/helpers.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
   "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/hooks.c.o -c /home/kfreyer/workspace/fdf/src/hooks.c",
   "file": "/home/kfreyer/workspace/fdf/src/hooks.c"
 },
@@ -31,8 +16,8 @@
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/mat_mul.c.o -c /home/kfreyer/workspace/fdf/src/mat_mul.c",
-  "file": "/home/kfreyer/workspace/fdf/src/mat_mul.c"
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/matrix.c.o -c /home/kfreyer/workspace/fdf/src/matrix.c",
+  "file": "/home/kfreyer/workspace/fdf/src/matrix.c"
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",
@@ -48,16 +33,6 @@
   "directory": "/home/kfreyer/workspace/fdf/build",
   "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/projection.c.o -c /home/kfreyer/workspace/fdf/src/projection.c",
   "file": "/home/kfreyer/workspace/fdf/src/projection.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/rectangle.c.o -c /home/kfreyer/workspace/fdf/src/rectangle.c",
-  "file": "/home/kfreyer/workspace/fdf/src/rectangle.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/minilibx-linux -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kfreyer/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/triangle.c.o -c /home/kfreyer/workspace/fdf/src/triangle.c",
-  "file": "/home/kfreyer/workspace/fdf/src/triangle.c"
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",
@@ -106,21 +81,6 @@
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/circle.c.o -c /home/kfreyer/workspace/fdf/src/circle.c",
-  "file": "/home/kfreyer/workspace/fdf/src/circle.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/gradient.c.o -c /home/kfreyer/workspace/fdf/src/gradient.c",
-  "file": "/home/kfreyer/workspace/fdf/src/gradient.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/helpers.c.o -c /home/kfreyer/workspace/fdf/src/helpers.c",
-  "file": "/home/kfreyer/workspace/fdf/src/helpers.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
   "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/hooks.c.o -c /home/kfreyer/workspace/fdf/src/hooks.c",
   "file": "/home/kfreyer/workspace/fdf/src/hooks.c"
 },
@@ -131,8 +91,8 @@
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/mat_mul.c.o -c /home/kfreyer/workspace/fdf/src/mat_mul.c",
-  "file": "/home/kfreyer/workspace/fdf/src/mat_mul.c"
+  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/matrix.c.o -c /home/kfreyer/workspace/fdf/src/matrix.c",
+  "file": "/home/kfreyer/workspace/fdf/src/matrix.c"
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",
@@ -148,16 +108,6 @@
   "directory": "/home/kfreyer/workspace/fdf/build",
   "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/projection.c.o -c /home/kfreyer/workspace/fdf/src/projection.c",
   "file": "/home/kfreyer/workspace/fdf/src/projection.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/rectangle.c.o -c /home/kfreyer/workspace/fdf/src/rectangle.c",
-  "file": "/home/kfreyer/workspace/fdf/src/rectangle.c"
-},
-{
-  "directory": "/home/kfreyer/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kfreyer/workspace/fdf/includes -I/home/kfreyer/workspace/fdf/libft -I/home/kfreyer/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/triangle.c.o -c /home/kfreyer/workspace/fdf/src/triangle.c",
-  "file": "/home/kfreyer/workspace/fdf/src/triangle.c"
 },
 {
   "directory": "/home/kfreyer/workspace/fdf/build",

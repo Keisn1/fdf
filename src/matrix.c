@@ -12,6 +12,24 @@
 
 #include "matrix.h"
 
+void	scale_matrix(t_matrix *m, double scale)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	while (i < m->m)
+	{
+		j = 0;
+		while (j < m->n)
+		{
+			m->mat[i][j] *= scale;
+			j++;
+		}
+		i++;
+	}
+}
+
 bool	valid_dimensions(t_matrix X, t_matrix Y)
 {
 	if (X.m == 0 || X.n == 0 || Y.m == 0 || Y.n == 0)
@@ -58,4 +76,3 @@ void	free_matrix(t_matrix M)
 		free(M.mat[m_count++]);
 	free(M.mat);
 }
-
