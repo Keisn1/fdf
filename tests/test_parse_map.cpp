@@ -56,38 +56,38 @@ INSTANTIATE_TEST_SUITE_P(
 	parseMapTests, parseMapTest,
 	testing::Values(
 		parseMapTestParams{"", {}, {}},
-		parseMapTestParams{"tests/test_maps/1-1-0.fdf", {{0}}, {{0x000000}}},
-		parseMapTestParams{"tests/test_maps/1-1-1.fdf", {{1}}, {{0x000000}}},
+		parseMapTestParams{"tests/test_maps/1-1-0.fdf", {{0}}, {{0xFF00FF}}},
+		parseMapTestParams{"tests/test_maps/1-1-1.fdf", {{1}}, {{0xFF00FF}}},
 		parseMapTestParams{
-			"tests/test_maps/1-2.fdf", {{0, 1}}, {{0x000000, 0x000000}}},
+			"tests/test_maps/1-2.fdf", {{0, 1}}, {{0xFF00FF, 0xFF00FF}}},
 		parseMapTestParams{
-			"tests/test_maps/1-2-other.fdf", {{2, 3}}, {{0x000000, 0x000000}}},
+			"tests/test_maps/1-2-other.fdf", {{2, 3}}, {{0xFF00FF, 0xFF00FF}}},
 		parseMapTestParams{"tests/test_maps/1-3.fdf",
 						   {{5, 6, 7}},
-						   {{0x000000, 0x000000, 0x000000}}},
+						   {{0xFF00FF, 0xFF00FF, 0xFF00FF}}},
 		parseMapTestParams{
 			"tests/test_maps/2-3.fdf",
 			{{1, 2, 3}, {5, 6, 7}},
-			{{0x000000, 0x000000, 0x000000}, {0x000000, 0x000000, 0x000000}}},
+			{{0xFF00FF, 0xFF00FF, 0xFF00FF}, {0xFF00FF, 0xFF00FF, 0xFF00FF}}},
 		parseMapTestParams{"tests/test_maps/3-3.fdf",
 						   {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
-						   {{0x000000, 0x000000, 0x000000},
-							{0x000000, 0x000000, 0x000000},
-							{0x000000, 0x000000, 0x000000}}},
+						   {{0xFF00FF, 0xFF00FF, 0xFF00FF},
+							{0xFF00FF, 0xFF00FF, 0xFF00FF},
+							{0xFF00FF, 0xFF00FF, 0xFF00FF}}},
 		parseMapTestParams{"tests/test_maps/3-1.fdf",
 						   {{1}, {2}, {3}},
-						   {{0x000000}, {0x000000}, {0x000000}}},
+						   {{0xFF00FF}, {0xFF00FF}, {0xFF00FF}}},
 		parseMapTestParams{"tests/test_maps/1-1-0-wc.fdf", {{0}}, {{0xff}}},
 		parseMapTestParams{"tests/test_maps/3-2-wc.fdf",
 						   {{1, 2}, {4, 5}, {7, 8}},
-						   {{0x00, 0x09}, {0xAA, 0x00}, {0x00, 0x11}}},
+						   {{0xFF00FF, 0x09}, {0xAA, 0xFF00FF}, {0xFF00FF, 0x11}}},
 		parseMapTestParams{
 			"tests/test_maps/10-2-small.fdf",
 			{{1, 0, 0, -1}, {-1, 0, 0, 0}, {-1, 1, 0, 0}, {1, -1, 0, 1}},
-			{{0x00, 0x00, 0x00, 0x00},
-			 {0x00, 0x00, 0x00, 0x00},
-			 {0x00, 0x00, 0x00, 0x00},
-			 {0x00, 0x00, 0x00, 0x00}}},
+			{{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+			 {0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+			 {0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+			 {0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF}}},
 		parseMapTestParams{
 			"tests/test_maps/10-2.fdf",
 			{{1, 0, 0, -1, -1, 0, 1, 1, 0, 0},
@@ -101,27 +101,27 @@ INSTANTIATE_TEST_SUITE_P(
 			 {-1, -1, 0, 1, -1, 0, 1, 0, 0, 1},
 			 {0, 0, 1, -1, 0, -1, 0, 0, 0, 0}},
 			{
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-				{0x00,0x00, 0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}}
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF},
+				{0xFF00FF,0xFF00FF, 0xFF00FF,0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF, 0xFF00FF}}}
 		));
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // extractPoints
 
-struct extractPointsTestParams {
+struct mapToVectorsTestParams {
 	t_map map;
 };
 
-class extractPointsTest : public testing::TestWithParam<extractPointsTestParams> {};
+class mapToVectorsTest : public testing::TestWithParam<mapToVectorsTestParams> {};
 
 t_map create_map(std::vector<std::vector<double>> map_matrix) {
 	t_map map;
@@ -135,8 +135,8 @@ t_map create_map(std::vector<std::vector<double>> map_matrix) {
 	return map;
 };
 
-TEST_P(extractPointsTest, extractPointsTest) {
-	extractPointsTestParams params = GetParam();
+TEST_P(mapToVectorsTest, mapToVectorsTest) {
+	mapToVectorsTestParams params = GetParam();
 
 	t_matrix points = map_to_vectors(params.map);
 	if (params.map.map.m == 0) {
@@ -178,12 +178,12 @@ TEST_P(extractPointsTest, extractPointsTest) {
 	free(points.mat);
 }
 
-INSTANTIATE_TEST_SUITE_P(extractPointsTest, extractPointsTest,
+INSTANTIATE_TEST_SUITE_P(extractPointsTest, mapToVectorsTest,
                          testing::Values(
-							 extractPointsTestParams{create_map({})}
-							 // extractPointsTestParams{create_map({{10}})}
-							 // extractPointsTestParams{create_map({{10, 11}})},
-							 // extractPointsTestParams{create_map({{10, 11}, {12, 13}})},
-							 // extractPointsTestParams{create_map({{10}, {13}})}
+							 mapToVectorsTestParams{create_map({})}
+							 // mapToVectorsTestParams{create_map({{10}})},
+							 // mapToVectorsTestParams{create_map({{10, 11}})},
+							 // mapToVectorsTestParams{create_map({{10, 11}, {12, 13}})},
+							 // mapToVectorsTestParams{create_map({{10}, {13}})}
 							 )
 	);

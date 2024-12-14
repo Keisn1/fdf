@@ -59,9 +59,7 @@ int	main(int argc, char** argv)
 	free_matrix(isometric_projection);
 
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, size_win_x, size_win_y, "wireframe");
-
 	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);
-
 
 	/* put image to window */
 	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, exit_program, &mlx_data);
