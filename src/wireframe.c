@@ -73,12 +73,13 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 				head = line;
 				while (head)
 				{
-					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content,
-								  0xFF00FF);
+					/* img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content, 0xFF00FF); */
+					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content, map.color[count_m][count_n]);
 					head = head->next;
 				}
 				ft_lstclear(&line, free);
 			}
+
 			if (count_m < map.map.m-1) {
 				line = get_bres_line((t_pixel){
 						(int)round(M.mat[0][idx]),
@@ -92,15 +93,19 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 				head = line;
 				while (head)
 				{
+					/* img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content, */
+					/* 			  0xFF00FF); */
 					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content,
-								  0xFF00FF);
+								  map.color[count_m][count_n]);
 					head = head->next;
 				}
 				ft_lstclear(&line, free);
 			}
+
 			count_n++;
 			idx++;
 		}
 		count_m++;
 	}
 }
+

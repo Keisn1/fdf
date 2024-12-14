@@ -13,7 +13,6 @@
 #include "fdf.h"
 #include "libft.h"
 #include "mlx.h"
-#include <math.h>
 #include <unistd.h>
 
 int	main(int argc, char** argv)
@@ -36,7 +35,10 @@ int	main(int argc, char** argv)
 
 	size_win_x = 3840;
 	size_win_y = 2160;
-	scale_matrix(&isometric_projection, size_win_y);
+	double scale_factor = size_win_x;
+	if (size_win_y < size_win_x)
+		scale_factor = size_win_y;
+	scale_matrix(&isometric_projection, scale_factor);
 
 	mlx_data.mlx_ptr = mlx_init();
 	if (!(mlx_data.mlx_ptr))
