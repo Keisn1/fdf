@@ -52,7 +52,7 @@ int	main(int argc, char** argv)
 	mlx_data.imgs = ft_lstnew(&img);
 
 	/* put the wireframe to image */
-	wf_to_img(mlx_data, img, isometric_projection, map);
+	wf_to_img_plot(mlx_data, img, isometric_projection, map);
 
 	/* free all the stuff */
 	free_map(map);

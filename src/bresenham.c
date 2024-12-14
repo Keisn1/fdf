@@ -11,14 +11,6 @@
 /* ************************************************************************** */
 
 #include "bresenham.h"
-#include "fdf.h"
-
-int	lt(int x, int y)
-{
-	if (x < y)
-		return (1);
-	return (-1);
-}
 
 t_bres	new_bres(t_pixel p_0, t_pixel p_1)
 {
@@ -37,6 +29,33 @@ t_bres	new_bres(t_pixel p_0, t_pixel p_1)
 	ret.err = ret.dx + ret.dy;
 	ret.e2 = 0;
 	return (ret);
+}
+
+void	bres_plotline_img(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
+		t_img *img)
+{
+	t_bres	bres;
+
+	bres = new_bres(p_0, p_1);
+	while (true)
+	{
+		img_put_pixel(mlx_data.mlx_ptr, img, p_0, 0xFF00FF);
+		bres.e2 = 2 * bres.err;
+		if (bres.e2 >= bres.dy)
+		{
+			if (p_0.i == p_1.i)
+				break ;
+			bres.err += bres.dy;
+			p_0.i += bres.sx;
+		}
+		if (bres.e2 <= bres.dx)
+		{
+			if (p_0.j == p_1.j)
+				break ;
+			bres.err += bres.dx;
+			p_0.j += bres.sy;
+		}
+	}
 }
 
 void	bres_plotline(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,

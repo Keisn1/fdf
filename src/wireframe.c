@@ -45,12 +45,8 @@ t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
 	return (ret);
 }
 
-void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
+void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 {
-	t_list	*line;
-	t_list	*head;
-
-
 	unsigned int	count_m;
 	unsigned int	count_n;
 	size_t idx;
@@ -61,45 +57,18 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 		count_n = 0;
 		while (count_n < map.map.n) {
 			if (count_n < map.map.n -1) {
-				line = get_bres_line((t_pixel){
-						(int)round(M.mat[0][idx]),
-						(int)round(M.mat[1][idx])
-					},
-					(t_pixel){
-						(int)round(M.mat[0][idx+1]),
-						(int)round(M.mat[1][idx+1])
-					} );
-
-				head = line;
-				while (head)
-				{
-					/* img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content, 0xFF00FF); */
-					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content, map.color[count_m][count_n]);
-					head = head->next;
-				}
-				ft_lstclear(&line, free);
+				bres_plotline_img(mlx_data,
+								  (t_pixel){(int)round(M.mat[0][idx]), (int)round(M.mat[1][idx])},
+								  (t_pixel){(int)round(M.mat[0][idx+1]), (int)round(M.mat[1][idx+1])
+								  }, &img);
 			}
 
 			if (count_m < map.map.m-1) {
-				line = get_bres_line((t_pixel){
-						(int)round(M.mat[0][idx]),
-						(int)round(M.mat[1][idx])
-					},
-					(t_pixel){
-						(int)round(M.mat[0][idx+map.map.n]),
-						(int)round(M.mat[1][idx+map.map.n])
-					} );
 
-				head = line;
-				while (head)
-				{
-					/* img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content, */
-					/* 			  0xFF00FF); */
-					img_put_pixel(mlx_data.mlx_ptr, &img, *(t_pixel *)head->content,
-								  map.color[count_m][count_n]);
-					head = head->next;
-				}
-				ft_lstclear(&line, free);
+				bres_plotline_img(mlx_data,
+								  (t_pixel){(int)round(M.mat[0][idx]), (int)round(M.mat[1][idx])},
+								  (t_pixel){(int)round(M.mat[0][idx+map.map.n]), (int)round(M.mat[1][idx+map.map.n])
+								  } , &img);
 			}
 
 			count_n++;
@@ -108,4 +77,3 @@ void	wf_to_img(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 		count_m++;
 	}
 }
-
