@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "bresenham.h"
+#include "libft.h"
 
 t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 {
@@ -122,4 +123,19 @@ t_list	*get_bres_line(t_pixel p_0, t_pixel p_1)
 		}
 	}
 	return (pixels);
+}
+
+void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
+		t_img *img)
+{
+	t_list* line = get_bres_line(p_0, p_1);
+	/* int len = ft_lstsize(line); */
+
+	t_list* head = line;
+	while (head) {
+		img_put_pixel(mlx_data.mlx_ptr, img, *(t_pixel*)head->content, 0xFF00FF);
+		head = head->next;
+	}
+
+	ft_lstclear(&line, free);
 }

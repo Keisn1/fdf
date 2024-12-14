@@ -12,7 +12,6 @@
 
 #include "bresenham.h"
 #include "fdf.h"
-#include "libft.h"
 #include <math.h>
 
 void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
@@ -27,15 +26,14 @@ void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 		count_n = 0;
 		while (count_n < map.map.n) {
 			if (count_n < map.map.n -1) {
-				bres_plotline_img(mlx_data,
+				bres_plotline_img_with_list(mlx_data,
 								  (t_pixel){(int)round(M.mat[0][idx]), (int)round(M.mat[1][idx])},
 								  (t_pixel){(int)round(M.mat[0][idx+1]), (int)round(M.mat[1][idx+1])
 								  }, &img);
 			}
 
 			if (count_m < map.map.m-1) {
-
-				bres_plotline_img(mlx_data,
+				bres_plotline_img_with_list(mlx_data,
 								  (t_pixel){(int)round(M.mat[0][idx]), (int)round(M.mat[1][idx])},
 								  (t_pixel){(int)round(M.mat[0][idx+map.map.n]), (int)round(M.mat[1][idx+map.map.n])
 								  } , &img);

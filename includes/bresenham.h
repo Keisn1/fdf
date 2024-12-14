@@ -32,6 +32,8 @@ typedef struct s_bres
 void	bres_plotline(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 			t_pixel_put_func pixel_put);
 void	bres_plotline_img(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,t_img *img);
+void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
+		t_img *img);
 t_list	*get_bres_line(t_pixel p_0, t_pixel p_1);
 
 /* helpers */
