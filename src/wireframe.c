@@ -15,36 +15,6 @@
 #include "libft.h"
 #include <math.h>
 
-t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
-{
-	t_list	*ret;
-	size_t	count_m;
-	size_t	count_n;
-	size_t	idx;
-
-	ret = NULL;
-	count_m = 0;
-	idx = 0;
-	while (count_m < wf_m)
-	{
-		count_m++;
-		count_n = 0;
-		while (count_n < wf_n)
-		{
-			if (count_n < wf_n - 1)
-				add_px_to_list(&ret, (t_pixel){idx, idx + 1});
-			if (count_m < wf_m)
-				add_px_to_list(&ret, (t_pixel){idx, idx + wf_n});
-			count_n++;
-			idx++;
-		}
-	}
-	if (idx) {
-
-	}
-	return (ret);
-}
-
 void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
 {
 	unsigned int	count_m;

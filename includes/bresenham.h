@@ -27,7 +27,7 @@ typedef struct s_bres
 	int	sy;
 	int	err;
 	int	e2;
-}		t_bres;
+}		t_bresenham;
 
 void	bres_plotline(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 			t_pixel_put_func pixel_put);

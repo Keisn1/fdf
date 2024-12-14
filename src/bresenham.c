@@ -12,9 +12,9 @@
 
 #include "bresenham.h"
 
-t_bres	new_bres(t_pixel p_0, t_pixel p_1)
+t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 {
-	t_bres	ret;
+	t_bresenham	ret;
 
 	ret.dx = ft_abs(p_1.i - p_0.i);
 	ret.dy = -ft_abs(p_1.j - p_0.j);
@@ -34,7 +34,7 @@ t_bres	new_bres(t_pixel p_0, t_pixel p_1)
 void	bres_plotline_img(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 		t_img *img)
 {
-	t_bres	bres;
+	t_bresenham	bres;
 
 	bres = new_bres(p_0, p_1);
 	while (true)
@@ -61,7 +61,7 @@ void	bres_plotline_img(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 void	bres_plotline(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 		t_pixel_put_func pixel_put)
 {
-	t_bres	bres;
+	t_bresenham	bres;
 
 	bres = new_bres(p_0, p_1);
 	while (true)
@@ -97,7 +97,7 @@ void	add_px_to_list(t_list **pixels, t_pixel p)
 
 t_list	*get_bres_line(t_pixel p_0, t_pixel p_1)
 {
-	t_bres	bres;
+	t_bresenham	bres;
 	t_list	*pixels;
 
 	bres = new_bres(p_0, p_1);
