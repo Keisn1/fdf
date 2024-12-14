@@ -1,5 +1,5 @@
 #include "fdf.h"
-#include <unistd.h>
+/* #include <unistd.h> */
 
 /* unsigned int *get_grad(int pixels) { */
 /* 	unsigned int *grad = (unsigned int*)malloc(sizeof(unsigned int) * pixels); */

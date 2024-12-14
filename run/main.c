@@ -15,17 +15,6 @@
 #include "mlx.h"
 #include <unistd.h>
 
-void translate_matrix(t_matrix *m, double x, double y) {
-	unsigned int c2;
-	c2 = 0;
-	while (c2 < m->n)
-	{
-		m->mat[0][c2] += x;
-		m->mat[1][c2] += y;
-		c2++;
-	}
-}
-
 double get_max(t_extrema extrema) {
 	if (extrema.max_x < extrema.max_y)
 		return extrema.max_y;
@@ -88,7 +77,7 @@ int	main(int argc, char** argv)
 	x_translation = extrema.min_x;
 	y_translation = extrema.min_y;
 
-	translate_matrix(&isometric_projection, -extrema.min_x, -extrema.min_y);
+	translate_vectors(&isometric_projection, -extrema.min_x, -extrema.min_y);
 
 	extrema.min_x -= x_translation;
 	extrema.max_x -= x_translation;

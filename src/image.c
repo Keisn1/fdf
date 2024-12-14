@@ -15,14 +15,13 @@
 
 /* bpp/8 gives you the number of bytes you need to jump,
 	to jump a whole pixel */
-void	img_put_pixel(void *mlx_ptr, t_img *img, t_pixel pos,
-		unsigned int color)
+void	img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px, unsigned int c)
 {
 	int	offset;
 
-	offset = pos.j * img->size_line + pos.i * (img->bpp / 8);
+	offset = px.j * img->size_line + px.i * (img->bpp / 8);
 	*(unsigned int *)(img->img_pixels + offset) = mlx_get_color_value(mlx_ptr,
-			color);
+			c);
 }
 
 t_img	new_img(void *mlx_ptr, int width, int height)
@@ -35,4 +34,20 @@ t_img	new_img(void *mlx_ptr, int width, int height)
 	img.width = width;
 	img.height = height;
 	return (img);
+}
+
+void	destroy_imgs(t_list *imgs, void *mlx_ptr)
+{
+	t_list	*head;
+	t_list	*tmp;
+
+	head = imgs;
+	tmp = NULL;
+	while (head)
+	{
+		mlx_destroy_image(mlx_ptr, ((t_img *)head->content)->img);
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
 }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "my_mlx.h"
 #include "mlx.h"
 
 int	mouse_hook(int button, int x, int y, void *param)
@@ -23,21 +24,6 @@ int	mouse_hook(int button, int x, int y, void *param)
 	return (1);
 }
 
-void	destroy_imgs(t_list *imgs, void *mlx_ptr)
-{
-	t_list	*head;
-	t_list	*tmp;
-
-	head = imgs;
-	tmp = NULL;
-	while (head)
-	{
-		mlx_destroy_image(mlx_ptr, ((t_img *)head->content)->img);
-		tmp = head;
-		head = head->next;
-		free(tmp);
-	}
-}
 
 int	exit_program(int keycode, t_mlx_data *mlx_data)
 {

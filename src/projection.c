@@ -25,3 +25,14 @@ t_matrix	get_isometric_projection(t_map map)
 	free_matrix(rot_matrix);
 	return (isometric_projection);
 }
+
+void translate_vectors(t_matrix *m, double x, double y) {
+	unsigned int c2;
+	c2 = 0;
+	while (c2 < m->n)
+	{
+		m->mat[0][c2] += x;
+		m->mat[1][c2] += y;
+		c2++;
+	}
+}

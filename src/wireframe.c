@@ -32,9 +32,9 @@ t_list	*get_wireframe_indices(size_t wf_m, size_t wf_n)
 		while (count_n < wf_n)
 		{
 			if (count_n < wf_n - 1)
-				add_back_point(&ret, (t_pixel){idx, idx + 1});
+				add_px_to_list(&ret, (t_pixel){idx, idx + 1});
 			if (count_m < wf_m)
-				add_back_point(&ret, (t_pixel){idx, idx + wf_n});
+				add_px_to_list(&ret, (t_pixel){idx, idx + wf_n});
 			count_n++;
 			idx++;
 		}

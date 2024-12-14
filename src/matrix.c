@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include "matrix.h"
-#include <math.h>
 
 bool	valid_dimensions(t_matrix X, t_matrix Y)
 {
@@ -51,20 +49,13 @@ t_matrix	mat_mul(t_matrix X, t_matrix Y)
 	return ((t_matrix){.mat = mat, .m = X.m, .n = Y.n});
 }
 
-t_matrix	get_rot_matrix(void)
+void	free_matrix(t_matrix M)
 {
-	t_matrix	rot_matrix;
+	unsigned int	m_count;
 
-	rot_matrix.m = 2;
-	rot_matrix.n = 3;
-	rot_matrix.mat = (double **)malloc(sizeof(double *) * rot_matrix.m);
-	rot_matrix.mat[0] = (double *)malloc(sizeof(double *) * rot_matrix.n);
-	rot_matrix.mat[1] = (double *)malloc(sizeof(double *) * rot_matrix.n);
-	rot_matrix.mat[0][0] = 1. / sqrt(2);
-	rot_matrix.mat[0][1] = -1. / sqrt(2);
-	rot_matrix.mat[0][2] = 0;
-	rot_matrix.mat[1][0] = 1. / sqrt(6);
-	rot_matrix.mat[1][1] = 1. / sqrt(6);
-	rot_matrix.mat[1][2] = -sqrt(2.) / sqrt(3);
-	return (rot_matrix);
+	m_count = 0;
+	while (m_count < M.m)
+		free(M.mat[m_count++]);
+	free(M.mat);
 }
+
