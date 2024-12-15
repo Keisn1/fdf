@@ -34,6 +34,15 @@ t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 	return (ret);
 }
 
+t_line new_line(t_pixel px1, t_pixel px2) {
+	t_line line;
+	line.pixels[0] = (t_pixel){px1.i, px1.j};
+	line.pixels[1] = (t_pixel){px2.i, px2.j};
+	line.colors[0] = 0xFF00FF;
+	line.colors[1] = 0xFF00FF;
+	return line;
+}
+
 
 void	bres_plotline_img_2(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel)
 {
@@ -46,7 +55,7 @@ void	bres_plotline_img_2(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put
 	bres = new_bres(p0, p1);
 	while (true)
 	{
-		t_img_put_pixel(mlx_data, img, p0, line.colors[0]);
+		t_img_put_pixel(mlx_data.mlx_ptr, img, p0, line.colors[0]);
 		bres.e2 = 2 * bres.err;
 		if (bres.e2 >= bres.dy)
 		{

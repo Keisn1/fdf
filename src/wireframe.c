@@ -12,33 +12,45 @@
 
 #include "bresenham.h"
 #include "fdf.h"
-#include <math.h>
+#include "my_mlx.h"
 
-void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map)
+t_line	get_line_horizontal(t_matrix vectors, size_t idx)
+{
+	return (new_line(new_pixel(vectors.mat[0][idx], vectors.mat[1][idx]),
+			new_pixel(vectors.mat[0][idx + 1], vectors.mat[1][idx + 1])));
+}
+t_line	get_line_vertical(t_matrix vectors, size_t idx, unsigned int len_row)
+{
+	return (new_line(new_pixel(vectors.mat[0][idx], vectors.mat[1][idx]),
+			new_pixel(vectors.mat[0][idx + len_row], vectors.mat[1][idx
+				+ len_row])));
+}
+
+void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix vectors,
+		t_map map)
 {
 	unsigned int	count_m;
 	unsigned int	count_n;
-	size_t idx;
+	t_line			line;
+	size_t			idx;
 
 	count_m = 0;
 	idx = 0;
-	while (count_m < map.map.m) {
+	while (count_m < map.map.m)
+	{
 		count_n = 0;
-		while (count_n < map.map.n) {
-			if (count_n < map.map.n -1) {
-				bres_plotline_img_with_list(mlx_data,
-								  (t_pixel){(int)round(M.mat[0][idx]), (int)round(M.mat[1][idx])},
-								  (t_pixel){(int)round(M.mat[0][idx+1]), (int)round(M.mat[1][idx+1])
-								  }, &img);
+		while (count_n < map.map.n)
+		{
+			if (count_n < map.map.n - 1)
+			{
+				line = get_line_horizontal(vectors, idx);
+				bres_plotline_img_2(mlx_data, &img, line, img_put_pixel);
 			}
-
-			if (count_m < map.map.m-1) {
-				bres_plotline_img_with_list(mlx_data,
-								  (t_pixel){(int)round(M.mat[0][idx]), (int)round(M.mat[1][idx])},
-								  (t_pixel){(int)round(M.mat[0][idx+map.map.n]), (int)round(M.mat[1][idx+map.map.n])
-								  } , &img);
+			if (count_m < map.map.m - 1)
+			{
+				line = get_line_vertical(vectors, idx, map.map.n);
+				bres_plotline_img_2(mlx_data, &img, line, img_put_pixel);
 			}
-
 			count_n++;
 			idx++;
 		}

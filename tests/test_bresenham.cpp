@@ -5,7 +5,7 @@
 class MLXWrapper {
 public:
 	MOCK_METHOD5(pixelPut, int(void* mlx_ptr, void* win_ptr, int x, int y, int color));
-	MOCK_METHOD4(imgPutPixel, void(t_mlx_data, t_img *, t_pixel, unsigned int));
+	MOCK_METHOD4(imgPutPixel, void(void* mlx_ptr, t_img *, t_pixel, unsigned int));
 };
 
 // Global or static instance for the test
@@ -19,9 +19,9 @@ extern "C" int mock_pixel_put(void* mlx_ptr, void* win_ptr, int x, int y, int co
 	return 0;
 }
 
-extern "C" void mock_img_pixel_put(t_mlx_data mlx_data, t_img *img, t_pixel pixel, unsigned int color) {
+extern "C" void mock_img_pixel_put(void* mlx_ptr, t_img *img, t_pixel pixel, unsigned int color) {
 	if (g_mlxWrapper)
-		g_mlxWrapper->imgPutPixel(mlx_data, img, pixel, color);
+		g_mlxWrapper->imgPutPixel(mlx_ptr, img, pixel, color);
 }
 
 MATCHER_P(PixelEq, expected, "") {

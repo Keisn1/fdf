@@ -55,10 +55,11 @@ typedef struct s_img
 }					t_img;
 
 typedef int			(*t_pixel_put_func)(void *, void *, int, int, int);
-typedef void		(*t_img_put_pixel_func)(t_mlx_data, t_img *, t_pixel,
+typedef void		(*t_img_put_pixel_func)(void *, t_img *, t_pixel,
 			unsigned int);
 
 t_img				new_img(void *mlx_ptr, int width, int height);
+t_pixel				new_pixel(double x, double y);
 void				img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px,
 						unsigned int c);
 void				destroy_imgs(t_list *imgs, void *mlx_ptr);
