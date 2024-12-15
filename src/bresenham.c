@@ -44,7 +44,7 @@ t_line new_line(t_pixel px1, t_pixel px2) {
 }
 
 
-void	bres_plotline_img_2(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel)
+void	bres_plotline_img(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel)
 {
 	t_bresenham	bres;
 	t_pixel		p0;
@@ -70,33 +70,6 @@ void	bres_plotline_img_2(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put
 				break ;
 			bres.err += bres.dx;
 			p0.j += bres.sy;
-		}
-	}
-}
-
-void	bres_plotline_img(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
-		t_img *img)
-{
-	t_bresenham	bres;
-
-	bres = new_bres(p_0, p_1);
-	while (true)
-	{
-		img_put_pixel(mlx_data.mlx_ptr, img, p_0, 0xFF00FF);
-		bres.e2 = 2 * bres.err;
-		if (bres.e2 >= bres.dy)
-		{
-			if (p_0.i == p_1.i)
-				break ;
-			bres.err += bres.dy;
-			p_0.i += bres.sx;
-		}
-		if (bres.e2 <= bres.dx)
-		{
-			if (p_0.j == p_1.j)
-				break ;
-			bres.err += bres.dx;
-			p_0.j += bres.sy;
 		}
 	}
 }

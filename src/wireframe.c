@@ -31,7 +31,6 @@ void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix vectors,
 {
 	unsigned int	count_m;
 	unsigned int	count_n;
-	t_line			line;
 	size_t			idx;
 
 	count_m = 0;
@@ -42,15 +41,11 @@ void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix vectors,
 		while (count_n < map.map.n)
 		{
 			if (count_n < map.map.n - 1)
-			{
-				line = get_line_horizontal(vectors, idx);
-				bres_plotline_img_2(mlx_data, &img, line, img_put_pixel);
-			}
+				bres_plotline_img(mlx_data, &img, get_line_horizontal(vectors,
+						idx), img_put_pixel);
 			if (count_m < map.map.m - 1)
-			{
-				line = get_line_vertical(vectors, idx, map.map.n);
-				bres_plotline_img_2(mlx_data, &img, line, img_put_pixel);
-			}
+				bres_plotline_img(mlx_data, &img, get_line_vertical(vectors,
+						idx, map.map.n), img_put_pixel);
 			count_n++;
 			idx++;
 		}
