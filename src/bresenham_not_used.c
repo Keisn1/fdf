@@ -17,8 +17,8 @@ void	add_px_to_list(t_list **pixels, t_pixel p)
 	t_pixel	*new;
 
 	new = (t_pixel *)malloc(sizeof(t_pixel) * 1);
-	new->i = p.i;
-	new->j = p.j;
+	new->x = p.x;
+	new->y = p.y;
 	ft_lstadd_back(pixels, ft_lstnew(new));
 }
 
@@ -35,17 +35,17 @@ t_list	*get_bres_line(t_pixel p_0, t_pixel p_1)
 		bres.e2 = 2 * bres.err;
 		if (bres.e2 >= bres.dy)
 		{
-			if (p_0.i == p_1.i)
+			if (p_0.x == p_1.x)
 				break ;
 			bres.err += bres.dy;
-			p_0.i += bres.sx;
+			p_0.x += bres.sx;
 		}
 		if (bres.e2 <= bres.dx)
 		{
-			if (p_0.j == p_1.j)
+			if (p_0.y == p_1.y)
 				break ;
 			bres.err += bres.dx;
-			p_0.j += bres.sy;
+			p_0.y += bres.sy;
 		}
 	}
 	return (pixels);
@@ -76,21 +76,21 @@ void	bres_plotline_window(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 	bres = new_bres(p_0, p_1);
 	while (true)
 	{
-		pixel_put(mlx_data.mlx_ptr, mlx_data.win_ptr, p_0.i, p_0.j, 0xFF00FF);
+		pixel_put(mlx_data.mlx_ptr, mlx_data.win_ptr, p_0.x, p_0.y, 0xFF00FF);
 		bres.e2 = 2 * bres.err;
 		if (bres.e2 >= bres.dy)
 		{
-			if (p_0.i == p_1.i)
+			if (p_0.x == p_1.x)
 				break ;
 			bres.err += bres.dy;
-			p_0.i += bres.sx;
+			p_0.x += bres.sx;
 		}
 		if (bres.e2 <= bres.dx)
 		{
-			if (p_0.j == p_1.j)
+			if (p_0.y == p_1.y)
 				break ;
 			bres.err += bres.dx;
-			p_0.j += bres.sy;
+			p_0.y += bres.sy;
 		}
 	}
 }

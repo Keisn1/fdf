@@ -25,7 +25,7 @@ extern "C" void mock_img_pixel_put(void* mlx_ptr, t_img *img, t_pixel pixel, uns
 }
 
 MATCHER_P(PixelEq, expected, "") {
-    return arg.i == expected.i && arg.j == expected.j;
+    return arg.x == expected.x && arg.y == expected.y;
 }
 
 
@@ -42,9 +42,9 @@ struct bresPlotlineImgTemplateTestParams {
 	std::vector<std::vector<unsigned int>> want;
 };
 
-class bresPlotlineImgTemplateTest : public testing::TestWithParam<bresPlotlineImgTemplateTestParams>{};
+class bresPlotlineImgTest : public testing::TestWithParam<bresPlotlineImgTemplateTestParams>{};
 
-TEST_P(bresPlotlineImgTemplateTest, bresPlotlineImgTemplateTest) {
+TEST_P(bresPlotlineImgTest, bresPlotlineImgTemplateTest) {
     MLXWrapper mock;
 	g_mlxWrapper = &mock;
 	bresPlotlineImgTemplateTestParams params = GetParam();
@@ -67,7 +67,7 @@ TEST_P(bresPlotlineImgTemplateTest, bresPlotlineImgTemplateTest) {
 
 INSTANTIATE_TEST_SUITE_P(
     bresPlotlineImgTemplateTest,
-	bresPlotlineImgTemplateTest,
+	bresPlotlineImgTest,
 	testing::Values(
 		bresPlotlineImgTemplateTestParams{0, 0, 0, 3, { {0, 0}, {0, 1}, {0, 2}, {0, 3} }},
 		bresPlotlineImgTemplateTestParams {0, 0, 3, 0, {{0, 0}, {1, 0}, {2, 0}, {3, 0}}},
@@ -137,8 +137,8 @@ TEST_P(bresenhamGetLineTest, BresenhamGetLineTest) {
 	t_list *head = got;
 	while (head) {
 		t_pixel *p = (t_pixel*)head->content;
-		EXPECT_EQ(params.want[count][0], p->i);
-		EXPECT_EQ(params.want[count][1], p->j);
+		EXPECT_EQ(params.want[count][0], p->x);
+		EXPECT_EQ(params.want[count][1], p->y);
 		count++;
 		head = head->next;
 	}

@@ -37,8 +37,8 @@ typedef struct s_mlx_data
 
 typedef struct s_pixel
 {
-	unsigned int	i;
-	unsigned int	j;
+	unsigned int	x;
+	unsigned int	y;
 }					t_pixel;
 
 typedef struct s_img

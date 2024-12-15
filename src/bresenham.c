@@ -18,13 +18,13 @@ t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 {
 	t_bresenham	ret;
 
-	ret.dx = ft_abs(p_1.i - p_0.i);
-	ret.dy = -ft_abs(p_1.j - p_0.j);
-	if (p_0.i < p_1.i)
+	ret.dx = ft_abs(p_1.x - p_0.x);
+	ret.dy = -ft_abs(p_1.y - p_0.y);
+	if (p_0.x < p_1.x)
 		ret.sx = 1;
 	else
 		ret.sx = -1;
-	if (p_0.j < p_1.j)
+	if (p_0.y < p_1.y)
 		ret.sy = 1;
 	else
 		ret.sy = -1;
@@ -37,8 +37,8 @@ t_line	new_line(t_pixel px1, t_pixel px2)
 {
 	t_line	line;
 
-	line.pixels[0] = (t_pixel){px1.i, px1.j};
-	line.pixels[1] = (t_pixel){px2.i, px2.j};
+	line.pixels[0] = (t_pixel){px1.x, px1.y};
+	line.pixels[1] = (t_pixel){px2.x, px2.y};
 	line.colors[0] = 0xFF00FF;
 	line.colors[1] = 0xFF00FF;
 	return (line);
@@ -56,17 +56,35 @@ void	bres_plotline_img(t_mlx_data mlx_data, t_img *img, t_line line,
 		bres.e2 = 2 * bres.err;
 		if (bres.e2 >= bres.dy)
 		{
-			if (line.pixels[0].i == line.pixels[1].i)
+			if (line.pixels[0].x == line.pixels[1].x)
 				break ;
 			bres.err += bres.dy;
-			line.pixels[0].i += bres.sx;
+			line.pixels[0].x += bres.sx;
 		}
 		if (bres.e2 <= bres.dx)
 		{
-			if (line.pixels[0].j == line.pixels[1].j)
+			if (line.pixels[0].y == line.pixels[1].y)
 				break ;
 			bres.err += bres.dx;
-			line.pixels[0].j += bres.sy;
+			line.pixels[0].y += bres.sy;
 		}
+	}
+}
+
+void bres_plotine_simple(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel) {
+	t_pixel p0 = line.pixels[0];
+	t_pixel p1 = line.pixels[1];
+
+	int dx = p1.x - p0.x;
+	int dy = p1.y - p0.y;
+	int D = 2 * dy - dx;
+
+	while (p0.x <= p1.x) {
+		t_img_put_pixel(mlx_data.mlx_ptr, img, p0, line.colors[0]);
+		if (D > 0) {
+			p0.y++;
+			D = D - 2*dx;
+		}
+		D = D + 2*dy;
 	}
 }

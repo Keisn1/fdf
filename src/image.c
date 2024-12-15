@@ -24,7 +24,7 @@ void	img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px, unsigned int c)
 {
 	int	offset;
 
-	offset = px.j * img->size_line + px.i * (img->bpp / 8);
+	offset = px.y * img->size_line + px.x * (img->bpp / 8);
 	*(unsigned int *)(img->img_pixels + offset) = mlx_get_color_value(mlx_ptr,
 			c);
 }
