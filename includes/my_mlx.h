@@ -14,6 +14,7 @@
 # define MY_MLX_H
 
 # include "libft.h"
+# include "mlx.h"
 
 enum
 {

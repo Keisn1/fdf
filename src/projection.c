@@ -45,15 +45,19 @@ t_matrix	get_isometric_projection(t_map map)
 	return (isometric_projection);
 }
 
-void translate_vectors_to_first_octant(t_matrix *mat) {
+/* translatation by minimum */
+void	translate_vectors_to_first_octant(t_matrix *mat)
+{
 	t_extrema	extrema;
-	/* translatation by minimum */
+
 	extrema = get_extrema(*mat);
 	translate_vectors(mat, -extrema.min_x, -extrema.min_y);
 }
 
-void translate_vectors(t_matrix *mat, double x, double y) {
-	unsigned int c2;
+void	translate_vectors(t_matrix *mat, double x, double y)
+{
+	unsigned int	c2;
+
 	c2 = 0;
 	while (c2 < mat->n)
 	{
@@ -63,17 +67,25 @@ void translate_vectors(t_matrix *mat, double x, double y) {
 	}
 }
 
-void norm_vectors(t_matrix *mat) {
-	double max_norm= 0;
-	double norm = 0;
-	size_t c1 = 0;
-	while (c1 < mat->n) {
-		double x_squared = pow(mat->mat[0][c1], 2);
-		double y_squared = pow(mat->mat[1][c1], 2);
+void	norm_vectors(t_matrix *mat)
+{
+	double	max_norm;
+	double	norm;
+	size_t	c1;
+	double	x_squared;
+	double	y_squared;
+
+	max_norm = 0;
+	norm = 0;
+	c1 = 0;
+	while (c1 < mat->n)
+	{
+		x_squared = pow(mat->mat[0][c1], 2);
+		y_squared = pow(mat->mat[1][c1], 2);
 		norm = sqrt(x_squared + y_squared);
 		if (norm > max_norm)
 			max_norm = norm;
 		c1++;
 	}
-	scale_matrix(mat, 1/max_norm);
+	scale_matrix(mat, 1 / max_norm);
 }

@@ -12,9 +12,6 @@
 
 #include "fdf.h"
 #include "libft.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
 
 void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 {

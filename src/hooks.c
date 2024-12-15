@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "my_mlx.h"
 #include "mlx.h"
+#include "my_mlx.h"
 
 int	mouse_hook(int button, int x, int y, void *param)
 {
@@ -23,7 +23,6 @@ int	mouse_hook(int button, int x, int y, void *param)
 		mlx_pixel_put(mlx_data.mlx_ptr, mlx_data.win_ptr, x, y, 0x008000FF);
 	return (1);
 }
-
 
 int	exit_program(int keycode, t_mlx_data *mlx_data)
 {

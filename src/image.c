@@ -10,9 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "mlx.h"
+#include "my_mlx.h"
 #include <math.h>
+
+t_pixel	new_pixel(double x, double y)
+{
+	return ((t_pixel){(int)round(x), (int)round(y)});
+}
 
 /* bpp/8 gives you the number of bytes you need to jump,
 	to jump a whole pixel */
@@ -23,11 +27,6 @@ void	img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px, unsigned int c)
 	offset = px.j * img->size_line + px.i * (img->bpp / 8);
 	*(unsigned int *)(img->img_pixels + offset) = mlx_get_color_value(mlx_ptr,
 			c);
-}
-
-t_pixel new_pixel(double x, double y) {
-	t_pixel px = {(int)round(x), (int)round(y)};
-	return px;
 }
 
 t_img	new_img(void *mlx_ptr, int width, int height)

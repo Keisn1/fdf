@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "matrix.h"
 
 double	ft_abs_double(double x)
 {
@@ -21,20 +21,21 @@ double	ft_abs_double(double x)
 
 /* takes 2xn Matrix */
 /* returns min max of rows*/
-t_extrema get_extrema(t_matrix M)
+t_extrema	get_extrema(t_matrix M)
 {
+	t_extrema		limits;
+	double			x;
+	double			y;
+	unsigned int	count;
+
 	if (M.m == 0)
-		return (t_extrema){0, 0, 0, 0};
-
-	t_extrema limits = {M.mat[0][0], M.mat[1][0], M.mat[0][0], M.mat[1][0]};
-	double x;
-	double y;
-
-	unsigned int count = 1;
-	while (count < M.n) {
+		return ((t_extrema){0, 0, 0, 0});
+	limits = (t_extrema){M.mat[0][0], M.mat[1][0], M.mat[0][0], M.mat[1][0]};
+	count = 1;
+	while (count < M.n)
+	{
 		x = M.mat[0][count];
 		y = M.mat[1][count];
-
 		if (x < limits.min_x)
 			limits.min_x = x;
 		if (y < limits.min_y)
@@ -45,6 +46,5 @@ t_extrema get_extrema(t_matrix M)
 			limits.max_y = y;
 		count++;
 	}
-	return limits;
+	return (limits);
 }
-

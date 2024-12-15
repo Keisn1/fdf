@@ -13,17 +13,16 @@
 #ifndef FDF_H
 # define FDF_H
 
-# include "libft.h"
 # include "matrix.h"
 # include "my_mlx.h"
 # include <X11/keysym.h>
 # include <limits.h>
 # include <stdbool.h>
 # include <stddef.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <sys/wait.h>
 # include <unistd.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 typedef struct s_map
 {
@@ -37,12 +36,13 @@ t_matrix			map_to_vectors(t_map map);
 
 /* projection */
 t_matrix			get_isometric_projection(t_map map);
-void translate_vectors_to_first_octant(t_matrix *mat);
+void				translate_vectors_to_first_octant(t_matrix *mat);
 void				norm_vectors(t_matrix *mat);
 
 /* parsing */
 void				translate_vectors(t_matrix *m, double x, double y);
-void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M, t_map map);
+void				wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M,
+						t_map map);
 
 /* hooks */
 int					exit_program(int keycode, t_mlx_data *mlx_data);

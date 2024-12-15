@@ -19,6 +19,7 @@ t_line	get_line_horizontal(t_matrix vectors, size_t idx)
 	return (new_line(new_pixel(vectors.mat[0][idx], vectors.mat[1][idx]),
 			new_pixel(vectors.mat[0][idx + 1], vectors.mat[1][idx + 1])));
 }
+
 t_line	get_line_vertical(t_matrix vectors, size_t idx, unsigned int len_row)
 {
 	return (new_line(new_pixel(vectors.mat[0][idx], vectors.mat[1][idx]),

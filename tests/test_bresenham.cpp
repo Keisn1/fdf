@@ -62,7 +62,7 @@ TEST_P(bresPlotlineImgTemplateTest, bresPlotlineImgTemplateTest) {
 	line.pixels[1] = (t_pixel){params.x_1, params.y_1};
 	line.colors[0] = 0;
 	line.colors[1] = 0;
-	bres_plotline_img_2(t_mlx_data{NULL, NULL, NULL}, NULL, line, mock_img_pixel_put);
+	bres_plotline_img(t_mlx_data{NULL, NULL, NULL}, NULL, line, mock_img_pixel_put);
 }
 
 INSTANTIATE_TEST_SUITE_P(
@@ -105,7 +105,7 @@ TEST_P(bresenhamPlotLineTest, BresenhamLineTest) {
 						));
 	}
 
-	bres_plotline(t_mlx_data{NULL, NULL, NULL},
+	bres_plotline_window(t_mlx_data{NULL, NULL, NULL},
 				  (t_pixel){params.x_0, params.y_0},
 				  (t_pixel){params.x_1, params.y_1},
 				  mock_pixel_put);
