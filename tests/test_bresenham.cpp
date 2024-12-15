@@ -1,9 +1,11 @@
 #include "test_fdf.hpp"
 
+// setup Mock ////////////////////////////////////////
 // Mock class that wraps mlx_pixel_put
 class MLXWrapper {
 public:
 	MOCK_METHOD5(pixelPut, int(void* mlx_ptr, void* win_ptr, int x, int y, int color));
+	MOCK_METHOD4(imgPutPixel, void(t_mlx_data, t_img *, t_pixel, unsigned int));
 };
 
 // Global or static instance for the test
@@ -17,6 +19,63 @@ extern "C" int mock_pixel_put(void* mlx_ptr, void* win_ptr, int x, int y, int co
 	return 0;
 }
 
+extern "C" void mock_img_pixel_put(t_mlx_data mlx_data, t_img *img, t_pixel pixel, unsigned int color) {
+	if (g_mlxWrapper)
+		g_mlxWrapper->imgPutPixel(mlx_data, img, pixel, color);
+}
+
+MATCHER_P(PixelEq, expected, "") {
+    return arg.i == expected.i && arg.j == expected.j;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// bresenhamTemplateTest /////////////////////////////////////////////////////////////////////////////////////////
+// testing the function bresenham_template ///////////////////////////////////////////////////////////////////////
+// without dependency injection and dedicated mock function inside source ////////////////////////////////////////
+
+struct bresPlotlineImgTemplateTestParams {
+	unsigned int x_0;
+	unsigned int y_0;
+	unsigned int x_1;
+	unsigned int y_1;
+	std::vector<std::vector<unsigned int>> want;
+};
+
+class bresPlotlineImgTemplateTest : public testing::TestWithParam<bresPlotlineImgTemplateTestParams>{};
+
+TEST_P(bresPlotlineImgTemplateTest, bresPlotlineImgTemplateTest) {
+    MLXWrapper mock;
+	g_mlxWrapper = &mock;
+	bresPlotlineImgTemplateTestParams params = GetParam();
+
+	for (const auto& t: params.want) {
+		t_pixel px = {t[0], t[1]};
+		EXPECT_CALL(mock, imgPutPixel(testing::_, testing::_,
+									  PixelEq(px)
+								  // testing::Truly([&px](const t_pixel& arg) {return arg.i == px.i && arg.j == px.j;})
+								  , testing::_));
+	}
+
+	t_line line;
+	line.pixels[0] = (t_pixel){params.x_0, params.y_0};
+	line.pixels[1] = (t_pixel){params.x_1, params.y_1};
+	line.colors[0] = 0;
+	line.colors[1] = 0;
+	bres_plotline_img_2(t_mlx_data{NULL, NULL, NULL}, NULL, line, mock_img_pixel_put);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    bresPlotlineImgTemplateTest,
+	bresPlotlineImgTemplateTest,
+	testing::Values(
+		bresPlotlineImgTemplateTestParams{0, 0, 0, 3, { {0, 0}, {0, 1}, {0, 2}, {0, 3} }}
+		)
+	);
+
+
+// breshamLineTest ////////////////////////////////////////
+// testing the function bres_plotline (uses mlx_pixel_put) ////////////////////////////////////////
 struct bresenhamLineTestParams {
 	unsigned int x_0;
 	unsigned int y_0;

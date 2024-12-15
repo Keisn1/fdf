@@ -40,8 +40,6 @@ typedef struct s_pixel
 	unsigned int	j;
 }					t_pixel;
 
-typedef int			(*t_pixel_put_func)(void *, void *, int, int, int);
-
 typedef struct s_img
 {
 	/* pointer to image in X-Server */
@@ -55,6 +53,10 @@ typedef struct s_img
 	int				width;
 	int				height;
 }					t_img;
+
+typedef int			(*t_pixel_put_func)(void *, void *, int, int, int);
+typedef void		(*t_img_put_pixel_func)(t_mlx_data, t_img *, t_pixel,
+			unsigned int);
 
 t_img				new_img(void *mlx_ptr, int width, int height);
 void				img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px,

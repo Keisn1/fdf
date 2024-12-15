@@ -29,13 +29,19 @@ typedef struct s_bres
 	int	e2;
 }		t_bresenham;
 
+typedef struct s_line {
+	t_pixel pixels[2];
+	unsigned int colors[2];
+} t_line;
+
 void	bres_plotline(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 			t_pixel_put_func pixel_put);
 void	bres_plotline_img(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,t_img *img);
 void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 		t_img *img);
 t_list	*get_bres_line(t_pixel p_0, t_pixel p_1);
-
+void	bres_plotline_img_template(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func img_put_pixel);
+void	bres_plotline_img_2(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func img_put_pixel);
 /* helpers */
 void				add_px_to_list(t_list **l, t_pixel p);
 

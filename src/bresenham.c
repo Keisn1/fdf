@@ -12,6 +12,8 @@
 
 #include "bresenham.h"
 #include "libft.h"
+#include "my_mlx.h"
+#include <unistd.h>
 
 t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 {
@@ -30,6 +32,37 @@ t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 	ret.err = ret.dx + ret.dy;
 	ret.e2 = 0;
 	return (ret);
+}
+
+
+void	bres_plotline_img_2(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel)
+{
+	t_bresenham	bres;
+	t_pixel		p0;
+	t_pixel		p1;
+
+	p0 = line.pixels[0];
+	p1 = line.pixels[1];
+	bres = new_bres(p0, p1);
+	while (true)
+	{
+		t_img_put_pixel(mlx_data, img, p0, line.colors[0]);
+		bres.e2 = 2 * bres.err;
+		if (bres.e2 >= bres.dy)
+		{
+			if (p0.i == p1.i)
+				break ;
+			bres.err += bres.dy;
+			p0.i += bres.sx;
+		}
+		if (bres.e2 <= bres.dx)
+		{
+			if (p0.j == p1.j)
+				break ;
+			bres.err += bres.dx;
+			p0.j += bres.sy;
+		}
+	}
 }
 
 void	bres_plotline_img(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
@@ -99,7 +132,7 @@ void	add_px_to_list(t_list **pixels, t_pixel p)
 t_list	*get_bres_line(t_pixel p_0, t_pixel p_1)
 {
 	t_bresenham	bres;
-	t_list	*pixels;
+	t_list		*pixels;
 
 	bres = new_bres(p_0, p_1);
 	pixels = NULL;
@@ -125,17 +158,19 @@ t_list	*get_bres_line(t_pixel p_0, t_pixel p_1)
 	return (pixels);
 }
 
-void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
-		t_img *img)
+void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_pixel p_0,
+		t_pixel p_1, t_img *img)
 {
-	t_list* line = get_bres_line(p_0, p_1);
-	/* int len = ft_lstsize(line); */
+	t_list	*line;
+	t_list	*head;
 
-	t_list* head = line;
-	while (head) {
-		img_put_pixel(mlx_data.mlx_ptr, img, *(t_pixel*)head->content, 0xFF00FF);
+	line = get_bres_line(p_0, p_1);
+	head = line;
+	while (head)
+	{
+		img_put_pixel(mlx_data.mlx_ptr, img, *(t_pixel *)head->content,
+			0xFF00FF);
 		head = head->next;
 	}
-
 	ft_lstclear(&line, free);
 }
