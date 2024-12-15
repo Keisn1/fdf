@@ -28,13 +28,10 @@ MATCHER_P(PixelEq, expected, "") {
     return arg.x == expected.x && arg.y == expected.y;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// bresenhamTemplateTest /////////////////////////////////////////////////////////////////////////////////////////
-// testing the function bresenham_template ///////////////////////////////////////////////////////////////////////
-// without dependency injection and dedicated mock function inside source ////////////////////////////////////////
+// bresenhamSimple /////////////////////////////////////////////////////////////////////////////////////////
 
-struct bresPlotlineImgTemplateTestParams {
+struct bresPlotlineSimpleTestParams {
 	unsigned int x_0;
 	unsigned int y_0;
 	unsigned int x_1;
@@ -42,12 +39,61 @@ struct bresPlotlineImgTemplateTestParams {
 	std::vector<std::vector<unsigned int>> want;
 };
 
-class bresPlotlineImgTest : public testing::TestWithParam<bresPlotlineImgTemplateTestParams>{};
+class bresPlotlineSimpleTest : public testing::TestWithParam<bresPlotlineSimpleTestParams>{};
+
+TEST_P(bresPlotlineSimpleTest, bresPlotlineSimpleTestParams) {
+    MLXWrapper mock;
+	g_mlxWrapper = &mock;
+	bresPlotlineSimpleTestParams params = GetParam();
+
+	for (const auto& t: params.want) {
+		t_pixel px = {t[0], t[1]};
+		EXPECT_CALL(mock, imgPutPixel(testing::_, testing::_,
+									  PixelEq(px)
+								  // testing::Truly([&px](const t_pixel& arg) {return arg.i == px.i && arg.j == px.j;})
+								  , testing::_));
+	}
+
+	t_line line;
+	line.pixels[0] = (t_pixel){params.x_0, params.y_0};
+	line.pixels[1] = (t_pixel){params.x_1, params.y_1};
+	line.colors[0] = 0;
+	line.colors[1] = 0;
+	bres_plotline_img(t_mlx_data{NULL, NULL, NULL}, NULL, line, mock_img_pixel_put);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    bresPlotlineSimpleTest,
+	bresPlotlineSimpleTest,
+	testing::Values(
+		bresPlotlineSimpleTestParams{0, 0, 0, 3, { {0, 0}, {0, 1}, {0, 2}, {0, 3} }},
+		bresPlotlineSimpleTestParams {0, 0, 3, 0, {{0, 0}, {1, 0}, {2, 0}, {3, 0}}},
+		bresPlotlineSimpleTestParams {3, 0, 0, 0, {{3, 0}, {2, 0}, {1, 0}, {0, 0}}},
+		bresPlotlineSimpleTestParams {0, 3, 0, 0, {{0, 3}, {0, 2}, {0, 1}, {0, 0}}},
+		bresPlotlineSimpleTestParams {20, 20, 17, 17, {{20, 20}, {19, 19}, {18, 18}, {17, 17}}},
+		bresPlotlineSimpleTestParams {17, 20, 20, 17, {{17, 20}, {18, 19}, {19, 18}, {20, 17}}},
+		bresPlotlineSimpleTestParams {0, 1, 6, 4, {{0, 1}, {1, 2}, {2, 2}, {3, 3}, {4, 3}, {5, 4}, {6, 4}}},
+		bresPlotlineSimpleTestParams {6, 4, 0, 1, {{6, 4}, {5, 3}, {4, 3}, {3, 2}, {2, 2}, {1, 1}, {0, 1}}}
+		)
+	);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// bresenhamPlotlineImg /////////////////////////////////////////////////////////////////////////////////////////
+
+struct bresPlotlineImgParams {
+	unsigned int x_0;
+	unsigned int y_0;
+	unsigned int x_1;
+	unsigned int y_1;
+	std::vector<std::vector<unsigned int>> want;
+};
+
+class bresPlotlineImgTest : public testing::TestWithParam<bresPlotlineImgParams>{};
 
 TEST_P(bresPlotlineImgTest, bresPlotlineImgTemplateTest) {
     MLXWrapper mock;
 	g_mlxWrapper = &mock;
-	bresPlotlineImgTemplateTestParams params = GetParam();
+	bresPlotlineImgParams params = GetParam();
 
 	for (const auto& t: params.want) {
 		t_pixel px = {t[0], t[1]};
@@ -69,14 +115,14 @@ INSTANTIATE_TEST_SUITE_P(
     bresPlotlineImgTemplateTest,
 	bresPlotlineImgTest,
 	testing::Values(
-		bresPlotlineImgTemplateTestParams{0, 0, 0, 3, { {0, 0}, {0, 1}, {0, 2}, {0, 3} }},
-		bresPlotlineImgTemplateTestParams {0, 0, 3, 0, {{0, 0}, {1, 0}, {2, 0}, {3, 0}}},
-		bresPlotlineImgTemplateTestParams {3, 0, 0, 0, {{3, 0}, {2, 0}, {1, 0}, {0, 0}}},
-		bresPlotlineImgTemplateTestParams {0, 3, 0, 0, {{0, 3}, {0, 2}, {0, 1}, {0, 0}}},
-		bresPlotlineImgTemplateTestParams {20, 20, 17, 17, {{20, 20}, {19, 19}, {18, 18}, {17, 17}}},
-		bresPlotlineImgTemplateTestParams {17, 20, 20, 17, {{17, 20}, {18, 19}, {19, 18}, {20, 17}}},
-		bresPlotlineImgTemplateTestParams {0, 1, 6, 4, {{0, 1}, {1, 2}, {2, 2}, {3, 3}, {4, 3}, {5, 4}, {6, 4}}},
-		bresPlotlineImgTemplateTestParams {6, 4, 0, 1, {{6, 4}, {5, 3}, {4, 3}, {3, 2}, {2, 2}, {1, 1}, {0, 1}}}
+		bresPlotlineImgParams{0, 0, 0, 3, { {0, 0}, {0, 1}, {0, 2}, {0, 3} }},
+		bresPlotlineImgParams {0, 0, 3, 0, {{0, 0}, {1, 0}, {2, 0}, {3, 0}}},
+		bresPlotlineImgParams {3, 0, 0, 0, {{3, 0}, {2, 0}, {1, 0}, {0, 0}}},
+		bresPlotlineImgParams {0, 3, 0, 0, {{0, 3}, {0, 2}, {0, 1}, {0, 0}}},
+		bresPlotlineImgParams {20, 20, 17, 17, {{20, 20}, {19, 19}, {18, 18}, {17, 17}}},
+		bresPlotlineImgParams {17, 20, 20, 17, {{17, 20}, {18, 19}, {19, 18}, {20, 17}}},
+		bresPlotlineImgParams {0, 1, 6, 4, {{0, 1}, {1, 2}, {2, 2}, {3, 3}, {4, 3}, {5, 4}, {6, 4}}},
+		bresPlotlineImgParams {6, 4, 0, 1, {{6, 4}, {5, 3}, {4, 3}, {3, 2}, {2, 2}, {1, 1}, {0, 1}}}
 		)
 	);
 
