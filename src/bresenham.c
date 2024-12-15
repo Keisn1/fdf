@@ -13,6 +13,7 @@
 #include "bresenham.h"
 #include "libft.h"
 #include "my_mlx.h"
+#include <unistd.h>
 
 t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 {
@@ -71,20 +72,37 @@ void	bres_plotline_img(t_mlx_data mlx_data, t_img *img, t_line line,
 	}
 }
 
-void bres_plotine_simple(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel) {
+
+
+void bres_plotline_simple(t_mlx_data mlx_data, t_img *img, t_line line,
+                          t_img_put_pixel_func t_img_put_pixel) {
+
+}
+
+void bres_plotline_low(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel) {
 	t_pixel p0 = line.pixels[0];
 	t_pixel p1 = line.pixels[1];
 
 	int dx = p1.x - p0.x;
 	int dy = p1.y - p0.y;
-	int D = 2 * dy - dx;
+	int yi = 1;
+	if (dy < 0) {
+		yi = -1;
+		dy = -dy;
+	}
+	int D = (2 * dy) - dx;
 
 	while (p0.x <= p1.x) {
+		ft_putnbr_fd(p0.x, STDOUT_FILENO);
+		ft_putendl_fd("", STDOUT_FILENO);
+		ft_putnbr_fd(p0.y, STDOUT_FILENO);
+		ft_putendl_fd("", STDOUT_FILENO);
 		t_img_put_pixel(mlx_data.mlx_ptr, img, p0, line.colors[0]);
 		if (D > 0) {
-			p0.y++;
+			p0.y += yi;
 			D = D - 2*dx;
 		}
 		D = D + 2*dy;
+		p0.x++;
 	}
 }

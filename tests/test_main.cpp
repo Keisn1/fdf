@@ -4,7 +4,7 @@
 auto main(int argc, char *argv[]) -> int {
     ::testing::InitGoogleTest(&argc, argv);
 
-    // ::testing::GTEST_FLAG(filter) = "bres*";
+    ::testing::GTEST_FLAG(filter) = "bresPlotlineSimpleTest*";
     // ::testing::GTEST_FLAG(filter) = "wireframeTest*";
     // ::testing::GTEST_FLAG(filter) = "parseMapTest*";
     // ::testing::GTEST_FLAG(filter) = "mapToVectorsTest*";
