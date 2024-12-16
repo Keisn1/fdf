@@ -52,7 +52,9 @@ t_list	*get_bres_line(t_line line)
 	return (pixels);
 }
 
-void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func img_put_pixel) {
+void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_img *img,
+		t_line line, t_img_put_pixel_func img_put_pixel)
+{
 	t_list	*pixels;
 	t_list	*head;
 
@@ -93,7 +95,6 @@ void	bres_plotline_window(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1,
 		}
 	}
 }
-
 
 void	bres_plotline_low(t_mlx_data mlx_data, t_img *img, t_line line,
 		t_img_put_pixel_func img_put_pixel)
