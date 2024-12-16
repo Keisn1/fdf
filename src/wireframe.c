@@ -13,43 +13,47 @@
 #include "bresenham.h"
 #include "fdf.h"
 #include "my_mlx.h"
+#include <unistd.h>
 
-t_line	get_line_horizontal(t_matrix vectors, size_t idx)
+t_line	get_line_horizontal(t_matrix vectors, int n, int m, t_map map)
 {
+	int	idx;
+
+	idx = n + (m * map.map.n);
 	return (new_line(new_pixel(vectors.mat[0][idx], vectors.mat[1][idx]),
-			new_pixel(vectors.mat[0][idx + 1], vectors.mat[1][idx + 1])));
+			new_pixel(vectors.mat[0][idx + 1], vectors.mat[1][idx + 1]),
+			map.color[m][n], map.color[m][n + 1]));
 }
 
-t_line	get_line_vertical(t_matrix vectors, size_t idx, unsigned int len_row)
+t_line	get_line_vertical(t_matrix vectors, int n, int m, t_map map)
 {
+	int	idx;
+
+	idx = n + (m * map.map.n);
 	return (new_line(new_pixel(vectors.mat[0][idx], vectors.mat[1][idx]),
-			new_pixel(vectors.mat[0][idx + len_row], vectors.mat[1][idx
-				+ len_row])));
+			new_pixel(vectors.mat[0][idx + map.map.n], vectors.mat[1][idx
+				+ map.map.n]), map.color[m][n], map.color[m + 1][n]));
 }
 
-void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix vectors,
-		t_map map)
+void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix vecs, t_map map)
 {
-	unsigned int	count_m;
-	unsigned int	count_n;
-	size_t			idx;
+	unsigned int	m;
+	unsigned int	n;
 
-	count_m = 0;
-	idx = 0;
-	while (count_m < map.map.m)
+	m = 0;
+	while (m < map.map.m)
 	{
-		count_n = 0;
-		while (count_n < map.map.n)
+		n = 0;
+		while (n < map.map.n)
 		{
-			if (count_n < map.map.n - 1)
-				bres_plotline_img(mlx_data, &img, get_line_horizontal(vectors,
-						idx), img_put_pixel);
-			if (count_m < map.map.m - 1)
-				bres_plotline_img(mlx_data, &img, get_line_vertical(vectors,
-						idx, map.map.n), img_put_pixel);
-			count_n++;
-			idx++;
+			if (n < map.map.n - 1)
+				bres_plotline_img(mlx_data, &img, get_line_horizontal(vecs, n,
+						m, map), img_put_pixel);
+			if (m < map.map.m - 1)
+				bres_plotline_img(mlx_data, &img, get_line_vertical(vecs, n, m,
+						map), img_put_pixel);
+			n++;
 		}
-		count_m++;
+		m++;
 	}
 }

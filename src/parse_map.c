@@ -96,7 +96,7 @@ unsigned int	parse_line(char *line, double **M_row, unsigned int **c_row, unsign
 	{
 		while (*line == ' ')
 			line++;
-		(*c_row)[count] = 0xFF00FF;
+		(*c_row)[count] = 0xFFFFFF;
 		(*M_row)[count] = ft_atoi(line);
 		line = advance_to_comma_or_ws(line);
 		if (*line == ',')

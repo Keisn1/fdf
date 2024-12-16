@@ -13,6 +13,7 @@
 #include "bresenham.h"
 #include "libft.h"
 #include "my_mlx.h"
+#include <unistd.h>
 
 t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 {
@@ -33,26 +34,69 @@ t_bresenham	new_bres(t_pixel p_0, t_pixel p_1)
 	return (ret);
 }
 
-t_line	new_line(t_pixel px1, t_pixel px2)
+t_line	new_line(t_pixel px1, t_pixel px2, int col1, int col2)
 {
 	t_line	line;
 
 	line.pixels[0] = (t_pixel){px1.x, px1.y};
 	line.pixels[1] = (t_pixel){px2.x, px2.y};
-	line.colors[0] = 0xFF00FF;
-	line.colors[1] = 0xFF00FF;
+	line.colors[0] = col1;
+	line.colors[1] = col2;
 	return (line);
+}
+
+int get_nbr_of_steps(t_line line)
+{
+	if (ft_abs((int)line.pixels[1].y - (int)line.pixels[0].y) < ft_abs((int)line.pixels[1].x - (int)line.pixels[0].x))
+		return  ft_abs((int)line.pixels[1].x - (int)line.pixels[0].x);
+	return ft_abs((int)line.pixels[1].y - (int)line.pixels[0].y);
+}
+
+// Function to extract RGB components
+void extractRGB(int color, int *red, int *green, int *blue) {
+	*red = (color >> 16) & 0xFF;
+	*green = (color >> 8) & 0xFF;
+	*blue = color & 0xFF;
+}
+
+int calculate_color(t_line line, int steps, int step) {
+
+	int color1 = line.colors[0]; // Red
+	int color2 = line.colors[1]; // Green
+
+	// Extract initial RGB components
+	int r1, g1, b1;
+	int r2, g2, b2;
+	extractRGB(color1, &r1, &g1, &b1);
+	extractRGB(color2, &r2, &g2, &b2);
+
+	// Calculate step increments
+	float stepR = (r2 - r1) / (float)steps;
+	float stepG = (g2 - g1) / (float)steps;
+	float stepB = (b2 - b1) / (float)steps;
+
+	int red = r1 + stepR * step;
+	int green = g1 + stepG * step;
+	int blue = b1 + stepB * step;
+
+	return (red << 16) | (green << 8) | blue;
+
 }
 
 void	bres_plotline_img(t_mlx_data mlx_data, t_img *img, t_line line,
 		t_img_put_pixel_func t_img_put_pixel)
 {
 	t_bresenham	bres;
+	int count = 0;
+	int color;
+	int steps = get_nbr_of_steps(line);
 
 	bres = new_bres(line.pixels[0], line.pixels[1]);
 	while (true)
 	{
-		t_img_put_pixel(mlx_data.mlx_ptr, img, line.pixels[0], line.colors[0]);
+		color = calculate_color(line, steps, count);
+		count++;
+		t_img_put_pixel(mlx_data.mlx_ptr, img, line.pixels[0], color);
 		bres.e2 = 2 * bres.err;
 		if (bres.e2 >= bres.dy)
 		{
