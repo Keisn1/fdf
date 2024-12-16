@@ -53,34 +53,30 @@ int get_nbr_of_steps(t_line line)
 }
 
 // Function to extract RGB components
-void extractRGB(int color, int *red, int *green, int *blue) {
-	*red = (color >> 16) & 0xFF;
-	*green = (color >> 8) & 0xFF;
-	*blue = color & 0xFF;
+void extractRGB(int color, int rgb[3]) {
+	rgb[0] = (color >> 16) & 0xFF;
+	rgb[1]= (color >> 8) & 0xFF;
+	rgb[2] = color & 0xFF;
 }
 
 int calculate_color(t_line line, int steps, int step) {
-
-	int color1 = line.colors[0]; // Red
-	int color2 = line.colors[1]; // Green
-
 	// Extract initial RGB components
-	int r1, g1, b1;
-	int r2, g2, b2;
-	extractRGB(color1, &r1, &g1, &b1);
-	extractRGB(color2, &r2, &g2, &b2);
+	int rgb1[3];
+	int rgb2[3];
+	extractRGB(line.colors[0],rgb1);
+	extractRGB(line.colors[1], rgb2);
+
 
 	// Calculate step increments
-	float stepR = (r2 - r1) / (float)steps;
-	float stepG = (g2 - g1) / (float)steps;
-	float stepB = (b2 - b1) / (float)steps;
+	float stepR = (rgb2[0] - rgb1[0]) / (float)steps;
+	float stepG = (rgb2[1] - rgb1[1]) / (float)steps;
+	float stepB = (rgb2[2] - rgb1[2]) / (float)steps;
 
-	int red = r1 + stepR * step;
-	int green = g1 + stepG * step;
-	int blue = b1 + stepB * step;
+	int red = rgb1[0] + stepR * step;
+	int green = rgb1[1] + stepG * step;
+	int blue = rgb1[2] + stepB * step;
 
 	return (red << 16) | (green << 8) | blue;
-
 }
 
 void	bres_plotline_img(t_mlx_data mlx_data, t_img *img, t_line line,
@@ -112,112 +108,5 @@ void	bres_plotline_img(t_mlx_data mlx_data, t_img *img, t_line line,
 			bres.err += bres.dx;
 			line.pixels[0].y += bres.sy;
 		}
-	}
-}
-
-void	bres_plotline_low(t_mlx_data mlx_data, t_img *img, t_line line,
-		t_img_put_pixel_func img_put_pixel)
-{
-	t_pixel	p0;
-	t_pixel	p1;
-	int		dx;
-	int		dy;
-	int		yi;
-	int		D;
-
-	p0 = line.pixels[0];
-	p1 = line.pixels[1];
-	dx = p1.x - p0.x;
-	dy = p1.y - p0.y;
-	yi = 1;
-	if (dy < 0)
-	{
-		yi = -1;
-		dy = -dy;
-	}
-	D = (2 * dy) - dx;
-	while (p0.x <= p1.x)
-	{
-		img_put_pixel(mlx_data.mlx_ptr, img, p0, line.colors[0]);
-		if (D > 0)
-		{
-			p0.y += yi;
-			D += 2 * (dy - dx);
-		}
-		else
-			D += 2 * dy;
-		p0.x++;
-	}
-}
-
-void	bres_plotline_high(t_mlx_data mlx_data, t_img *img, t_line line,
-		t_img_put_pixel_func img_put_pixel)
-{
-	t_pixel	p0;
-	t_pixel	p1;
-	int		dx;
-	int		dy;
-	int		xi;
-	int		D;
-
-	p0 = line.pixels[0];
-	p1 = line.pixels[1];
-	dx = p1.x - p0.x;
-	dy = p1.y - p0.y;
-	xi = 1;
-	if (dx < 0)
-	{
-		xi = -1;
-		dx = -dx;
-	}
-	D = (2 * dx) - dy;
-	while (p0.y <= p1.y)
-	{
-		img_put_pixel(mlx_data.mlx_ptr, img, p0, line.colors[0]);
-		if (D > 0)
-		{
-			p0.x += xi;
-			D += 2 * (dx - dy);
-		}
-		else
-			D += 2 * dx;
-		p0.y++;
-	}
-}
-
-void	switch_points(t_line *line)
-{
-	t_pixel	tmp;
-
-	tmp = line->pixels[0];
-	line->pixels[0] = line->pixels[1];
-	line->pixels[1] = tmp;
-	return ;
-}
-
-void	bres_plotline_simple(t_mlx_data mlx_data, t_img *img, t_line line,
-		t_img_put_pixel_func img_put_pixel)
-{
-	if (abs((int)line.pixels[1].y
-			- (int)line.pixels[0].y) < abs((int)line.pixels[1].x
-			- (int)line.pixels[0].x))
-	{
-		if (line.pixels[0].x > line.pixels[1].x)
-		{
-			switch_points(&line);
-			bres_plotline_low(mlx_data, img, line, img_put_pixel);
-		}
-		else
-			bres_plotline_low(mlx_data, img, line, img_put_pixel);
-	}
-	else
-	{
-		if (line.pixels[0].y > line.pixels[1].y)
-		{
-			switch_points(&line);
-			bres_plotline_high(mlx_data, img, line, img_put_pixel);
-		}
-		else
-			bres_plotline_high(mlx_data, img, line, img_put_pixel);
 	}
 }
