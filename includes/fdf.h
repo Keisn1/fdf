@@ -46,6 +46,5 @@ void				wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M,
 
 /* hooks */
 /* int					exit_program(int keycode, t_mlx_data *mlx_data); */
-int					exit_program(int keycode, void** params);
-int					scale_hook(int keycode, t_mlx_data *mlx_data);
+int	keyup_hook(int keycode, void** params);
 #endif // FDF_H

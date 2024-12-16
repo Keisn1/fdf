@@ -55,13 +55,13 @@ int	main(int argc, char** argv)
 	/* put the wireframe to image */
 	wf_to_img_plot(mlx_data, img, isometric_projection, map);
 
-
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, size_win_x, size_win_y, "wireframe");
 	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);
 
 	/* put image to window */
-	void* params_exit[3] = {(void*)&mlx_data, (void*)&isometric_projection, (void*)&map};
-	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, exit_program, &params_exit);
+
+	void* params_scale[3] = {(void*)&mlx_data, (void*)&isometric_projection, (void*)&map};
+	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, keyup_hook, &params_scale);
 	mlx_loop(mlx_data.mlx_ptr);
 	return (0);
 }
