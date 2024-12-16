@@ -49,6 +49,7 @@ typedef struct s_img
 	char			*img_pixels;
 	/* bits per pixel */
 	int				bpp;
+	/* number of bytes used to store one line of the image in memory */
 	int				size_line;
 	int				endian;
 	int				width;

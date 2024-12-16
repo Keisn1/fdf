@@ -16,13 +16,11 @@
 # include "matrix.h"
 # include "my_mlx.h"
 # include <X11/keysym.h>
+# include <fcntl.h>
 # include <limits.h>
 # include <stdbool.h>
 # include <stddef.h>
-# include <stdlib.h>
 # include <unistd.h>
-#include <fcntl.h>
-#include <unistd.h>
 
 typedef struct s_map
 {
@@ -30,9 +28,11 @@ typedef struct s_map
 	unsigned int	**color;
 }					t_map;
 
-t_map				parse_map(const char *filename);
 void				free_map(t_map map);
+char				*advance_to_comma_or_ws(char *str);
 t_matrix			map_to_vectors(t_map map);
+unsigned int		ft_hex_to_unsigned(char *hex_str);
+t_map				parse_map(const char *filename);
 
 /* projection */
 t_matrix			get_isometric_projection(t_map map);
@@ -45,5 +45,7 @@ void				wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M,
 						t_map map);
 
 /* hooks */
-int					exit_program(int keycode, t_mlx_data *mlx_data);
+/* int					exit_program(int keycode, t_mlx_data *mlx_data); */
+int					exit_program(int keycode, void** params);
+int					scale_hook(int keycode, t_mlx_data *mlx_data);
 #endif // FDF_H
