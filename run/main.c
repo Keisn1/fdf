@@ -33,8 +33,8 @@ int	main(int argc, char** argv)
 	translate_vectors_to_first_octant(&isometric_projection);
 	norm_vectors(&isometric_projection);
 
-	size_win_x = 3840;
-	size_win_y = 2160;
+	size_win_x = 1920;
+	size_win_y = 1080;
 	double scale_factor = size_win_x;
 	if (size_win_y < size_win_x)
 		scale_factor = size_win_y;

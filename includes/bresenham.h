@@ -41,10 +41,13 @@ t_line new_line(t_pixel px1, t_pixel px2);
 void bres_plotline_simple(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel);
 void	bres_plotline_window(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1, t_pixel_put_func pixel_put);
 void	bres_plotline_img(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func t_img_put_pixel);
-void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_pixel p_0, t_pixel p_1, t_img *img);
-t_list	*get_bres_line(t_pixel p_0, t_pixel p_1);
-void	bres_plotline_img_template(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func img_put_pixel);
 
+void	bres_plotline_img_with_list(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func img_put_pixel);
+t_list	*get_bres_line(t_line line);
+
+void	bres_plotline_img_template(t_mlx_data mlx_data, t_img *img, t_line line, t_img_put_pixel_func img_put_pixel);
+unsigned int *get_gradient(unsigned int col1, unsigned int col2,
+                           unsigned int steps);
 /* helpers */
 void				add_px_to_list(t_list **l, t_pixel p);
 

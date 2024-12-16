@@ -1,4 +1,6 @@
 #include "test_fdf.hpp"
+#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 // setup Mock ////////////////////////////////////////
 // Mock class that wraps mlx_pixel_put
@@ -66,18 +68,20 @@ INSTANTIATE_TEST_SUITE_P(
     bresPlotlineSimpleTest,
 	bresPlotlineSimpleTest,
 	testing::Values(
-		bresPlotlineSimpleTestParams {0, 0, 3, 0, {{0, 0}, {1, 0}, {2, 0}, {3, 0}}}
-		// bresPlotlineSimpleTestParams {20, 20, 17, 17, {{20, 20}, {19, 19}, {18, 18}, {17, 17}}},
-		// bresPlotlineSimpleTestParams {0, 3, 0, 0, {{0, 3}, {0, 2}, {0, 1}, {0, 0}}}
-		// bresPlotlineSimpleTestParams {3, 0, 0, 0, {{3, 0}, {2, 0}, {1, 0}, {0, 0}}}
-		// bresPlotlineSimpleTestParams{0, 0, 0, 3, { {0, 0}, {0, 1}, {0, 2}, {0, 3} }}
-		// bresPlotlineSimpleTestParams {17, 20, 20, 17, {{17, 20}, {18, 19}, {19, 18}, {20, 17}}},
-		// bresPlotlineSimpleTestParams {0, 1, 6, 4, {{0, 1}, {1, 2}, {2, 2}, {3, 3}, {4, 3}, {5, 4}, {6, 4}}},
-		// bresPlotlineSimpleTestParams {6, 4, 0, 1, {{6, 4}, {5, 3}, {4, 3}, {3, 2}, {2, 2}, {1, 1}, {0, 1}}},
-		// bresPlotlineSimpleTestParams{0, 3, 0, 0, { {0, 3}, {0, 2}, {0, 1}, {0, 0} }}
-		// bresPlotlineSimpleTestParams {3, 0, 0, 0, {{3, 0}, {2, 0}, {1, 0}, {0, 0}}},
-		// bresPlotlineSimpleTestParams {17, 17, 20, 20, {{17, 17}, {18, 18}, {19, 19}, {20, 20}}},
-		// bresPlotlineSimpleTestParams {17, 17, 20, 20, {{17, 17}, {18, 18}, {19, 19}, {20, 20}}}
+		bresPlotlineSimpleTestParams {0, 0, 3, 0, {{0, 0}, {1, 0}, {2, 0}, {3, 0}}},
+		bresPlotlineSimpleTestParams {0, 0, 3, 3, {{0, 0}, {1, 1}, {2, 2}, {3, 3}}},
+		bresPlotlineSimpleTestParams {0, 3, 3, 0, {{0, 3} , {1, 2}, {2, 1}, {3, 0}}},
+		bresPlotlineSimpleTestParams {20, 20, 17, 17, {{20, 20}, {19, 19}, {18, 18}, {17, 17}}},
+		bresPlotlineSimpleTestParams {0, 3, 0, 0, {{0, 3}, {0, 2}, {0, 1}, {0, 0}}},
+		bresPlotlineSimpleTestParams {3, 0, 0, 0, {{3, 0}, {2, 0}, {1, 0}, {0, 0}}},
+		bresPlotlineSimpleTestParams{0, 0, 0, 3, { {0, 0}, {0, 1}, {0, 2}, {0, 3} }},
+		bresPlotlineSimpleTestParams {17, 20, 20, 17, {{17, 20}, {18, 19}, {19, 18}, {20, 17}}},
+		bresPlotlineSimpleTestParams {0, 1, 6, 4, {{0, 1}, {1, 1}, {2, 2}, {3, 2}, {4, 3}, {5, 3}, {6, 4}}},
+		bresPlotlineSimpleTestParams {6, 4, 0, 1, {{6, 4}, {5, 3}, {4, 3}, {3, 2}, {2, 2}, {1, 1}, {0, 1}}},
+		bresPlotlineSimpleTestParams{0, 3, 0, 0, { {0, 3}, {0, 2}, {0, 1}, {0, 0} }},
+		bresPlotlineSimpleTestParams {3, 0, 0, 0, {{3, 0}, {2, 0}, {1, 0}, {0, 0}}},
+		bresPlotlineSimpleTestParams {17, 17, 20, 20, {{17, 17}, {18, 18}, {19, 19}, {20, 20}}},
+		bresPlotlineSimpleTestParams {17, 17, 20, 20, {{17, 17}, {18, 18}, {19, 19}, {20, 20}}}
 		)
 	);
 
@@ -179,9 +183,10 @@ class bresenhamGetLineTest : public testing::TestWithParam<bresenhamLineTestPara
 TEST_P(bresenhamGetLineTest, BresenhamGetLineTest) {
 	bresenhamLineTestParams params = GetParam();
 
-	t_pixel p_0 = {params.x_0, params.y_0};
-	t_pixel p_1 = {params.x_1, params.y_1};
-	t_list* got = get_bres_line(p_0, p_1);
+	t_line line;
+	line.pixels[0] = {params.x_0, params.y_0};
+	line.pixels[1] = {params.x_1, params.y_1};
+	t_list* got = get_bres_line(line);
 
 	int count = 0;
 	t_list *head = got;
@@ -207,3 +212,33 @@ INSTANTIATE_TEST_SUITE_P(bresenhamGetLineTests, bresenhamGetLineTest,
 							 bresenhamLineTestParams {6, 4, 0, 1, {{6, 4}, {5, 3}, {4, 3}, {3, 2}, {2, 2}, {1, 1}, {0, 1}}}
 							 )
 	);
+
+
+// struct gradientTestParams {
+// 	unsigned int col1;
+// 	unsigned int col2;
+// 	unsigned int steps;
+// 	std::vector<unsigned int> want;
+// };
+
+// class gradientTest : public ::testing::TestWithParam<gradientTestParams>{};
+
+// TEST_P(gradientTest, gradientTest) {
+// 	gradientTestParams params = GetParam();
+
+// 	unsigned int* gradient = get_gradient(params.col1, params.col2, params.steps);
+// 	if (params.want.size() == 0) {
+// 		ASSERT_EQ(gradient, nullptr);
+// 	}
+// 	for (size_t i = 0; i < params.want.size(); i++ ) {
+// 		EXPECT_EQ(params.want[i], gradient[i]);
+// 	}
+// 	free(gradient);
+// }
+
+// INSTANTIATE_TEST_SUITE_P(gradientTests, gradientTest,
+//                          testing::Values(
+//                              gradientTestParams{0x0000000, 0x000004, 5, {0, 1, 2, 3, 4}},
+//                              gradientTestParams{0x001F00, 0x001F00, 5, {0, 1, 2, 3, 4}}
+// 							 )
+// 	);
