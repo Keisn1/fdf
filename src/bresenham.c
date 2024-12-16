@@ -55,7 +55,7 @@ int	get_nbr_of_steps(t_line line)
 }
 
 // Function to extract RGB components
-void	extractRGB(int color, float rgb[3])
+void	extract_rgb(int color, float rgb[3])
 {
 	rgb[0] = (color >> 16) & 0xFF;
 	rgb[1] = (color >> 8) & 0xFF;
@@ -67,54 +67,58 @@ void	fill_grad_step(float grad_step[3], t_line line, int steps)
 	float	rgb1[3];
 	float	rgb2[3];
 
-	extractRGB(line.colors[0], rgb1);
-	extractRGB(line.colors[1], rgb2);
+	extract_rgb(line.colors[0], rgb1);
+	extract_rgb(line.colors[1], rgb2);
 	grad_step[0] = (rgb2[0] - rgb1[0]) / (float)steps;
 	grad_step[1] = (rgb2[1] - rgb1[1]) / (float)steps;
 	grad_step[2] = (rgb2[2] - rgb1[2]) / (float)steps;
 }
 
-int	calculate_color(float color[3], float grad_step[3], int step)
+int	add_g_step(float color[3], float grad_step[3])
 {
-	int	red;
-	int	green;
-	int	blue;
+	color[0] = color[0] + grad_step[0];
+	color[1] = color[1] + grad_step[1];
+	color[2] = color[2] + grad_step[2];
+	return (((int)color[0] << 16) | ((int)color[1] << 8) | (int)color[2]);
+}
 
-	red = color[0] + grad_step[0] * step;
-	green = color[1] + grad_step[1] * step;
-	blue = color[2] + grad_step[2] * step;
-	return ((red << 16) | (green << 8) | blue);
+void	bres_update1(t_line *line, t_bresenham *bres)
+{
+	bres->err += bres->dy;
+	line->pixels[0].x += bres->sx;
+}
+
+void	bres_update2(t_line *line, t_bresenham *bres)
+{
+	bres->err += bres->dx;
+	line->pixels[0].y += bres->sy;
 }
 
 void	bres_plotline_img(t_mlx_data mlx_data, t_img *img, t_line line,
-		t_img_put_pixel_func img_put_pixel)
+		t_img_put_pixel_func ipp)
 {
 	t_bresenham	bres;
-	int			step;
-	float		grad_step[3];
-	float		color[3];
+	float		g_step[3];
+	float		c[3];
 
-	step = 0;
-	extractRGB(line.colors[0], color);
-	fill_grad_step(grad_step, line, get_nbr_of_steps(line));
+	extract_rgb(line.colors[0], c);
+	fill_grad_step(g_step, line, get_nbr_of_steps(line));
 	bres = new_bres(line.pixels[0], line.pixels[1]);
 	while (true)
 	{
-		img_put_pixel(mlx_data.mlx_ptr, img, line.pixels[0], calculate_color(color, grad_step, step++));
+		ipp(mlx_data.mlx_ptr, img, line.pixels[0], add_g_step(c, g_step));
 		bres.e2 = 2 * bres.err;
 		if (bres.e2 >= bres.dy)
 		{
 			if (line.pixels[0].x == line.pixels[1].x)
 				break ;
-			bres.err += bres.dy;
-			line.pixels[0].x += bres.sx;
+			bres_update1(&line, &bres);
 		}
 		if (bres.e2 <= bres.dx)
 		{
 			if (line.pixels[0].y == line.pixels[1].y)
 				break ;
-			bres.err += bres.dx;
-			line.pixels[0].y += bres.sy;
+			bres_update2(&line, &bres);
 		}
 	}
 }
