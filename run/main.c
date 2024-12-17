@@ -43,13 +43,13 @@ int	main(int argc, char** argv)
 	norm_vectors(&vectors);
 	scale_matrix(&vectors, 500);
 	p.projection = get_isometric_projection(vectors);
+
+	display_wf(p.projection, map, mlx_data);
+
 	p.zoom_factor = 1.01;
 	p.zoom = 0;
 	p.drehwinkel = 5;
 	p.rotation = 0;
-	translate_vectors_to_first_octant(&p.projection);
-	scale_matrix(&p.projection, pow(p.zoom_factor, p.zoom));
-	display_wf(p.projection, map, mlx_data);
 
 	/* setup hooks */
 	void* params_scale[4] = {(void*)&mlx_data, (void*)&p, (void*)&map, (void*)&vectors};

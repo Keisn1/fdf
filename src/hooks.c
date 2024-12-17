@@ -38,14 +38,10 @@ int	keyup_hook(int keycode, void** params)
 		t_matrix new_vectors = mat_mul(rotation_z, vectors);
 		free_matrix(rotation_z);
 
-		t_matrix rot_matrix = get_rot_matrix();
-
 		free_matrix(p->projection);
-		p->projection = mat_mul(rot_matrix, new_vectors);
+		p->projection = get_isometric_projection(new_vectors);
 		free_matrix(new_vectors);
-		free_matrix(rot_matrix);
 
-		translate_vectors_to_first_octant(&(p->projection));
 		scale_matrix(&p->projection, pow(p->zoom_factor, p->zoom));
 		display_wf(p->projection, map, mlx_data);
 	}

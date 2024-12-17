@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
 {
@@ -94,8 +95,9 @@ t_matrix	map_to_vectors(t_map map)
 	if (map.map.m == 0)
 		return ((t_matrix){NULL, 0, 0});
 	reserve_space_points(map.map.m * map.map.n, &vectors);
-	double offset_x = -(map.map.n / 2.);
-	double offset_y = -(map.map.m / 2.);
+	double offset_x = -((map.map.n-1) / 2.);
+	double offset_y = -((map.map.m-1) / 2.);
+
 	i = 0;
 	count = 0;
 	while (i < map.map.m)
