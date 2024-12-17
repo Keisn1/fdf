@@ -40,14 +40,14 @@ int	main(int argc, char** argv)
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "wireframe");
 
 	vectors = map_to_vectors(map);
+	norm_vectors(&vectors);
+	scale_matrix(&vectors, 500);
 	p.projection = get_isometric_projection(vectors);
 	p.zoom_factor = 1.01;
 	p.zoom = 0;
 	p.drehwinkel = 5;
 	p.rotation = 0;
 	translate_vectors_to_first_octant(&p.projection);
-	norm_vectors(&p.projection);
-	scale_matrix(&p.projection, 900);
 	scale_matrix(&p.projection, pow(p.zoom_factor, p.zoom));
 	display_wf(p.projection, map, mlx_data);
 

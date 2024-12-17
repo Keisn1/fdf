@@ -46,8 +46,6 @@ int	keyup_hook(int keycode, void** params)
 		free_matrix(rot_matrix);
 
 		translate_vectors_to_first_octant(&(p->projection));
-		norm_vectors(&(p->projection));
-		scale_matrix(&p->projection, 900);
 		scale_matrix(&p->projection, pow(p->zoom_factor, p->zoom));
 		display_wf(p->projection, map, mlx_data);
 	}

@@ -94,6 +94,8 @@ t_matrix	map_to_vectors(t_map map)
 	if (map.map.m == 0)
 		return ((t_matrix){NULL, 0, 0});
 	reserve_space_points(map.map.m * map.map.n, &vectors);
+	double offset_x = -(map.map.n / 2.);
+	double offset_y = -(map.map.m / 2.);
 	i = 0;
 	count = 0;
 	while (i < map.map.m)
@@ -101,8 +103,8 @@ t_matrix	map_to_vectors(t_map map)
 		j = 0;
 		while (j < map.map.n)
 		{
-			vectors.mat[0][count] = j;
-			vectors.mat[1][count] = i;
+			vectors.mat[0][count] = j + offset_x;
+			vectors.mat[1][count] = i + offset_y;
 			vectors.mat[2][count++] = map.map.mat[i][j++];
 		}
 		i++;
