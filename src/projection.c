@@ -13,10 +13,10 @@
 #include "fdf.h"
 #include <math.h>
 
-t_matrix	get_rot_matrix_z(void)
+t_matrix	get_rot_matrix_z(double drehwinkel)
 {
 	t_matrix	rot_matrix;
-	double theta = (M_PI / 180.0) * 10;
+	double theta = (M_PI / 180.0) * drehwinkel;
 
 	rot_matrix.m = 3;
 	rot_matrix.n = 3;

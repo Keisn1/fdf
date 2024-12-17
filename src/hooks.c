@@ -14,7 +14,6 @@
 #include "matrix.h"
 #include "my_mlx.h"
 #include <math.h>
-#include <stdio.h>
 
 int	keyup_hook(int keycode, void** params)
 {
@@ -34,7 +33,8 @@ int	keyup_hook(int keycode, void** params)
 		display_wf(p->projection, map, mlx_data);
 	}
 	if (keycode == XK_Left) {
-		t_matrix rotation_z = get_rot_matrix_z();
+		p->rotation++;
+		t_matrix rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
 		t_matrix new_vectors = mat_mul(rotation_z, vectors);
 		free_matrix(rotation_z);
 

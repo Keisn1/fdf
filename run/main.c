@@ -43,6 +43,8 @@ int	main(int argc, char** argv)
 	p.projection = get_isometric_projection(vectors);
 	p.zoom_factor = 1.01;
 	p.zoom = 0;
+	p.drehwinkel = 5;
+	p.rotation = 0;
 	translate_vectors_to_first_octant(&p.projection);
 	norm_vectors(&p.projection);
 	scale_matrix(&p.projection, 1080 * pow(p.zoom_factor, p.zoom));
