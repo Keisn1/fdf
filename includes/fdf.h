@@ -44,7 +44,7 @@ t_matrix	get_rot_matrix(void);
 t_matrix	get_rot_matrix_z(void);
 void				translate_vectors_to_first_octant(t_matrix *mat);
 void				norm_vectors(t_matrix *mat);
-void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data, double scale);
+void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data);
 
 /* parsing */
 void				translate_vectors(t_matrix *m, double x, double y);

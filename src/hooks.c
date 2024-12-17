@@ -12,7 +12,6 @@
 
 #include "fdf.h"
 #include "matrix.h"
-#include "mlx.h"
 #include "my_mlx.h"
 
 int	keyup_hook(int keycode, void** params)
@@ -22,10 +21,14 @@ int	keyup_hook(int keycode, void** params)
 	t_map map = *(t_map*)params[2];
 	t_matrix vectors = *(t_matrix*)params[3];
 
-	if (keycode == XK_Up)
-		display_wf(p->projection, map, mlx_data, 1.03);
-	if (keycode == XK_Down)
-		display_wf(p->projection, map, mlx_data, 0.97);
+	if (keycode == XK_Up) {
+		scale_matrix(&p->projection, 1.03);
+		display_wf(p->projection, map, mlx_data);
+	}
+	if (keycode == XK_Down) {
+		scale_matrix(&p->projection, 0.97);
+		display_wf(p->projection, map, mlx_data);
+	}
 	if (keycode == XK_Left) {
 		t_matrix rotation_z = get_rot_matrix_z();
 		t_matrix new_vectors = mat_mul(rotation_z, vectors);
@@ -40,7 +43,8 @@ int	keyup_hook(int keycode, void** params)
 
 		translate_vectors_to_first_octant(&(p->projection));
 		norm_vectors(&(p->projection));
-		display_wf(p->projection, map, mlx_data, 1080);
+		scale_matrix(&p->projection, 1080);
+		display_wf(p->projection, map, mlx_data);
 	}
 
 	if (keycode == XK_Escape)

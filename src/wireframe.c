@@ -58,9 +58,8 @@ void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix vecs, t_map map)
 	}
 }
 
-void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data, double scale) {
+void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data) {
 	t_img img;
-	scale_matrix(&isometric_projection, scale);
 	img = new_img(mlx_data.mlx_ptr, 1920, 1080);
 	wf_to_img_plot(mlx_data, img, isometric_projection, map);
 	mlx_clear_window(mlx_data.mlx_ptr, mlx_data.win_ptr);

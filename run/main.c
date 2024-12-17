@@ -32,18 +32,15 @@ int	main(int argc, char** argv)
 	map = parse_map(filename);
 	vectors = map_to_vectors(map);
 	p.projection = get_isometric_projection(vectors);
-	/* isometric_projection = get_isometric_projection(vectors); */
 	translate_vectors_to_first_octant(&p.projection);
-	/* translate_vectors_to_first_octant(&isometric_projection); */
 	norm_vectors(&p.projection);
-	/* norm_vectors(&isometric_projection); */
 
 	size_win_x = 1920;
 	size_win_y = 1080;
 	double scale_factor = size_win_x;
 	if (size_win_y < size_win_x)
 		scale_factor = size_win_y;
-
+	scale_matrix(&p.projection, scale_factor);
 
 	mlx_data.mlx_ptr = mlx_init();
 	if (!(mlx_data.mlx_ptr))
@@ -53,8 +50,7 @@ int	main(int argc, char** argv)
 	}
 	/* get a window */
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, size_win_x, size_win_y, "wireframe");
-	display_wf(p.projection, map, mlx_data, scale_factor);
-	/* display_wf(isometric_projection, map, mlx_data, scale_factor); */
+	display_wf(p.projection, map, mlx_data);
 
 	/* setup hooks */
 	void* params_scale[4] = {(void*)&mlx_data, (void*)&p, (void*)&map, (void*)&vectors};
