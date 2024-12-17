@@ -57,7 +57,7 @@ int	main(int argc, char** argv)
 	/* display_wf(isometric_projection, map, mlx_data, scale_factor); */
 
 	/* setup hooks */
-	void* params_scale[4] = {(void*)&mlx_data, (void*)&p.projection, (void*)&map, (void*)&vectors};
+	void* params_scale[4] = {(void*)&mlx_data, (void*)&p, (void*)&map, (void*)&vectors};
 	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, keyup_hook, &params_scale);
 	mlx_loop(mlx_data.mlx_ptr);
 	return (0);

@@ -16,7 +16,7 @@
 t_matrix	get_rot_matrix_z(void)
 {
 	t_matrix	rot_matrix;
-	double theta = (M_PI / 180.0) * 1;
+	double theta = (M_PI / 180.0) * 10;
 
 	rot_matrix.m = 3;
 	rot_matrix.n = 3;
