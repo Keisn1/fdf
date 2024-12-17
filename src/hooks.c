@@ -19,7 +19,6 @@ int	keyup_hook(int keycode, void** params)
 {
 	t_mlx_data mlx_data = *(t_mlx_data*)params[0];
 	t_projection *p = (t_projection*)params[1];
-	/* t_matrix projection = *(t_matrix*)params[1]; */
 	t_map map = *(t_map*)params[2];
 	t_matrix vectors = *(t_matrix*)params[3];
 
@@ -33,17 +32,15 @@ int	keyup_hook(int keycode, void** params)
 		free_matrix(rotation_z);
 
 		t_matrix rot_matrix = get_rot_matrix();
-		t_matrix new_isometric_projection = mat_mul(rot_matrix, new_vectors);
 
 		free_matrix(p->projection);
-		p->projection = new_isometric_projection;
+		p->projection = mat_mul(rot_matrix, new_vectors);
 		free_matrix(new_vectors);
 		free_matrix(rot_matrix);
 
-		translate_vectors_to_first_octant(&new_isometric_projection);
-		norm_vectors(&new_isometric_projection);
-		display_wf(new_isometric_projection, map, mlx_data, 1080);
-		/* free_matrix(new_isometric_projection); */
+		translate_vectors_to_first_octant(&(p->projection));
+		norm_vectors(&(p->projection));
+		display_wf(p->projection, map, mlx_data, 1080);
 	}
 
 	if (keycode == XK_Escape)
