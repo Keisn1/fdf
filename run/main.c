@@ -22,18 +22,21 @@ int	main(int argc, char** argv)
 	char		*filename;
 	t_map		map;
 	t_matrix	vectors;
-	t_matrix	isometric_projection;
 	size_t		size_win_x;
 	size_t		size_win_y;
+	t_projection p;
 
 	(void)argc;
 	/* parse map */
 	filename = argv[1];
 	map = parse_map(filename);
 	vectors = map_to_vectors(map);
-	isometric_projection = get_isometric_projection(vectors);
-	translate_vectors_to_first_octant(&isometric_projection);
-	norm_vectors(&isometric_projection);
+	p.projection = get_isometric_projection(vectors);
+	/* isometric_projection = get_isometric_projection(vectors); */
+	translate_vectors_to_first_octant(&p.projection);
+	/* translate_vectors_to_first_octant(&isometric_projection); */
+	norm_vectors(&p.projection);
+	/* norm_vectors(&isometric_projection); */
 
 	size_win_x = 1920;
 	size_win_y = 1080;
@@ -50,10 +53,11 @@ int	main(int argc, char** argv)
 	}
 	/* get a window */
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, size_win_x, size_win_y, "wireframe");
-	display_wf(isometric_projection, map, mlx_data, scale_factor);
+	display_wf(p.projection, map, mlx_data, scale_factor);
+	/* display_wf(isometric_projection, map, mlx_data, scale_factor); */
 
 	/* setup hooks */
-	void* params_scale[4] = {(void*)&mlx_data, (void*)&isometric_projection, (void*)&map, (void*)&vectors};
+	void* params_scale[4] = {(void*)&mlx_data, (void*)&p.projection, (void*)&map, (void*)&vectors};
 	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, keyup_hook, &params_scale);
 	mlx_loop(mlx_data.mlx_ptr);
 	return (0);

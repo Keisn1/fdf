@@ -33,7 +33,10 @@ char				*advance_to_comma_or_ws(char *str);
 t_matrix			map_to_vectors(t_map map);
 unsigned int		ft_hex_to_unsigned(char *hex_str);
 t_map				parse_map(const char *filename);
-void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data, double scale);
+
+typedef struct s_projection {
+	t_matrix projection;
+} t_projection;
 
 /* projection */
 t_matrix	get_isometric_projection(t_matrix vectors);
@@ -41,6 +44,7 @@ t_matrix	get_rot_matrix(void);
 t_matrix	get_rot_matrix_z(void);
 void				translate_vectors_to_first_octant(t_matrix *mat);
 void				norm_vectors(t_matrix *mat);
+void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data, double scale);
 
 /* parsing */
 void				translate_vectors(t_matrix *m, double x, double y);
