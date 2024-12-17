@@ -33,6 +33,7 @@ char				*advance_to_comma_or_ws(char *str);
 t_matrix			map_to_vectors(t_map map);
 unsigned int		ft_hex_to_unsigned(char *hex_str);
 t_map				parse_map(const char *filename);
+void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data, double scale);
 
 /* projection */
 t_matrix			get_isometric_projection(t_map map);

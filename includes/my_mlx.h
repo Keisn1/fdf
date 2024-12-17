@@ -32,7 +32,6 @@ typedef struct s_mlx_data
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	t_list			*imgs;
 }					t_mlx_data;
 
 typedef struct s_pixel
