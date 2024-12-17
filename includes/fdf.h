@@ -36,6 +36,8 @@ t_map				parse_map(const char *filename);
 
 typedef struct s_projection {
 	t_matrix projection;
+	double zoom_factor;
+	int zoom;
 } t_projection;
 
 /* projection */

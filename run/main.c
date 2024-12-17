@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "mlx.h"
 #include "my_mlx.h"
+#include <math.h>
 #include <unistd.h>
 
 int	main(int argc, char** argv)
@@ -22,25 +23,12 @@ int	main(int argc, char** argv)
 	char		*filename;
 	t_map		map;
 	t_matrix	vectors;
-	size_t		size_win_x;
-	size_t		size_win_y;
 	t_projection p;
 
 	(void)argc;
 	/* parse map */
 	filename = argv[1];
 	map = parse_map(filename);
-	vectors = map_to_vectors(map);
-	p.projection = get_isometric_projection(vectors);
-	translate_vectors_to_first_octant(&p.projection);
-	norm_vectors(&p.projection);
-
-	size_win_x = 1920;
-	size_win_y = 1080;
-	double scale_factor = size_win_x;
-	if (size_win_y < size_win_x)
-		scale_factor = size_win_y;
-	scale_matrix(&p.projection, scale_factor);
 
 	mlx_data.mlx_ptr = mlx_init();
 	if (!(mlx_data.mlx_ptr))
@@ -49,7 +37,15 @@ int	main(int argc, char** argv)
 		return (1);
 	}
 	/* get a window */
-	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, size_win_x, size_win_y, "wireframe");
+	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "wireframe");
+
+	vectors = map_to_vectors(map);
+	p.projection = get_isometric_projection(vectors);
+	p.zoom_factor = 1.01;
+	p.zoom = 0;
+	translate_vectors_to_first_octant(&p.projection);
+	norm_vectors(&p.projection);
+	scale_matrix(&p.projection, 1080 * pow(p.zoom_factor, p.zoom));
 	display_wf(p.projection, map, mlx_data);
 
 	/* setup hooks */

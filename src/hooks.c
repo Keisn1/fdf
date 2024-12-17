@@ -13,6 +13,8 @@
 #include "fdf.h"
 #include "matrix.h"
 #include "my_mlx.h"
+#include <math.h>
+#include <stdio.h>
 
 int	keyup_hook(int keycode, void** params)
 {
@@ -22,11 +24,13 @@ int	keyup_hook(int keycode, void** params)
 	t_matrix vectors = *(t_matrix*)params[3];
 
 	if (keycode == XK_Up) {
-		scale_matrix(&p->projection, 1.03);
+		p->zoom++;
+		scale_matrix(&p->projection, p->zoom_factor);
 		display_wf(p->projection, map, mlx_data);
 	}
 	if (keycode == XK_Down) {
-		scale_matrix(&p->projection, 0.97);
+		p->zoom--;
+		scale_matrix(&p->projection, 1 / p->zoom_factor);
 		display_wf(p->projection, map, mlx_data);
 	}
 	if (keycode == XK_Left) {
@@ -43,7 +47,7 @@ int	keyup_hook(int keycode, void** params)
 
 		translate_vectors_to_first_octant(&(p->projection));
 		norm_vectors(&(p->projection));
-		scale_matrix(&p->projection, 1080);
+		scale_matrix(&p->projection, 1080 * pow(p->zoom_factor, p->zoom));
 		display_wf(p->projection, map, mlx_data);
 	}
 
