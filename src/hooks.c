@@ -20,26 +20,32 @@ int	keyup_hook(int keycode, void** params)
 	t_mlx_data mlx_data = *(t_mlx_data*)params[0];
 	t_matrix isometric_projection = *(t_matrix*)params[1];
 	t_map map = *(t_map*)params[2];
+	t_matrix vectors = *(t_matrix*)params[3];
 
 	if (keycode == XK_Up)
 		display_wf(isometric_projection, map, mlx_data, 1.03);
 	if (keycode == XK_Down)
 		display_wf(isometric_projection, map, mlx_data, 0.97);
 	if (keycode == XK_Left) {
-			t_matrix vectors = map_to_vectors(map);
 			t_matrix rotation_z = get_rot_matrix_z();
-			vectors = mat_mul(rotation_z, vectors);
+			t_matrix new_vectors = mat_mul(rotation_z, vectors);
+			free_matrix(rotation_z);
 			t_matrix rot_matrix = get_rot_matrix();
-			isometric_projection = mat_mul(rot_matrix, vectors);
-			translate_vectors_to_first_octant(&isometric_projection);
-			norm_vectors(&isometric_projection);
-			display_wf(isometric_projection, map, mlx_data, 1080);
+			t_matrix new_isometric_projection = mat_mul(rot_matrix, new_vectors);
+			free_matrix(new_vectors);
+			free_matrix(rot_matrix);
+
+			translate_vectors_to_first_octant(&new_isometric_projection);
+			norm_vectors(&new_isometric_projection);
+			display_wf(new_isometric_projection, map, mlx_data, 1080);
+			free_matrix(new_isometric_projection);
         }
 
 	if (keycode == XK_Escape)
 	{
 		free_map(map);
 		free_matrix(isometric_projection);
+		free_matrix(vectors);
 		mlx_destroy_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
 		mlx_destroy_display(mlx_data.mlx_ptr);
 		free(mlx_data.mlx_ptr);

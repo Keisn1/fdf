@@ -36,7 +36,7 @@ t_map				parse_map(const char *filename);
 void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data, double scale);
 
 /* projection */
-t_matrix			get_isometric_projection(t_map map);
+t_matrix	get_isometric_projection(t_matrix vectors);
 t_matrix	get_rot_matrix(void);
 t_matrix	get_rot_matrix_z(void);
 void				translate_vectors_to_first_octant(t_matrix *mat);
