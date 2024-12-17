@@ -13,6 +13,31 @@
 #include "fdf.h"
 #include <math.h>
 
+t_matrix	get_rot_matrix_z(void)
+{
+	t_matrix	rot_matrix;
+	double theta = (M_PI / 180.0) * 1;
+
+	rot_matrix.m = 3;
+	rot_matrix.n = 3;
+	rot_matrix.mat = (double **)malloc(sizeof(double *) * rot_matrix.m);
+	rot_matrix.mat[0] = (double *)malloc(sizeof(double *) * rot_matrix.n);
+	rot_matrix.mat[1] = (double *)malloc(sizeof(double *) * rot_matrix.n);
+	rot_matrix.mat[2] = (double *)malloc(sizeof(double *) * rot_matrix.n);
+
+	rot_matrix.mat[0][0] = cos(theta);
+	rot_matrix.mat[0][1] = -sin(theta);
+	rot_matrix.mat[0][2] = 0;
+	rot_matrix.mat[1][0] = sin(theta);
+	rot_matrix.mat[1][1] = cos(theta);
+	rot_matrix.mat[1][2] = 0;
+	rot_matrix.mat[2][0] = 0;
+	rot_matrix.mat[2][1] = 0;
+	rot_matrix.mat[2][2] = 1;
+	return (rot_matrix);
+}
+
+
 t_matrix	get_rot_matrix(void)
 {
 	t_matrix	rot_matrix;

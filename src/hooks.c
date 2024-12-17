@@ -11,26 +11,30 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "matrix.h"
 #include "mlx.h"
 #include "my_mlx.h"
 
 int	keyup_hook(int keycode, void** params)
 {
-	/* t_img		img; */
 	t_mlx_data mlx_data = *(t_mlx_data*)params[0];
 	t_matrix isometric_projection = *(t_matrix*)params[1];
 	t_map map = *(t_map*)params[2];
 
 	if (keycode == XK_Up)
-	{
 		display_wf(isometric_projection, map, mlx_data, 1.03);
-		/* scale_matrix(&isometric_projection, 1.03); */
-		/* img = new_img(mlx_data.mlx_ptr, 960, 540); */
-		/* wf_to_img_plot(mlx_data, img, isometric_projection, map); */
-		/* mlx_clear_window(mlx_data.mlx_ptr, mlx_data.win_ptr); */
-		/* mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 200, 200); */
-		/* mlx_destroy_image(mlx_data.mlx_ptr, img.img); */
-	}
+	if (keycode == XK_Down)
+		display_wf(isometric_projection, map, mlx_data, 0.97);
+	if (keycode == XK_Left) {
+			t_matrix vectors = map_to_vectors(map);
+			t_matrix rotation_z = get_rot_matrix_z();
+			vectors = mat_mul(rotation_z, vectors);
+			t_matrix rot_matrix = get_rot_matrix();
+			isometric_projection = mat_mul(rot_matrix, vectors);
+			translate_vectors_to_first_octant(&isometric_projection);
+			norm_vectors(&isometric_projection);
+			display_wf(isometric_projection, map, mlx_data, 1080);
+        }
 
 	if (keycode == XK_Escape)
 	{
