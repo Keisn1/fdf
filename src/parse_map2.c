@@ -86,14 +86,14 @@ void	reserve_space_points(size_t size, t_matrix *points)
 
 t_matrix	map_to_vectors(t_map map)
 {
-	t_matrix	points;
+	t_matrix	vectors;
 	size_t		i;
 	size_t		j;
 	size_t		count;
 
 	if (map.map.m == 0)
 		return ((t_matrix){NULL, 0, 0});
-	reserve_space_points(map.map.m * map.map.n, &points);
+	reserve_space_points(map.map.m * map.map.n, &vectors);
 	i = 0;
 	count = 0;
 	while (i < map.map.m)
@@ -101,13 +101,13 @@ t_matrix	map_to_vectors(t_map map)
 		j = 0;
 		while (j < map.map.n)
 		{
-			points.mat[0][count] = j;
-			points.mat[1][count] = i;
-			points.mat[2][count++] = map.map.mat[i][j++];
+			vectors.mat[0][count] = j;
+			vectors.mat[1][count] = i;
+			vectors.mat[2][count++] = map.map.mat[i][j++];
 		}
 		i++;
 	}
-	return (points);
+	return (vectors);
 }
 
 char	*advance_to_comma_or_ws(char *str)
