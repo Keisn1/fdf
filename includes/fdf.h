@@ -39,8 +39,11 @@ typedef struct s_projection {
 	t_matrix projection;
 	int zoom;
 	int rotation;
+	int translation_h;
+	int translation_v;
 	double zoom_factor;
 	double drehwinkel;
+	double translation_distance;
 	unsigned int rows;
 	unsigned int cols;
 	unsigned int** colors;

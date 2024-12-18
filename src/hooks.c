@@ -14,7 +14,6 @@
 #include "matrix.h"
 #include "my_mlx.h"
 #include <math.h>
-#include <stdio.h>
 
 void	scale_up(t_projection *p)
 {
@@ -41,6 +40,8 @@ void	rotate_left(t_projection *p)
 	p->projection = get_isometric_projection(rotated_vectors);
 	free_matrix(rotated_vectors);
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
+	translate_projection(&p->projection, p->translation_h
+		* p->translation_distance, p->translation_v * p->translation_distance);
 }
 
 void	rotate_right(t_projection *p)
@@ -56,24 +57,46 @@ void	rotate_right(t_projection *p)
 	p->projection = get_isometric_projection(rotated_vectors);
 	free_matrix(rotated_vectors);
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
+	translate_projection(&p->projection, p->translation_h
+		* p->translation_distance, p->translation_v * p->translation_distance);
 }
 
-int mouse_up_hook(int button, int x, int y, void **params) {
+int	mouse_up_hook(int button, int x, int y, void **params)
+{
 	t_mlx_data		mlx_data;
 	t_projection	*p;
 
-	(void)button;
 	(void)x;
 	(void)y;
 	mlx_data = *(t_mlx_data *)params[0];
 	p = (t_projection *)params[1];
-	printf("%d \n", button);
 	if (button == 4)
 		scale_up(p);
 	if (button == 5)
 		scale_down(p);
 	display_wf(*p, mlx_data);
-	return 0;
+	return (0);
+}
+
+void	translate_left(t_projection *p)
+{
+	p->translation_h--;
+	translate_projection(&p->projection, -p->translation_distance, 0);
+}
+void	translate_right(t_projection *p)
+{
+	p->translation_h++;
+	translate_projection(&p->projection, p->translation_distance, 0);
+}
+void	translate_up(t_projection *p)
+{
+	p->translation_v--;
+	translate_projection(&p->projection, 0, -p->translation_distance);
+}
+void	translate_down(t_projection *p)
+{
+	p->translation_v++;
+	translate_projection(&p->projection, 0, p->translation_distance);
 }
 
 int	keypress_hook(int keycode, void **params)
@@ -83,18 +106,18 @@ int	keypress_hook(int keycode, void **params)
 
 	mlx_data = *(t_mlx_data *)params[0];
 	p = (t_projection *)params[1];
-	if (keycode == XK_Up)
-		scale_up(p);
-	if (keycode == XK_Down)
-		scale_down(p);
-	if (keycode == XK_Left)
+	if (keycode == XK_u)
 		rotate_left(p);
-	if (keycode == XK_Right)
+	if (keycode == XK_i)
 		rotate_right(p);
-	if (keycode == XK_l)
-		translate_projection(&p->projection, 10, 0);
-	if (keycode == XK_h)
-		translate_projection(&p->projection, -10, 0);
+	if (keycode == XK_Left)
+		translate_left(p);
+	if (keycode == XK_Right)
+		translate_right(p);
+	if (keycode == XK_Up)
+		translate_up(p);
+	if (keycode == XK_Down)
+		translate_down(p);
 	display_wf(*p, mlx_data);
 	return (0);
 }

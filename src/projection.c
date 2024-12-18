@@ -145,8 +145,11 @@ t_projection	new_projection(char *filename, double width, double height)
 	map = parse_map(filename);
 	p.drehwinkel = 3;
 	p.zoom_factor = 1.02;
+	p.translation_distance = 10;
 	p.zoom = 0;
 	p.rotation = 0;
+	p.translation_h = 0;
+	p.translation_v = 0;
 	p.rows = map.map.m;
 	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);
