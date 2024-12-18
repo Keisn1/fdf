@@ -25,17 +25,17 @@ t_line	get_line_horizontal(t_projection p, int n, int m)
 			p.colors[m][n], p.colors[m][n + 1]));
 }
 
-t_line	get_line_vertical(t_projection p, int n, int m, t_map map)
+t_line	get_line_vertical(t_projection p, int n, int m)
 {
 	int	idx;
 
 	idx = n + (m * p.rows);
 	return (new_line(new_pixel(p.projection .mat[0][idx], p.projection.mat[1][idx]),
 			new_pixel(p.projection.mat[0][idx + p.rows], p.projection.mat[1][idx
-				+ p.rows]), map.color[m][n], map.color[m + 1][n]));
+				+ p.rows]), p.colors[m][n], p.colors[m + 1][n]));
 }
 
-void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_projection p, t_map map)
+void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_projection p)
 {
 	unsigned int	m;
 	unsigned int	n;
@@ -47,21 +47,19 @@ void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_projection p, t_map map)
 		while (n < p.cols)
 		{
 			if (n < p.cols - 1)
-				bres_plotline_img(mlx_data, &img, get_line_horizontal(p, n,
-						m, map), img_put_pixel);
+				bres_plotline_img(mlx_data, &img, get_line_horizontal(p, n, m), img_put_pixel);
 			if (m < p.rows - 1)
-				bres_plotline_img(mlx_data, &img, get_line_vertical(p, n, m,
-						map), img_put_pixel);
+				bres_plotline_img(mlx_data, &img, get_line_vertical(p, n, m), img_put_pixel);
 			n++;
 		}
 		m++;
 	}
 }
 
-void display_wf(t_projection p, t_map map, t_mlx_data mlx_data) {
+void display_wf(t_projection p, t_mlx_data mlx_data) {
 	t_img img;
 	img = new_img(mlx_data.mlx_ptr, 1920, 1080);
-	wf_to_img_plot(mlx_data, img, p, map);
+	wf_to_img_plot(mlx_data, img, p);
 	mlx_clear_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
 	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);
 	mlx_destroy_image(mlx_data.mlx_ptr, img.img);
