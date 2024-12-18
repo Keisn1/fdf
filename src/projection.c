@@ -96,6 +96,7 @@ void	norm_vectors(t_matrix *mat)
 	size_t	c1;
 	double	x_squared;
 	double	y_squared;
+	double	z_squared;
 
 	max_norm = 0;
 	norm = 0;
@@ -104,7 +105,8 @@ void	norm_vectors(t_matrix *mat)
 	{
 		x_squared = pow(mat->mat[0][c1], 2);
 		y_squared = pow(mat->mat[1][c1], 2);
-		norm = sqrt(x_squared + y_squared);
+		z_squared = pow(mat->mat[1][c1], 2);
+		norm = sqrt(x_squared + y_squared + z_squared);
 		if (norm > max_norm)
 			max_norm = norm;
 		c1++;

@@ -69,14 +69,14 @@ void	free_colors(unsigned int** colors, unsigned int rows)
 		free(colors);
 }
 
-void	reserve_space_points(size_t size, t_matrix *points)
+void	reserve_space_vectors(size_t size, t_matrix *vectors)
 {
-	points->mat = malloc(3 * sizeof(double *));
-	points->mat[0] = (double *)malloc(sizeof(double) * size);
-	points->mat[1] = (double *)malloc(sizeof(double) * size);
-	points->mat[2] = (double *)malloc(sizeof(double) * size);
-	points->m = 3;
-	points->n = size;
+	vectors->mat = malloc(3 * sizeof(double *));
+	vectors->mat[0] = (double *)malloc(sizeof(double) * size);
+	vectors->mat[1] = (double *)malloc(sizeof(double) * size);
+	vectors->mat[2] = (double *)malloc(sizeof(double) * size);
+	vectors->m = 3;
+	vectors->n = size;
 }
 
 t_matrix	map_to_vectors(t_map map)
@@ -88,7 +88,7 @@ t_matrix	map_to_vectors(t_map map)
 
 	if (map.map.m == 0)
 		return ((t_matrix){NULL, 0, 0});
-	reserve_space_points(map.map.m * map.map.n, &vectors);
+	reserve_space_vectors(map.map.m * map.map.n, &vectors);
 	double offset_x = -((map.map.n-1) / 2.);
 	double offset_y = -((map.map.m-1) / 2.);
 
