@@ -35,7 +35,7 @@ t_line	get_line_vertical(t_projection p, int n, int m)
 				+ p.rows]), p.colors[m][n], p.colors[m + 1][n]));
 }
 
-void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_projection p)
+void	plot_projection_to_img(t_mlx_data mlx_data, t_img img, t_projection p)
 {
 	unsigned int	m;
 	unsigned int	n;
@@ -59,7 +59,7 @@ void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_projection p)
 void display_wf(t_projection p, t_mlx_data mlx_data) {
 	t_img img;
 	img = new_img(mlx_data.mlx_ptr, 1920, 1080);
-	wf_to_img_plot(mlx_data, img, p);
+	plot_projection_to_img(mlx_data, img, p);
 	mlx_clear_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
 	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);
 	mlx_destroy_image(mlx_data.mlx_ptr, img.img);

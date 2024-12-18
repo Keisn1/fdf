@@ -29,12 +29,8 @@ void	img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px, unsigned int c)
 
 	if (y >= img->height || x >= img->width || y < 0 || x < 0)
 		return;
-	/* if ((int)px.y >= img->height || (int)px.x >= img->width || (int)px.y < 0 || (int)px.x < 0) */
-	/* 	return; */
 	offset = y * img->size_line + x * (img->bpp / 8);
-	/* offset = px.y * img->size_line + px.x * (img->bpp / 8); */
-	*(unsigned int *)(img->img_pixels + offset) = mlx_get_color_value(mlx_ptr,
-			c);
+	*(unsigned int *)(img->img_pixels + offset) = mlx_get_color_value(mlx_ptr, c);
 }
 
 t_img	new_img(void *mlx_ptr, int width, int height)

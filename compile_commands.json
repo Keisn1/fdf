@@ -1,15 +1,21 @@
 [
 {
   "directory": "/home/kay/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/minilibx-linux -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/bresenham.c.o -c /home/kay/workspace/fdf/src/bresenham.c",
-  "file": "/home/kay/workspace/fdf/src/bresenham.c",
-  "output": "CMakeFiles/run_tests.dir/src/bresenham.c.o"
+  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/minilibx-linux -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/bresenham1.c.o -c /home/kay/workspace/fdf/src/bresenham1.c",
+  "file": "/home/kay/workspace/fdf/src/bresenham1.c",
+  "output": "CMakeFiles/run_tests.dir/src/bresenham1.c.o"
 },
 {
   "directory": "/home/kay/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/minilibx-linux -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/bresenham_not_used.c.o -c /home/kay/workspace/fdf/src/bresenham_not_used.c",
-  "file": "/home/kay/workspace/fdf/src/bresenham_not_used.c",
-  "output": "CMakeFiles/run_tests.dir/src/bresenham_not_used.c.o"
+  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/minilibx-linux -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/bresenham2.c.o -c /home/kay/workspace/fdf/src/bresenham2.c",
+  "file": "/home/kay/workspace/fdf/src/bresenham2.c",
+  "output": "CMakeFiles/run_tests.dir/src/bresenham2.c.o"
+},
+{
+  "directory": "/home/kay/workspace/fdf/build",
+  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/minilibx-linux -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/fdf.c.o -c /home/kay/workspace/fdf/src/fdf.c",
+  "file": "/home/kay/workspace/fdf/src/fdf.c",
+  "output": "CMakeFiles/run_tests.dir/src/fdf.c.o"
 },
 {
   "directory": "/home/kay/workspace/fdf/build",
@@ -40,6 +46,12 @@
   "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/minilibx-linux -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/parse_map.c.o -c /home/kay/workspace/fdf/src/parse_map.c",
   "file": "/home/kay/workspace/fdf/src/parse_map.c",
   "output": "CMakeFiles/run_tests.dir/src/parse_map.c.o"
+},
+{
+  "directory": "/home/kay/workspace/fdf/build",
+  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/minilibx-linux -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/build/_deps/googletest-src/googletest/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googletest -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock/include -isystem /home/kay/workspace/fdf/build/_deps/googletest-src/googlemock  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/run_tests.dir/src/parse_map2.c.o -c /home/kay/workspace/fdf/src/parse_map2.c",
+  "file": "/home/kay/workspace/fdf/src/parse_map2.c",
+  "output": "CMakeFiles/run_tests.dir/src/parse_map2.c.o"
 },
 {
   "directory": "/home/kay/workspace/fdf/build",
@@ -97,15 +109,21 @@
 },
 {
   "directory": "/home/kay/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/bresenham.c.o -c /home/kay/workspace/fdf/src/bresenham.c",
-  "file": "/home/kay/workspace/fdf/src/bresenham.c",
-  "output": "CMakeFiles/fdf.dir/src/bresenham.c.o"
+  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/bresenham1.c.o -c /home/kay/workspace/fdf/src/bresenham1.c",
+  "file": "/home/kay/workspace/fdf/src/bresenham1.c",
+  "output": "CMakeFiles/fdf.dir/src/bresenham1.c.o"
 },
 {
   "directory": "/home/kay/workspace/fdf/build",
-  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/bresenham_not_used.c.o -c /home/kay/workspace/fdf/src/bresenham_not_used.c",
-  "file": "/home/kay/workspace/fdf/src/bresenham_not_used.c",
-  "output": "CMakeFiles/fdf.dir/src/bresenham_not_used.c.o"
+  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/bresenham2.c.o -c /home/kay/workspace/fdf/src/bresenham2.c",
+  "file": "/home/kay/workspace/fdf/src/bresenham2.c",
+  "output": "CMakeFiles/fdf.dir/src/bresenham2.c.o"
+},
+{
+  "directory": "/home/kay/workspace/fdf/build",
+  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/fdf.c.o -c /home/kay/workspace/fdf/src/fdf.c",
+  "file": "/home/kay/workspace/fdf/src/fdf.c",
+  "output": "CMakeFiles/fdf.dir/src/fdf.c.o"
 },
 {
   "directory": "/home/kay/workspace/fdf/build",
@@ -136,6 +154,12 @@
   "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/parse_map.c.o -c /home/kay/workspace/fdf/src/parse_map.c",
   "file": "/home/kay/workspace/fdf/src/parse_map.c",
   "output": "CMakeFiles/fdf.dir/src/parse_map.c.o"
+},
+{
+  "directory": "/home/kay/workspace/fdf/build",
+  "command": "/usr/bin/clang  -I/home/kay/workspace/fdf/includes -I/home/kay/workspace/fdf/libft -I/home/kay/workspace/fdf/minilibx-linux  -Wall -Werror -Wextra -fsanitize=address -o CMakeFiles/fdf.dir/src/parse_map2.c.o -c /home/kay/workspace/fdf/src/parse_map2.c",
+  "file": "/home/kay/workspace/fdf/src/parse_map2.c",
+  "output": "CMakeFiles/fdf.dir/src/parse_map2.c.o"
 },
 {
   "directory": "/home/kay/workspace/fdf/build",

@@ -16,18 +16,13 @@
 #include "my_mlx.h"
 #include <unistd.h>
 
-int	main(int argc, char** argv)
+int	main(int argc, char **argv)
 {
-	t_mlx_data	mlx_data;
-	char		*filename;
-	t_map		map;
-	t_projection p;
+	t_mlx_data		mlx_data;
+	t_projection	p;
+	void			*hook_params[2] = {(void *)&mlx_data, (void *)&p};
 
 	(void)argc;
-	/* parse map */
-	filename = argv[1];
-	map = parse_map(filename);
-
 	mlx_data.mlx_ptr = mlx_init();
 	if (!(mlx_data.mlx_ptr))
 	{
@@ -35,15 +30,11 @@ int	main(int argc, char** argv)
 		return (1);
 	}
 	/* get a window */
-	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "wireframe");
-
-	p = new_projection(map);
-
+	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "fdf");
+	p = new_projection(argv[1]);
 	display_wf(p, mlx_data);
-
 	/* setup hooks */
-	void* params_scale[3] = {(void*)&mlx_data, (void*)&p, (void*)&map};
-	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, keyup_hook, &params_scale);
+	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, keyup_hook, &hook_params);
 	mlx_loop(mlx_data.mlx_ptr);
 	return (0);
 }

@@ -78,19 +78,19 @@ t_map	resize_map(t_map map)
 	new_map.map.m = map.map.m + 1;
 	new_map.map.n = map.map.n;
 	new_map.map.mat = (double **)malloc(sizeof(double *) * (new_map.map.m));
-	new_map.color = (unsigned int **)malloc(sizeof(unsigned int *)
+	new_map.colors = (unsigned int **)malloc(sizeof(unsigned int *)
 			* (new_map.map.m));
-	if (!new_map.map.mat || !new_map.color)
+	if (!new_map.map.mat || !new_map.colors)
 		return ((t_map){(t_matrix){NULL, 0, 0}, NULL});
 	count = 0;
 	while (count < map.map.m)
 	{
 		new_map.map.mat[count] = map.map.mat[count];
-		new_map.color[count] = map.color[count];
+		new_map.colors[count] = map.colors[count];
 		count++;
 	}
 	free(map.map.mat);
-	free(map.color);
+	free(map.colors);
 	return (new_map);
 }
 
@@ -112,7 +112,7 @@ t_map	parse_map(const char *filename)
 	while (line)
 	{
 		map = resize_map(map);
-		parse_line(line, map.map.mat + count, map.color + count, map.map.n);
+		parse_line(line, map.map.mat + count, map.colors + count, map.map.n);
 		count++;
 		free(line);
 		line = get_next_line(fd, false);

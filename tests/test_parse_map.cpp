@@ -21,7 +21,7 @@ void comp_map(
 		c2 = 0;
 		while (c2 < want_M[0].size()) {
 			EXPECT_EQ(want_M[c1][c2], map.map.mat[c1][c2]);
-			EXPECT_EQ(want_color[c1][c2], map.color[c1][c2]);
+			EXPECT_EQ(want_color[c1][c2], map.colors[c1][c2]);
 			c2++;
 		}
 		c1++;
@@ -34,7 +34,7 @@ TEST_P(parseMapTest, parseMapTest) {
 	t_map map = parse_map(params.filename.c_str());
 	if (params.want_M.size() == 0) {
 		EXPECT_EQ(nullptr, map.map.mat);
-		EXPECT_EQ(nullptr, map.color);
+		EXPECT_EQ(nullptr, map.colors);
 		EXPECT_EQ(params.want_M.size(), map.map.m);
 		EXPECT_EQ(params.want_M.size(), map.map.n);
 		return;
@@ -45,11 +45,11 @@ TEST_P(parseMapTest, parseMapTest) {
 	size_t c1 = 0;
 	while (c1 < params.want_M.size()) {
 		free(map.map.mat[c1]);
-		free(map.color[c1]);
+		free(map.colors[c1]);
 		c1++;
 	}
 	free(map.map.mat);
-	free(map.color);
+	free(map.colors);
 }
 
 INSTANTIATE_TEST_SUITE_P(

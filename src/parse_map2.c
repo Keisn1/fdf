@@ -60,19 +60,13 @@ unsigned int	ft_hex_to_unsigned(char *hex_str)
 	return (res);
 }
 
-void	free_map(t_map map)
+void	free_colors(unsigned int** colors, unsigned int rows)
 {
-	unsigned int	c1;
-
-	c1 = 0;
-	while (c1 < map.map.m)
-	{
-		free(map.map.mat[c1]);
-		free(map.color[c1]);
-		c1++;
-	}
-	free(map.map.mat);
-	free(map.color);
+		unsigned int	c1;
+		c1 = 0;
+		while (c1 < rows)
+			free(colors[c1++]);
+		free(colors);
 }
 
 void	reserve_space_points(size_t size, t_matrix *points)

@@ -25,14 +25,13 @@
 typedef struct s_map
 {
 	t_matrix		map;
-	unsigned int	**color;
+	unsigned int	**colors;
 }					t_map;
 
-void				free_map(t_map map);
-char				*advance_to_comma_or_ws(char *str);
-t_matrix			map_to_vectors(t_map map);
-unsigned int		ft_hex_to_unsigned(char *hex_str);
 t_map				parse_map(const char *filename);
+char				*advance_to_comma_or_ws(char *str);
+unsigned int		ft_hex_to_unsigned(char *hex_str);
+void	free_colors(unsigned int** colors, unsigned int rows);
 
 
 typedef struct s_projection {
@@ -49,7 +48,8 @@ typedef struct s_projection {
 
 
 /* projection */
-t_projection new_projection(t_map map);
+t_projection new_projection(char* filename);
+t_matrix			map_to_vectors(t_map map);
 t_matrix	get_isometric_projection(t_matrix vectors);
 t_matrix	get_rot_matrix(void);
 t_matrix	get_rot_matrix_z(double drehwinkel);

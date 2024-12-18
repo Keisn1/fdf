@@ -19,7 +19,6 @@ int	keyup_hook(int keycode, void** params)
 {
 	t_mlx_data mlx_data = *(t_mlx_data*)params[0];
 	t_projection *p = (t_projection*)params[1];
-	t_map map = *(t_map*)params[2];
 
 	if (keycode == XK_Up) {
 		p->zoom++;
@@ -47,9 +46,10 @@ int	keyup_hook(int keycode, void** params)
 
 	if (keycode == XK_Escape)
 	{
-		free_map(map);
 		free_matrix(p->projection);
 		free_matrix(p->vectors);
+		free_colors(p->colors, p->rows);
+
 		mlx_destroy_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
 		mlx_destroy_display(mlx_data.mlx_ptr);
 		free(mlx_data.mlx_ptr);

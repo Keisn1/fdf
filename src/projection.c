@@ -11,20 +11,21 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "matrix.h"
 #include <math.h>
 
 t_matrix	get_rot_matrix_z(double drehwinkel)
 {
 	t_matrix	rot_matrix;
-	double theta = (M_PI / 180.0) * drehwinkel;
+	double		theta;
 
+	theta = (M_PI / 180.0) * drehwinkel;
 	rot_matrix.m = 3;
 	rot_matrix.n = 3;
 	rot_matrix.mat = (double **)malloc(sizeof(double *) * rot_matrix.m);
 	rot_matrix.mat[0] = (double *)malloc(sizeof(double *) * rot_matrix.n);
 	rot_matrix.mat[1] = (double *)malloc(sizeof(double *) * rot_matrix.n);
 	rot_matrix.mat[2] = (double *)malloc(sizeof(double *) * rot_matrix.n);
-
 	rot_matrix.mat[0][0] = cos(theta);
 	rot_matrix.mat[0][1] = -sin(theta);
 	rot_matrix.mat[0][2] = 0;
@@ -36,7 +37,6 @@ t_matrix	get_rot_matrix_z(double drehwinkel)
 	rot_matrix.mat[2][2] = 1;
 	return (rot_matrix);
 }
-
 
 t_matrix	get_rot_matrix(void)
 {
@@ -112,19 +112,23 @@ void	norm_vectors(t_matrix *mat)
 	scale_matrix(mat, 1 / max_norm);
 }
 
-t_projection new_projection(t_map map) {
-	t_projection p;
+t_projection	new_projection(char *filename)
+{
+	t_projection	p;
+	t_map			map;
+
+	map = parse_map(filename);
 	p.drehwinkel = 5;
 	p.zoom_factor = 1.01;
 	p.zoom = 0;
 	p.rotation = 0;
-
 	p.rows = map.map.m;
 	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);
 	norm_vectors(&p.vectors);
 	scale_matrix(&p.vectors, 500);
 	p.projection = get_isometric_projection(p.vectors);
-	p.colors = map.color;
-	return p;
+	p.colors = map.colors;
+	free_matrix(map.map);
+	return (p);
 }
