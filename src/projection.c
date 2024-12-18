@@ -111,3 +111,13 @@ void	norm_vectors(t_matrix *mat)
 	}
 	scale_matrix(mat, 1 / max_norm);
 }
+
+t_projection new_projection(double zoom_factor, double drehwinkel) {
+	t_projection p;
+	p.drehwinkel = drehwinkel;
+	p.zoom_factor = zoom_factor;
+	p.projection = (t_matrix){NULL, 0, 0};
+	p.zoom = 0;
+	p.rotation = 0;
+	return p;
+}

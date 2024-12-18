@@ -34,15 +34,18 @@ t_matrix			map_to_vectors(t_map map);
 unsigned int		ft_hex_to_unsigned(char *hex_str);
 t_map				parse_map(const char *filename);
 
+
 typedef struct s_projection {
 	t_matrix projection;
-	double zoom_factor;
 	int zoom;
-	double drehwinkel;
 	int rotation;
+	double zoom_factor;
+	double drehwinkel;
 } t_projection;
 
+
 /* projection */
+t_projection new_projection(double zoom_factor, double drehwinkel);
 t_matrix	get_isometric_projection(t_matrix vectors);
 t_matrix	get_rot_matrix(void);
 t_matrix	get_rot_matrix_z(double drehwinkel);

@@ -14,7 +14,6 @@
 #include "libft.h"
 #include "mlx.h"
 #include "my_mlx.h"
-#include <math.h>
 #include <unistd.h>
 
 int	main(int argc, char** argv)
@@ -39,6 +38,7 @@ int	main(int argc, char** argv)
 	/* get a window */
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "wireframe");
 
+	p = new_projection(1.01, 5);
 	vectors = map_to_vectors(map);
 	norm_vectors(&vectors);
 	scale_matrix(&vectors, 500);
@@ -46,9 +46,9 @@ int	main(int argc, char** argv)
 
 	display_wf(p.projection, map, mlx_data);
 
-	p.zoom_factor = 1.01;
+	/* p.zoom_factor = 1.01; */
 	p.zoom = 0;
-	p.drehwinkel = 5;
+	/* p.drehwinkel = 5; */
 	p.rotation = 0;
 
 	/* setup hooks */
