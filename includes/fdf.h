@@ -58,8 +58,6 @@ void display_wf(t_projection p, t_map map, t_mlx_data mlx_data);
 
 /* parsing */
 void				translate_vectors(t_matrix *m, double x, double y);
-void				wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix M,
-						t_map map);
 
 /* hooks */
 /* int					exit_program(int keycode, t_mlx_data *mlx_data); */
