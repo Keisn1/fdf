@@ -91,8 +91,6 @@ int	keypress_hook(int keycode, void **params)
 		rotate_left(p);
 	if (keycode == XK_Right)
 		rotate_right(p);
-	if (keycode == XK_Right)
-		rotate_right(p);
 	if (keycode == XK_l)
 		translate_projection(&p->projection, 10, 0);
 	if (keycode == XK_h)
