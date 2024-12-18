@@ -125,5 +125,6 @@ t_projection new_projection(t_map map) {
 	norm_vectors(&p.vectors);
 	scale_matrix(&p.vectors, 500);
 	p.projection = get_isometric_projection(p.vectors);
+	p.colors = map.color;
 	return p;
 }

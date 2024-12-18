@@ -15,14 +15,14 @@
 #include "my_mlx.h"
 #include <unistd.h>
 
-t_line	get_line_horizontal(t_projection p, int n, int m, t_map map)
+t_line	get_line_horizontal(t_projection p, int n, int m)
 {
 	int	idx;
 
 	idx = n + (m * p.cols);
 	return (new_line(new_pixel(p.projection.mat[0][idx], p.projection.mat[1][idx]),
 			new_pixel(p.projection.mat[0][idx + 1], p.projection.mat[1][idx + 1]),
-			map.color[m][n], map.color[m][n + 1]));
+			p.colors[m][n], p.colors[m][n + 1]));
 }
 
 t_line	get_line_vertical(t_projection p, int n, int m, t_map map)

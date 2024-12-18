@@ -44,6 +44,7 @@ typedef struct s_projection {
 	double drehwinkel;
 	unsigned int rows;
 	unsigned int cols;
+	unsigned int** colors;
 } t_projection;
 
 
