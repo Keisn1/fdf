@@ -14,6 +14,7 @@
 #include "matrix.h"
 #include "my_mlx.h"
 #include <math.h>
+#include <stdio.h>
 
 void	scale_up(t_projection *p)
 {
@@ -57,6 +58,24 @@ void	rotate_right(t_projection *p)
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
 }
 
+int mouse_up_hook(int button, int x, int y, void **params) {
+	t_mlx_data		mlx_data;
+	t_projection	*p;
+
+	(void)button;
+	(void)x;
+	(void)y;
+	mlx_data = *(t_mlx_data *)params[0];
+	p = (t_projection *)params[1];
+	printf("%d \n", button);
+	if (button == 4)
+		scale_up(p);
+	if (button == 5)
+		scale_down(p);
+	display_wf(*p, mlx_data);
+	return 0;
+}
+
 int	keypress_hook(int keycode, void **params)
 {
 	t_mlx_data		mlx_data;
@@ -72,6 +91,12 @@ int	keypress_hook(int keycode, void **params)
 		rotate_left(p);
 	if (keycode == XK_Right)
 		rotate_right(p);
+	if (keycode == XK_Right)
+		rotate_right(p);
+	if (keycode == XK_l)
+		translate_projection(&p->projection, 10, 0);
+	if (keycode == XK_h)
+		translate_projection(&p->projection, -10, 0);
 	display_wf(*p, mlx_data);
 	return (0);
 }

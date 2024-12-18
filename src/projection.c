@@ -67,16 +67,16 @@ t_matrix	get_isometric_projection(t_matrix vectors)
 	return (isometric_projection);
 }
 
-/* translatation by minimum */
-void	translate_vectors_to_first_octant(t_matrix *mat)
-{
-	t_extrema	extrema;
+/* /\* translatation by minimum *\/ */
+/* void	translate_vectors_to_first_octant(t_matrix *mat) */
+/* { */
+/* 	t_extrema	extrema; */
 
-	extrema = get_extrema(*mat);
-	translate_vectors(mat, -extrema.min_x, -extrema.min_y);
-}
+/* 	extrema = get_extrema(*mat); */
+/* 	translate_vectors(mat, -extrema.min_x, -extrema.min_y); */
+/* } */
 
-void	translate_vectors(t_matrix *mat, double x, double y)
+void	translate_projection(t_matrix *mat, double x, double y)
 {
 	unsigned int	c2;
 

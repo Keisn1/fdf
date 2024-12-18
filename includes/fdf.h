@@ -57,12 +57,14 @@ t_matrix	get_rot_matrix_z(double drehwinkel);
 void				translate_vectors_to_first_octant(t_matrix *mat);
 void				norm_vectors(t_matrix *mat);
 void display_wf(t_projection p, t_mlx_data mlx_data);
+void	translate_projection(t_matrix *mat, double x, double y);
 
 /* parsing */
-void				translate_vectors(t_matrix *m, double x, double y);
+void				translate_projection(t_matrix *m, double x, double y);
 
 /* hooks */
 /* int					exit_program(int keycode, t_mlx_data *mlx_data); */
 int	keyrelease_hook(int keycode, void** params);
 int keypress_hook(int keycode, void **params);
+int mouse_up_hook(int button, int x, int y, void **param);
 #endif // FDF_H
