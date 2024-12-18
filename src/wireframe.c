@@ -29,10 +29,10 @@ t_line	get_line_vertical(t_projection p, int n, int m)
 {
 	int	idx;
 
-	idx = n + (m * p.rows);
+	idx = n + (m * p.cols);
 	return (new_line(new_pixel(p.projection .mat[0][idx], p.projection.mat[1][idx]),
-			new_pixel(p.projection.mat[0][idx + p.rows], p.projection.mat[1][idx
-				+ p.rows]), p.colors[m][n], p.colors[m + 1][n]));
+			new_pixel(p.projection.mat[0][idx + p.cols], p.projection.mat[1][idx
+				+ p.cols]), p.colors[m][n], p.colors[m + 1][n]));
 }
 
 void	plot_projection_to_img(t_mlx_data mlx_data, t_img img, t_projection p)
