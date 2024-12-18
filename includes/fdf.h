@@ -36,6 +36,7 @@ t_map				parse_map(const char *filename);
 
 
 typedef struct s_projection {
+	t_matrix vectors;
 	t_matrix projection;
 	int zoom;
 	int rotation;

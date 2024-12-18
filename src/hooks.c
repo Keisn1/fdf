@@ -20,7 +20,6 @@ int	keyup_hook(int keycode, void** params)
 	t_mlx_data mlx_data = *(t_mlx_data*)params[0];
 	t_projection *p = (t_projection*)params[1];
 	t_map map = *(t_map*)params[2];
-	t_matrix vectors = *(t_matrix*)params[3];
 
 	if (keycode == XK_Up) {
 		p->zoom++;
@@ -35,12 +34,12 @@ int	keyup_hook(int keycode, void** params)
 	if (keycode == XK_Left) {
 		p->rotation++;
 		t_matrix rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
-		t_matrix new_vectors = mat_mul(rotation_z, vectors);
+		t_matrix rotated_vectors = mat_mul(rotation_z, p->vectors);
 		free_matrix(rotation_z);
 
 		free_matrix(p->projection);
-		p->projection = get_isometric_projection(new_vectors);
-		free_matrix(new_vectors);
+		p->projection = get_isometric_projection(rotated_vectors);
+		free_matrix(rotated_vectors);
 
 		scale_matrix(&p->projection, pow(p->zoom_factor, p->zoom));
 		display_wf(p->projection, map, mlx_data);
@@ -50,7 +49,7 @@ int	keyup_hook(int keycode, void** params)
 	{
 		free_map(map);
 		free_matrix(p->projection);
-		free_matrix(vectors);
+		free_matrix(p->vectors);
 		mlx_destroy_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
 		mlx_destroy_display(mlx_data.mlx_ptr);
 		free(mlx_data.mlx_ptr);
