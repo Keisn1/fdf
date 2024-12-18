@@ -58,10 +58,10 @@ void	wf_to_img_plot(t_mlx_data mlx_data, t_img img, t_matrix vecs, t_map map)
 	}
 }
 
-void display_wf(t_matrix projection, t_map map, t_mlx_data mlx_data) {
+void display_wf(t_projection p, t_map map, t_mlx_data mlx_data) {
 	t_img img;
 	img = new_img(mlx_data.mlx_ptr, 1920, 1080);
-	wf_to_img_plot(mlx_data, img, projection, map);
+	wf_to_img_plot(mlx_data, img, p.projection, map);
 	mlx_clear_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
 	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);
 	mlx_destroy_image(mlx_data.mlx_ptr, img.img);

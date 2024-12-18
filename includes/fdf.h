@@ -42,6 +42,8 @@ typedef struct s_projection {
 	int rotation;
 	double zoom_factor;
 	double drehwinkel;
+	unsigned int rows;
+	unsigned int cols;
 } t_projection;
 
 
@@ -52,7 +54,7 @@ t_matrix	get_rot_matrix(void);
 t_matrix	get_rot_matrix_z(double drehwinkel);
 void				translate_vectors_to_first_octant(t_matrix *mat);
 void				norm_vectors(t_matrix *mat);
-void display_wf(t_matrix isometric_projection, t_map map, t_mlx_data mlx_data);
+void display_wf(t_projection p, t_map map, t_mlx_data mlx_data);
 
 /* parsing */
 void				translate_vectors(t_matrix *m, double x, double y);

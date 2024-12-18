@@ -24,12 +24,12 @@ int	keyup_hook(int keycode, void** params)
 	if (keycode == XK_Up) {
 		p->zoom++;
 		scale_matrix(&p->projection, p->zoom_factor);
-		display_wf(p->projection, map, mlx_data);
+		display_wf(*p, map, mlx_data);
 	}
 	if (keycode == XK_Down) {
 		p->zoom--;
 		scale_matrix(&p->projection, 1 / p->zoom_factor);
-		display_wf(p->projection, map, mlx_data);
+		display_wf(*p, map, mlx_data);
 	}
 	if (keycode == XK_Left) {
 		p->rotation++;
@@ -42,7 +42,7 @@ int	keyup_hook(int keycode, void** params)
 		free_matrix(rotated_vectors);
 
 		scale_matrix(&p->projection, pow(p->zoom_factor, p->zoom));
-		display_wf(p->projection, map, mlx_data);
+		display_wf(*p, map, mlx_data);
 	}
 
 	if (keycode == XK_Escape)

@@ -39,7 +39,7 @@ int	main(int argc, char** argv)
 
 	p = new_projection(map);
 
-	display_wf(p.projection, map, mlx_data);
+	display_wf(p, map, mlx_data);
 
 	/* setup hooks */
 	void* params_scale[3] = {(void*)&mlx_data, (void*)&p, (void*)&map};

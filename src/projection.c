@@ -119,6 +119,8 @@ t_projection new_projection(t_map map) {
 	p.zoom = 0;
 	p.rotation = 0;
 
+	p.rows = map.map.m;
+	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);
 	norm_vectors(&p.vectors);
 	scale_matrix(&p.vectors, 500);
