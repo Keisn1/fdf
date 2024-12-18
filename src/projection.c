@@ -112,12 +112,16 @@ void	norm_vectors(t_matrix *mat)
 	scale_matrix(mat, 1 / max_norm);
 }
 
-t_projection new_projection(double zoom_factor, double drehwinkel) {
+t_projection new_projection(t_map map) {
 	t_projection p;
-	p.drehwinkel = drehwinkel;
-	p.zoom_factor = zoom_factor;
-	p.projection = (t_matrix){NULL, 0, 0};
+	p.drehwinkel = 5;
+	p.zoom_factor = 1.01;
 	p.zoom = 0;
 	p.rotation = 0;
+
+	p.vectors = map_to_vectors(map);
+	norm_vectors(&p.vectors);
+	scale_matrix(&p.vectors, 500);
+	p.projection = get_isometric_projection(p.vectors);
 	return p;
 }

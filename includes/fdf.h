@@ -46,7 +46,7 @@ typedef struct s_projection {
 
 
 /* projection */
-t_projection new_projection(double zoom_factor, double drehwinkel);
+t_projection new_projection(t_map map);
 t_matrix	get_isometric_projection(t_matrix vectors);
 t_matrix	get_rot_matrix(void);
 t_matrix	get_rot_matrix_z(double drehwinkel);

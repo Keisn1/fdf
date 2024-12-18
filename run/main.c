@@ -37,11 +37,7 @@ int	main(int argc, char** argv)
 	/* get a window */
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "wireframe");
 
-	p = new_projection(1.01, 5);
-	p.vectors = map_to_vectors(map);
-	norm_vectors(&p.vectors);
-	scale_matrix(&p.vectors, 500);
-	p.projection = get_isometric_projection(p.vectors);
+	p = new_projection(map);
 
 	display_wf(p.projection, map, mlx_data);
 
