@@ -38,6 +38,7 @@ int	keyup_hook(int keycode, void** params)
 
 		free_matrix(p->projection);
 		p->projection = get_isometric_projection(rotated_vectors);
+		scale_matrix(&p->projection, 500);
 		free_matrix(rotated_vectors);
 
 		scale_matrix(&p->projection, pow(p->zoom_factor, p->zoom));

@@ -126,8 +126,8 @@ t_projection	new_projection(char *filename)
 	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);
 	norm_vectors(&p.vectors);
-	scale_matrix(&p.vectors, 500);
 	p.projection = get_isometric_projection(p.vectors);
+	scale_matrix(&p.projection, 500);
 	p.colors = map.colors;
 	free_matrix(map.map);
 	return (p);
