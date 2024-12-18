@@ -31,10 +31,12 @@ int	main(int argc, char **argv)
 	}
 	/* get a window */
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "fdf");
-	p = new_projection(argv[1]);
+	p = new_projection(argv[1], 1920, 1080);
+
 	display_wf(p, mlx_data);
 	/* setup hooks */
-	mlx_hook(mlx_data.win_ptr, ON_KEYUP, 1L << 1, keyup_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, ON_KEYPRESS, 1L << 0, keypress_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, ON_KEYRELEASE, 1L << 1, keyrelease_hook, &hook_params);
 	mlx_loop(mlx_data.mlx_ptr);
 	return (0);
 }

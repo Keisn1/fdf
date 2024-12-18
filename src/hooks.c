@@ -15,42 +15,79 @@
 #include "my_mlx.h"
 #include <math.h>
 
-int	keyup_hook(int keycode, void** params)
+void	scale_up(t_projection *p)
 {
-	t_mlx_data mlx_data = *(t_mlx_data*)params[0];
-	t_projection *p = (t_projection*)params[1];
+	p->zoom++;
+	scale_matrix(&p->projection, p->zoom_factor);
+}
 
-	if (keycode == XK_Up) {
-		p->zoom++;
-		scale_matrix(&p->projection, p->zoom_factor);
-		display_wf(*p,  mlx_data);
-	}
-	if (keycode == XK_Down) {
-		p->zoom--;
-		scale_matrix(&p->projection, 1 / p->zoom_factor);
-		display_wf(*p,  mlx_data);
-	}
-	if (keycode == XK_Left) {
-		p->rotation++;
-		t_matrix rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
-		t_matrix rotated_vectors = mat_mul(rotation_z, p->vectors);
-		free_matrix(rotation_z);
+void	scale_down(t_projection *p)
+{
+	p->zoom--;
+	scale_matrix(&p->projection, 1 / p->zoom_factor);
+}
 
-		free_matrix(p->projection);
-		p->projection = get_isometric_projection(rotated_vectors);
-		scale_matrix(&p->projection, 500);
-		free_matrix(rotated_vectors);
+void	rotate_left(t_projection *p)
+{
+	t_matrix	rotation_z;
+	t_matrix	rotated_vectors;
 
-		scale_matrix(&p->projection, pow(p->zoom_factor, p->zoom));
-		display_wf(*p,  mlx_data);
-	}
+	p->rotation++;
+	rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
+	rotated_vectors = mat_mul(rotation_z, p->vectors);
+	free_matrix(rotation_z);
+	free_matrix(p->projection);
+	p->projection = get_isometric_projection(rotated_vectors);
+	free_matrix(rotated_vectors);
+	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
+}
 
+void	rotate_right(t_projection *p)
+{
+	t_matrix	rotation_z;
+	t_matrix	rotated_vectors;
+
+	p->rotation--;
+	rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
+	rotated_vectors = mat_mul(rotation_z, p->vectors);
+	free_matrix(rotation_z);
+	free_matrix(p->projection);
+	p->projection = get_isometric_projection(rotated_vectors);
+	free_matrix(rotated_vectors);
+	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
+}
+
+int	keypress_hook(int keycode, void **params)
+{
+	t_mlx_data		mlx_data;
+	t_projection	*p;
+
+	mlx_data = *(t_mlx_data *)params[0];
+	p = (t_projection *)params[1];
+	if (keycode == XK_Up)
+		scale_up(p);
+	if (keycode == XK_Down)
+		scale_down(p);
+	if (keycode == XK_Left)
+		rotate_left(p);
+	if (keycode == XK_Right)
+		rotate_right(p);
+	display_wf(*p, mlx_data);
+	return (0);
+}
+
+int	keyrelease_hook(int keycode, void **params)
+{
+	t_mlx_data		mlx_data;
+	t_projection	*p;
+
+	mlx_data = *(t_mlx_data *)params[0];
+	p = (t_projection *)params[1];
 	if (keycode == XK_Escape)
 	{
 		free_matrix(p->projection);
 		free_matrix(p->vectors);
 		free_colors(p->colors, p->rows);
-
 		mlx_destroy_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
 		mlx_destroy_display(mlx_data.mlx_ptr);
 		free(mlx_data.mlx_ptr);
@@ -68,4 +105,3 @@ int	mouse_hook(int button, int x, int y, void *param)
 		mlx_pixel_put(mlx_data.mlx_ptr, mlx_data.win_ptr, x, y, 0x008000FF);
 	return (1);
 }
-

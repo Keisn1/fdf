@@ -114,14 +114,37 @@ void	norm_vectors(t_matrix *mat)
 	scale_matrix(mat, 1 / max_norm);
 }
 
-t_projection	new_projection(char *filename)
+double	ft_abs_double(double x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
+}
+
+double	get_init_scale(t_matrix projection, double width, double height)
+{
+	t_extrema	e;
+	double		max_y;
+	double		max_x;
+	double		init_scale;
+
+	e = get_extrema(projection);
+	max_y = ft_abs_double(e.max_y) > ft_abs_double(e.min_y) ? ft_abs_double(e.max_y) : ft_abs_double(e.min_y);
+	max_x = ft_abs_double(e.max_x) > ft_abs_double(e.min_x) ? ft_abs_double(e.max_x) : ft_abs_double(e.min_x);
+	init_scale = width / 2.1 / max_x;
+	if (height / 2.1 / max_y < init_scale)
+		init_scale = height / 2.1 / max_y;
+	return (init_scale);
+}
+
+t_projection	new_projection(char *filename, double width, double height)
 {
 	t_projection	p;
 	t_map			map;
 
 	map = parse_map(filename);
-	p.drehwinkel = 5;
-	p.zoom_factor = 1.01;
+	p.drehwinkel = 3;
+	p.zoom_factor = 1.02;
 	p.zoom = 0;
 	p.rotation = 0;
 	p.rows = map.map.m;
@@ -129,8 +152,9 @@ t_projection	new_projection(char *filename)
 	p.vectors = map_to_vectors(map);
 	norm_vectors(&p.vectors);
 	p.projection = get_isometric_projection(p.vectors);
-	scale_matrix(&p.projection, 500);
 	p.colors = map.colors;
+	p.init_scale = get_init_scale(p.projection, width, height);
+	scale_matrix(&p.projection, p.init_scale);
 	free_matrix(map.map);
 	return (p);
 }

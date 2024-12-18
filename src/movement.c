@@ -12,13 +12,6 @@
 
 #include "matrix.h"
 
-double	ft_abs_double(double x)
-{
-	if (x < 0)
-		return (-x);
-	return (x);
-}
-
 /* takes 2xn Matrix */
 /* returns min max of rows*/
 t_extrema	get_extrema(t_matrix M)

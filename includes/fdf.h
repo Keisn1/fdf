@@ -44,11 +44,12 @@ typedef struct s_projection {
 	unsigned int rows;
 	unsigned int cols;
 	unsigned int** colors;
+	double init_scale;
 } t_projection;
 
 
 /* projection */
-t_projection new_projection(char* filename);
+t_projection	new_projection(char *filename, double width, double height);
 t_matrix			map_to_vectors(t_map map);
 t_matrix	get_isometric_projection(t_matrix vectors);
 t_matrix	get_rot_matrix(void);
@@ -62,5 +63,6 @@ void				translate_vectors(t_matrix *m, double x, double y);
 
 /* hooks */
 /* int					exit_program(int keycode, t_mlx_data *mlx_data); */
-int	keyup_hook(int keycode, void** params);
+int	keyrelease_hook(int keycode, void** params);
+int keypress_hook(int keycode, void **params);
 #endif // FDF_H
