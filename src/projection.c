@@ -76,7 +76,7 @@ t_matrix	get_isometric_projection(t_matrix vectors)
 /* 	translate_vectors(mat, -extrema.min_x, -extrema.min_y); */
 /* } */
 
-void	translate_projection(t_matrix *mat, double x, double y)
+void	translate_projection(t_matrix *mat, int x, int y)
 {
 	unsigned int	c2;
 
@@ -150,6 +150,8 @@ t_projection	new_projection(char *filename, double width, double height)
 	p.rotation = 0;
 	p.translation_h = 0;
 	p.translation_v = 0;
+	p.t_x = 0;
+	p.t_y = 0;
 	p.rows = map.map.m;
 	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);

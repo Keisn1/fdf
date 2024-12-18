@@ -14,7 +14,9 @@
 #include "libft.h"
 #include "mlx.h"
 #include "my_mlx.h"
+#include <X11/X.h>
 #include <unistd.h>
+
 
 int	main(int argc, char **argv)
 {
@@ -35,10 +37,12 @@ int	main(int argc, char **argv)
 
 	display_wf(p, mlx_data);
 	/* setup hooks */
-	mlx_hook(mlx_data.win_ptr, ON_KEYPRESS, 1L << 0, keypress_hook, &hook_params);
-	mlx_hook(mlx_data.win_ptr, ON_KEYRELEASE, 1L << 1, keyrelease_hook, &hook_params);
-	mlx_hook(mlx_data.win_ptr, ON_MOUSEDOWN, 1L << 2, mouse_up_hook, &hook_params);
-	/* mlx_mouse_hook(mlx_data.win_ptr, mouse_up_hook , &hook_params); */
+	mlx_hook(mlx_data.win_ptr, KeyPress, KeyPressMask, keypress_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask, button1press_hook, &hook_params); /* button1motionMask */
+
+	mlx_hook(mlx_data.win_ptr, MotionNotify, Button1MotionMask, button_press_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, ButtonRelease, ButtonReleaseMask, button_release_hook, &hook_params);
 	mlx_loop(mlx_data.mlx_ptr);
 	return (0);
 }

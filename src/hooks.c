@@ -13,7 +13,9 @@
 #include "fdf.h"
 #include "matrix.h"
 #include "my_mlx.h"
+#include <X11/X.h>
 #include <math.h>
+#include <stdio.h>
 
 void	scale_up(t_projection *p)
 {
@@ -61,7 +63,7 @@ void	rotate_right(t_projection *p)
 		* p->translation_distance, p->translation_v * p->translation_distance);
 }
 
-int	mouse_up_hook(int button, int x, int y, void **params)
+int	button1press_hook(int button, int x, int y, void **params)
 {
 	t_mlx_data		mlx_data;
 	t_projection	*p;
@@ -70,9 +72,9 @@ int	mouse_up_hook(int button, int x, int y, void **params)
 	(void)y;
 	mlx_data = *(t_mlx_data *)params[0];
 	p = (t_projection *)params[1];
-	if (button == 4)
+	if (button == Button4)
 		scale_up(p);
-	if (button == 5)
+	if (button == Button5)
 		scale_down(p);
 	display_wf(*p, mlx_data);
 	return (0);
@@ -142,12 +144,38 @@ int	keyrelease_hook(int keycode, void **params)
 	return (0);
 }
 
-int	mouse_hook(int button, int x, int y, void *param)
-{
-	t_mlx_data	mlx_data;
+int button_press_hook(int x, int y, void **params) {
 
-	mlx_data = *(t_mlx_data *)param;
-	if (button == 1)
-		mlx_pixel_put(mlx_data.mlx_ptr, mlx_data.win_ptr, x, y, 0x008000FF);
-	return (1);
+	t_mlx_data		mlx_data;
+	t_projection	*p;
+
+	mlx_data = *(t_mlx_data *)params[0];
+	p = (t_projection *)params[1];
+
+	if (p->t_x == 0 && p->t_y == 0) {
+		p->t_x = x;
+		p->t_y = y;
+		return 0;
+	}
+	int delta_x = x - p->t_x;
+	int delta_y = y - p->t_y;
+		p->t_x = x;
+		p->t_y = y;
+
+	translate_projection(&p->projection, delta_x, delta_y);
+	display_wf(*p, mlx_data);
+	return 0;
+}
+
+int button_release_hook(int button, int x, int y, void **params) {
+	t_projection	*p;
+	(void)x;
+	(void)y;
+	p = (t_projection *)params[1];
+
+	if (button == Button1) {
+		p->t_x = 0;
+		p->t_y = 0;
+	}
+	return (0);
 }
