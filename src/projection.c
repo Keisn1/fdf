@@ -98,4 +98,3 @@ void	rebuild_projection(t_projection *p)
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
 	translate_projection(&p->projection, p->translation_h, p->translation_v);
 }
-

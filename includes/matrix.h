@@ -13,7 +13,8 @@
 #ifndef MATRIX_H
 # define MATRIX_H
 
-#include "libft.h"
+# include <stdlib.h>
+# include <stdbool.h>
 
 typedef struct s_mat
 {

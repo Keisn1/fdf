@@ -60,13 +60,14 @@ unsigned int	ft_hex_to_unsigned(char *hex_str)
 	return (res);
 }
 
-void	free_colors(unsigned int** colors, unsigned int rows)
+void	free_colors(unsigned int **colors, unsigned int rows)
 {
-		unsigned int	c1;
-		c1 = 0;
-		while (c1 < rows)
-			free(colors[c1++]);
-		free(colors);
+	unsigned int	c1;
+
+	c1 = 0;
+	while (c1 < rows)
+		free(colors[c1++]);
+	free(colors);
 }
 
 void	reserve_space_vectors(size_t size, t_matrix *vectors)
@@ -85,13 +86,14 @@ t_matrix	map_to_vectors(t_map map)
 	size_t		i;
 	size_t		j;
 	size_t		count;
+	double		offset_x;
+	double		offset_y;
 
 	if (map.map.m == 0)
 		return ((t_matrix){NULL, 0, 0});
 	reserve_space_vectors(map.map.m * map.map.n, &vectors);
-	double offset_x = -((map.map.n-1) / 2.);
-	double offset_y = -((map.map.m-1) / 2.);
-
+	offset_x = -((map.map.n - 1) / 2.);
+	offset_y = -((map.map.m - 1) / 2.);
 	i = 0;
 	count = 0;
 	while (i < map.map.m)

@@ -23,14 +23,16 @@ t_pixel	new_pixel(double x, double y)
 void	img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px, unsigned int c)
 {
 	int	offset;
+	int	x;
+	int	y;
 
-	int x = px.x + (int)img->width/2;
-	int y = px.y + (int)img->height/2;
-
+	x = px.x + (int)img->width / 2;
+	y = px.y + (int)img->height / 2;
 	if (y >= img->height || x >= img->width || y < 0 || x < 0)
-		return;
+		return ;
 	offset = y * img->size_line + x * (img->bpp / 8);
-	*(unsigned int *)(img->img_pixels + offset) = mlx_get_color_value(mlx_ptr, c);
+	*(unsigned int *)(img->img_pixels + offset) = mlx_get_color_value(mlx_ptr,
+			c);
 }
 
 t_img	new_img(void *mlx_ptr, int width, int height)

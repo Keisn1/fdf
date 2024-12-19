@@ -16,52 +16,41 @@
 # include "libft.h"
 # include "mlx.h"
 
-enum
-{
-	ON_KEYPRESS = 2,
-	ON_KEYRELEASE = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-
 /* mlx */
 typedef struct s_mlx_data
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	bool button1_pressed;
-}					t_mlx_data;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	bool	button1_pressed;
+}			t_mlx_data;
 
 typedef struct s_pixel
 {
-	int	x;
-	int	y;
-}					t_pixel;
+	int		x;
+	int		y;
+}			t_pixel;
 
 typedef struct s_img
 {
 	/* pointer to image in X-Server */
-	void			*img;
+	void	*img;
 	/* address of image data */
-	char			*img_pixels;
+	char	*img_pixels;
 	/* bits per pixel */
-	int				bpp;
+	int		bpp;
 	/* number of bytes used to store one line of the image in memory */
-	int				size_line;
-	int				endian;
-	int				width;
-	int				height;
-}					t_img;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}			t_img;
 
-typedef int			(*t_pixel_put_func)(void *, void *, int, int, int);
+typedef int	(*t_pixel_put_func)(void *, void *, int, int, int);
 
-t_img				new_img(void *mlx_ptr, int width, int height);
-t_pixel				new_pixel(double x, double y);
-void				img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px,
-						unsigned int c);
-void				destroy_imgs(t_list *imgs, void *mlx_ptr);
+t_img		new_img(void *mlx_ptr, int width, int height);
+t_pixel		new_pixel(double x, double y);
+void		img_put_pixel(void *mlx_ptr, t_img *img, t_pixel px,
+				unsigned int c);
+void		destroy_imgs(t_list *imgs, void *mlx_ptr);
 
 #endif
