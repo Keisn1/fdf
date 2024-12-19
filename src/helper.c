@@ -18,3 +18,22 @@ double	ft_abs_double(double x)
 		return (-x);
 	return (x);
 }
+
+void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
+{
+	void	*new;
+
+	if (!ptr)
+		return (malloc(size));
+	if (size == 0)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	new = malloc(size);
+	if (!new)
+		return (NULL);
+	new = ft_memcpy(new, ptr, cpy_size);
+	free(ptr);
+	return (new);
+}

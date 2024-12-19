@@ -13,25 +13,6 @@
 #include "fdf.h"
 #include <stdio.h>
 
-void	*ft_realloc(void *ptr, size_t size, size_t cpy_size)
-{
-	void	*new;
-
-	if (!ptr)
-		return (malloc(size));
-	if (size == 0)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	new = malloc(size);
-	if (!new)
-		return (NULL);
-	new = ft_memcpy(new, ptr, cpy_size);
-	free(ptr);
-	return (new);
-}
-
 unsigned int	ft_hex_to_unsigned(char *hex_str)
 {
 	int				size;
@@ -76,15 +57,11 @@ void	reserve_space_vectors(size_t size, t_matrix *vectors)
 	vectors->mat[0] = (double *)malloc(sizeof(double) * size);
 	vectors->mat[1] = (double *)malloc(sizeof(double) * size);
 	vectors->mat[2] = (double *)malloc(sizeof(double) * size);
-	vectors->m = 3;
-	vectors->n = size;
 }
 
 t_matrix	map_to_vectors(t_map map)
 {
 	t_matrix	vectors;
-	size_t		i;
-	size_t		j;
 	size_t		count;
 	double		offset_x;
 	double		offset_y;
@@ -92,20 +69,18 @@ t_matrix	map_to_vectors(t_map map)
 	if (map.map.m == 0)
 		return ((t_matrix){NULL, 0, 0});
 	reserve_space_vectors(map.map.m * map.map.n, &vectors);
+	vectors.m = 3;
+	vectors.n = map.map.m * map.map.n;
 	offset_x = -((map.map.n - 1) / 2.);
 	offset_y = -((map.map.m - 1) / 2.);
-	i = 0;
 	count = 0;
-	while (i < map.map.m)
+	while (count < vectors.n)
 	{
-		j = 0;
-		while (j < map.map.n)
-		{
-			vectors.mat[0][count] = j + offset_x;
-			vectors.mat[1][count] = i + offset_y;
-			vectors.mat[2][count++] = map.map.mat[i][j++];
-		}
-		i++;
+		vectors.mat[0][count] = (count % map.map.n) + offset_x;
+		vectors.mat[1][count] = (int)(count / map.map.n) + offset_y;
+		vectors.mat[2][count] = map.map.mat[(int)(count / map.map.n)][(count
+				% map.map.n)];
+		count++;
 	}
 	return (vectors);
 }

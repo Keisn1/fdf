@@ -37,7 +37,6 @@ t_matrix	get_rot_matrix_z(double drehwinkel)
 	return (rot_matrix);
 }
 
-
 void	rotate_left(t_projection *p)
 {
 	p->rotation++;

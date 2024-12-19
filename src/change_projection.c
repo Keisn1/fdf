@@ -18,6 +18,5 @@ void	change_projection(t_projection *p)
 		p->kind = PARALLEL;
 	else
 		p->kind = ISOMETRIC;
-
 	rebuild_projection(p);
 }
