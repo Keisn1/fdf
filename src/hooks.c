@@ -43,7 +43,10 @@ void	rotate_left(t_projection *p)
 	rotated_vectors = mat_mul(rotation_z, p->vectors);
 	free_matrix(rotation_z);
 	free_matrix(p->projection);
-	p->projection = get_parallel_projection(rotated_vectors);
+	if (p->kind == 1)
+		p->projection = get_isometric_projection(rotated_vectors);
+	else
+		p->projection = get_parallel_projection(rotated_vectors);
 	free_matrix(rotated_vectors);
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
 	translate_projection(&p->projection, p->translation_h , p->translation_v );
@@ -59,7 +62,10 @@ void	rotate_right(t_projection *p)
 	rotated_vectors = mat_mul(rotation_z, p->vectors);
 	free_matrix(rotation_z);
 	free_matrix(p->projection);
-	p->projection = get_parallel_projection(rotated_vectors);
+	if (p->kind == 1)
+		p->projection = get_isometric_projection(rotated_vectors);
+	else
+		p->projection = get_parallel_projection(rotated_vectors);
 	free_matrix(rotated_vectors);
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
 	translate_projection(&p->projection, p->translation_h , p->translation_v );
@@ -106,13 +112,47 @@ void	translate_down(t_projection *p)
 	translate_projection(&p->projection, 0, 1);
 }
 
-int	keypress_hook(int keycode, void **params)
+void change_projection(t_projection *p) {
+	t_matrix rotation_z;
+	t_matrix rotated_vectors;
+	if (p->kind == 1 )
+		p->kind = 2;
+	else
+		p->kind = 1;
+
+	if (p->kind == 1) {
+		rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
+		rotated_vectors = mat_mul(rotation_z, p->vectors);
+		free_matrix(rotation_z);
+		free_matrix(p->projection);
+		p->projection = get_isometric_projection(rotated_vectors);
+		free_matrix(rotated_vectors);
+		scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
+		translate_projection(&p->projection, p->translation_h , p->translation_v );
+	}
+	if (p->kind == 2) {
+		rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
+		rotated_vectors = mat_mul(rotation_z, p->vectors);
+		free_matrix(rotation_z);
+		free_matrix(p->projection);
+		p->projection = get_parallel_projection(rotated_vectors);
+		free_matrix(rotated_vectors);
+		scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
+		translate_projection(&p->projection, p->translation_h , p->translation_v );
+	}
+
+
+}
+
+int	keypress_handler(int keycode, void **params)
 {
 	t_mlx_data		mlx_data;
 	t_projection	*p;
 
 	mlx_data = *(t_mlx_data *)params[0];
 	p = (t_projection *)params[1];
+	if (keycode == XK_p)
+		change_projection(p);
 	if (keycode == XK_u)
 		rotate_left(p);
 	if (keycode == XK_i)

@@ -33,8 +33,8 @@ char				*advance_to_comma_or_ws(char *str);
 unsigned int		ft_hex_to_unsigned(char *hex_str);
 void	free_colors(unsigned int** colors, unsigned int rows);
 
-
 typedef struct s_projection {
+	int kind;
 	t_matrix vectors;
 	t_matrix projection;
 	int zoom;
@@ -69,7 +69,7 @@ void	translate_projection(t_matrix *mat, int x, int y);
 /* hooks */
 /* int					exit_program(int keycode, t_mlx_data *mlx_data); */
 int	keyrelease_hook(int keycode, void** params);
-int keypress_hook(int keycode, void **params);
+int keypress_handler(int keycode, void **params);
 int button_press_hook(int button, int x, int y, void **param);
 int button1_motion_hook(int x, int y, void **params);
 int button_release_hook(int button, int x, int y, void **params);

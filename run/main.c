@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 
 	display_wf(p, mlx_data);
 	/* setup hooks */
-	mlx_hook(mlx_data.win_ptr, KeyPress, KeyPressMask, keypress_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, KeyPress, KeyPressMask, keypress_handler, &hook_params);
 	mlx_hook(mlx_data.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_hook, &hook_params);
 	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask, button_press_hook, &hook_params); /* button1motionMask */
 
