@@ -13,6 +13,7 @@
 #include "fdf.h"
 #include "matrix.h"
 #include <math.h>
+#include <stdio.h>
 
 t_matrix	get_rot_matrix_z(double drehwinkel)
 {
@@ -70,7 +71,7 @@ t_matrix	get_pp_matrix(void)
 	pp_matrix.mat[0][2] = 0;
 	pp_matrix.mat[1][0] = 0;
 	pp_matrix.mat[1][1] = 0;
-	pp_matrix.mat[1][2] = 1;
+	pp_matrix.mat[1][2] = -1;
 	return (pp_matrix);
 }
 
@@ -90,7 +91,7 @@ t_matrix	get_parallel_projection(t_matrix vectors)
 	t_matrix	pp_matrix;
 	t_matrix	parallel_projection;
 
-	pp_matrix = get_rot_matrix();
+	pp_matrix = get_pp_matrix();
 	parallel_projection = mat_mul(pp_matrix, vectors);
 	free_matrix(pp_matrix);
 	return (parallel_projection);
@@ -184,6 +185,7 @@ t_projection	new_projection(char *filename, double width, double height)
 	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);
 	norm_vectors(&p.vectors);
+	/* p.projection = get_parallel_projection(p.vectors); */
 	p.projection = get_isometric_projection(p.vectors);
 	p.colors = map.colors;
 	p.init_scale = get_init_scale(p.projection, width, height);
