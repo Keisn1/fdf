@@ -13,7 +13,6 @@
 #include "fdf.h"
 #include "matrix.h"
 #include "my_mlx.h"
-#include <math.h>
 
 int	button_press_handler(int button, int x, int y, void **params)
 {
@@ -32,47 +31,6 @@ int	button_press_handler(int button, int x, int y, void **params)
 		scale_down(p);
 	display_wf(*p, *mlx_data);
 	return (0);
-}
-
-void	rebuild_projection(t_projection *p)
-{
-	t_matrix	rotation_z;
-	t_matrix	rotated_vectors;
-
-	rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
-	rotated_vectors = mat_mul(rotation_z, p->vectors);
-	free_matrix(rotation_z);
-	free_matrix(p->projection);
-	if (p->kind == ISOMETRIC)
-		p->projection = get_isometric_projection(rotated_vectors);
-	else if (p->kind == PARALLEL)
-		p->projection = get_parallel_projection(rotated_vectors);
-	free_matrix(rotated_vectors);
-	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
-	translate_projection(&p->projection, p->translation_h, p->translation_v);
-}
-
-void	change_projection(t_projection *p)
-{
-	t_matrix	rotation_z;
-	t_matrix	rotated_vectors;
-
-	if (p->kind == ISOMETRIC)
-		p->kind = PARALLEL;
-	else
-		p->kind = ISOMETRIC;
-
-	rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
-	rotated_vectors = mat_mul(rotation_z, p->vectors);
-	free_matrix(rotation_z);
-	free_matrix(p->projection);
-	if (p->kind == ISOMETRIC)
-		p->projection = get_isometric_projection(rotated_vectors);
-	else if (p->kind == PARALLEL)
-		p->projection = get_parallel_projection(rotated_vectors);
-	free_matrix(rotated_vectors);
-	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
-	translate_projection(&p->projection, p->translation_h, p->translation_v);
 }
 
 int	keypress_handler(int keycode, void **params)
@@ -149,7 +107,7 @@ int	button1_motion_hook(int x, int y, void **params)
 	return (0);
 }
 
-int	button_release_hook(int button, int x, int y, void **params)
+int	button_release_handler(int button, int x, int y, void **params)
 {
 	t_projection	*p;
 	t_mlx_data		*mlx_data;

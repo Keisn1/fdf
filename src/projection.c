@@ -14,104 +14,24 @@
 #include "matrix.h"
 #include <math.h>
 
-
-t_matrix	get_rot_matrix(void)
-{
-	t_matrix	rot_matrix;
-
-	rot_matrix.m = 2;
-	rot_matrix.n = 3;
-	rot_matrix.mat = (double **)malloc(sizeof(double *) * rot_matrix.m);
-	rot_matrix.mat[0] = (double *)malloc(sizeof(double *) * rot_matrix.n);
-	rot_matrix.mat[1] = (double *)malloc(sizeof(double *) * rot_matrix.n);
-	rot_matrix.mat[0][0] = 1. / sqrt(2);
-	rot_matrix.mat[0][1] = -1. / sqrt(2);
-	rot_matrix.mat[0][2] = 0;
-	rot_matrix.mat[1][0] = 1. / sqrt(6);
-	rot_matrix.mat[1][1] = 1. / sqrt(6);
-	rot_matrix.mat[1][2] = -sqrt(2.) / sqrt(3);
-	return (rot_matrix);
-}
-
-t_matrix	get_pp_matrix(void)
-{
-	t_matrix	pp_matrix;
-
-	pp_matrix.m = 2;
-	pp_matrix.n = 3;
-	pp_matrix.mat = (double **)malloc(sizeof(double *) * pp_matrix.m);
-	pp_matrix.mat[0] = (double *)malloc(sizeof(double *) * pp_matrix.n);
-	pp_matrix.mat[1] = (double *)malloc(sizeof(double *) * pp_matrix.n);
-	pp_matrix.mat[0][0] = 1;
-	pp_matrix.mat[0][1] = 0;
-	pp_matrix.mat[0][2] = 0;
-	pp_matrix.mat[1][0] = 0;
-	pp_matrix.mat[1][1] = 0;
-	pp_matrix.mat[1][2] = -1;
-	return (pp_matrix);
-}
-
-t_matrix	get_isometric_projection(t_matrix vectors)
-{
-	t_matrix	rot_matrix;
-	t_matrix	isometric_projection;
-
-	rot_matrix = get_rot_matrix();
-	isometric_projection = mat_mul(rot_matrix, vectors);
-	free_matrix(rot_matrix);
-	return (isometric_projection);
-}
-
-t_matrix	get_parallel_projection(t_matrix vectors)
-{
-	t_matrix	pp_matrix;
-	t_matrix	parallel_projection;
-
-	pp_matrix = get_pp_matrix();
-	parallel_projection = mat_mul(pp_matrix, vectors);
-	free_matrix(pp_matrix);
-	return (parallel_projection);
-}
-
-/* /\* translatation by minimum *\/ */
-/* void	translate_vectors_to_first_octant(t_matrix *mat) */
-/* { */
-/* 	t_extrema	extrema; */
-
-/* 	extrema = get_extrema(*mat); */
-/* 	translate_vectors(mat, -extrema.min_x, -extrema.min_y); */
-/* } */
-
 void	norm_vectors(t_matrix *mat)
 {
 	double	max_norm;
 	double	norm;
 	size_t	c1;
-	double	x_squared;
-	double	y_squared;
-	double	z_squared;
 
 	max_norm = 0;
 	norm = 0;
 	c1 = 0;
 	while (c1 < mat->n)
 	{
-		x_squared = pow(mat->mat[0][c1], 2);
-		y_squared = pow(mat->mat[1][c1], 2);
-		z_squared = pow(mat->mat[1][c1], 2);
-		norm = sqrt(x_squared + y_squared + z_squared);
+		norm = sqrt(pow(mat->mat[0][c1], 2) + pow(mat->mat[1][c1], 2)
+				+ pow(mat->mat[1][c1], 2));
 		if (norm > max_norm)
 			max_norm = norm;
 		c1++;
 	}
 	scale_matrix(mat, 1 / max_norm);
-}
-
-double	ft_abs_double(double x)
-{
-	if (x < 0)
-		return (-x);
-	return (x);
 }
 
 double	get_init_scale(t_matrix projection, double width, double height)
@@ -122,8 +42,12 @@ double	get_init_scale(t_matrix projection, double width, double height)
 	double		init_scale;
 
 	e = get_extrema(projection);
-	max_y = ft_abs_double(e.max_y) > ft_abs_double(e.min_y) ? ft_abs_double(e.max_y) : ft_abs_double(e.min_y);
-	max_x = ft_abs_double(e.max_x) > ft_abs_double(e.min_x) ? ft_abs_double(e.max_x) : ft_abs_double(e.min_x);
+	max_x = ft_abs_double(e.max_x);
+	if (ft_abs_double(e.min_x) > max_x)
+		max_x = ft_abs_double(e.min_x);
+	max_y = ft_abs_double(e.max_y);
+	if (ft_abs_double(e.min_y) > max_y)
+		max_y = ft_abs_double(e.min_y);
 	init_scale = width / 2.1 / max_x;
 	if (height / 2.1 / max_y < init_scale)
 		init_scale = height / 2.1 / max_y;
@@ -156,3 +80,22 @@ t_projection	new_projection(char *filename, double width, double height)
 	free_matrix(map.map);
 	return (p);
 }
+
+void	rebuild_projection(t_projection *p)
+{
+	t_matrix	rotation_z;
+	t_matrix	rotated_vectors;
+
+	rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
+	rotated_vectors = mat_mul(rotation_z, p->vectors);
+	free_matrix(rotation_z);
+	free_matrix(p->projection);
+	if (p->kind == ISOMETRIC)
+		p->projection = get_isometric_projection(rotated_vectors);
+	else if (p->kind == PARALLEL)
+		p->projection = get_parallel_projection(rotated_vectors);
+	free_matrix(rotated_vectors);
+	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
+	translate_projection(&p->projection, p->translation_h, p->translation_v);
+}
+

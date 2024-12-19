@@ -30,7 +30,7 @@ void	setup_hooks(t_mlx_data mlx_data, t_projection p)
 	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask, button_press_handler,
 		&hook_params);
 	mlx_hook(mlx_data.win_ptr, ButtonRelease, ButtonReleaseMask,
-		button_release_hook, &hook_params);
+		button_release_handler, &hook_params);
 	mlx_hook(mlx_data.win_ptr, MotionNotify, Button1MotionMask,
 		button1_motion_hook, &hook_params);
 	mlx_loop(mlx_data.mlx_ptr);
