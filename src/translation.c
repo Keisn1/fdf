@@ -30,16 +30,19 @@ void	translate_left(t_projection *p)
 	p->translation_h--;
 	translate_projection(&p->projection, -1, 0);
 }
+
 void	translate_right(t_projection *p)
 {
 	p->translation_h++;
 	translate_projection(&p->projection, 1, 0);
 }
+
 void	translate_up(t_projection *p)
 {
 	p->translation_v--;
 	translate_projection(&p->projection, 0, -1);
 }
+
 void	translate_down(t_projection *p)
 {
 	p->translation_v++;

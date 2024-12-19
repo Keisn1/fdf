@@ -13,7 +13,6 @@
 #include "fdf.h"
 #include "matrix.h"
 #include <math.h>
-#include <stdio.h>
 
 
 t_matrix	get_rot_matrix(void)
