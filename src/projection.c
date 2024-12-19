@@ -56,6 +56,24 @@ t_matrix	get_rot_matrix(void)
 	return (rot_matrix);
 }
 
+t_matrix	get_pp_matrix(void)
+{
+	t_matrix	pp_matrix;
+
+	pp_matrix.m = 2;
+	pp_matrix.n = 3;
+	pp_matrix.mat = (double **)malloc(sizeof(double *) * pp_matrix.m);
+	pp_matrix.mat[0] = (double *)malloc(sizeof(double *) * pp_matrix.n);
+	pp_matrix.mat[1] = (double *)malloc(sizeof(double *) * pp_matrix.n);
+	pp_matrix.mat[0][0] = 1;
+	pp_matrix.mat[0][1] = 0;
+	pp_matrix.mat[0][2] = 0;
+	pp_matrix.mat[1][0] = 0;
+	pp_matrix.mat[1][1] = 0;
+	pp_matrix.mat[1][2] = 1;
+	return (pp_matrix);
+}
+
 t_matrix	get_isometric_projection(t_matrix vectors)
 {
 	t_matrix	rot_matrix;
@@ -65,6 +83,17 @@ t_matrix	get_isometric_projection(t_matrix vectors)
 	isometric_projection = mat_mul(rot_matrix, vectors);
 	free_matrix(rot_matrix);
 	return (isometric_projection);
+}
+
+t_matrix	get_parallel_projection(t_matrix vectors)
+{
+	t_matrix	pp_matrix;
+	t_matrix	parallel_projection;
+
+	pp_matrix = get_rot_matrix();
+	parallel_projection = mat_mul(pp_matrix, vectors);
+	free_matrix(pp_matrix);
+	return (parallel_projection);
 }
 
 /* /\* translatation by minimum *\/ */
@@ -143,15 +172,14 @@ t_projection	new_projection(char *filename, double width, double height)
 	t_map			map;
 
 	map = parse_map(filename);
-	p.drehwinkel = 3;
+	p.drehwinkel = 2;
 	p.zoom_factor = 1.02;
-	p.translation_distance = 10;
 	p.zoom = 0;
 	p.rotation = 0;
 	p.translation_h = 0;
 	p.translation_v = 0;
-	p.t_x = 0;
-	p.t_y = 0;
+	p.last_pos_x = 0;
+	p.last_pos_y = 0;
 	p.rows = map.map.m;
 	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);

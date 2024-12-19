@@ -39,17 +39,16 @@ typedef struct s_projection {
 	t_matrix projection;
 	int zoom;
 	int rotation;
-	int translation_h;
-	int translation_v;
 	double zoom_factor;
 	double drehwinkel;
-	int translation_distance;
 	unsigned int rows;
 	unsigned int cols;
 	unsigned int** colors;
 	double init_scale;
-	int t_x;
-	int t_y;
+	int translation_h;
+	int translation_v;
+	int last_pos_x;
+	int last_pos_y;
 } t_projection;
 
 
@@ -70,7 +69,9 @@ void	translate_projection(t_matrix *mat, int x, int y);
 /* int					exit_program(int keycode, t_mlx_data *mlx_data); */
 int	keyrelease_hook(int keycode, void** params);
 int keypress_hook(int keycode, void **params);
-int button1press_hook(int button, int x, int y, void **param);
-int button_press_hook(int x, int y, void **params);
+int button_press_hook(int button, int x, int y, void **param);
+int button1_motion_hook(int x, int y, void **params);
 int button_release_hook(int button, int x, int y, void **params);
+
+double	ft_abs_double(double x);
 #endif // FDF_H

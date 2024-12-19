@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 	void			*hook_params[2] = {(void *)&mlx_data, (void *)&p};
 
 	(void)argc;
+	mlx_data.button1_pressed = false;
 	mlx_data.mlx_ptr = mlx_init();
 	if (!(mlx_data.mlx_ptr))
 	{
@@ -39,9 +40,9 @@ int	main(int argc, char **argv)
 	/* setup hooks */
 	mlx_hook(mlx_data.win_ptr, KeyPress, KeyPressMask, keypress_hook, &hook_params);
 	mlx_hook(mlx_data.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_hook, &hook_params);
-	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask, button1press_hook, &hook_params); /* button1motionMask */
+	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask, button_press_hook, &hook_params); /* button1motionMask */
 
-	mlx_hook(mlx_data.win_ptr, MotionNotify, Button1MotionMask, button_press_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, MotionNotify, Button1MotionMask, button1_motion_hook, &hook_params);
 	mlx_hook(mlx_data.win_ptr, ButtonRelease, ButtonReleaseMask, button_release_hook, &hook_params);
 	mlx_loop(mlx_data.mlx_ptr);
 	return (0);
