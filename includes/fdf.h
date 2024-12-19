@@ -63,7 +63,6 @@ t_matrix			map_to_vectors(t_map map);
 t_matrix	get_isometric_projection(t_matrix vectors);
 t_matrix	get_parallel_projection(t_matrix vectors);
 t_matrix	get_rot_matrix(void);
-t_matrix	get_rot_matrix_z(double drehwinkel);
 void				translate_vectors_to_first_octant(t_matrix *mat);
 void				norm_vectors(t_matrix *mat);
 void display_wf(t_projection p, t_mlx_data mlx_data);
@@ -74,9 +73,14 @@ void display_wf(t_projection p, t_mlx_data mlx_data);
 /* int					exit_program(int keycode, t_mlx_data *mlx_data); */
 int	keyrelease_hook(int keycode, void** params);
 int keypress_handler(int keycode, void **params);
-int button_press_hook(int button, int x, int y, void **param);
+int button_press_handler(int button, int x, int y, void **param);
 int button1_motion_hook(int x, int y, void **params);
 int button_release_hook(int button, int x, int y, void **params);
+
+/* rotation */
+t_matrix	get_rot_matrix_z(double drehwinkel);
+void	rotate_left(t_projection *p);
+void	rotate_right(t_projection *p);
 
 /* translation */
 void	translate_projection(t_matrix *mat, int x, int y);
