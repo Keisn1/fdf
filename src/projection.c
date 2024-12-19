@@ -106,19 +106,6 @@ t_matrix	get_parallel_projection(t_matrix vectors)
 /* 	translate_vectors(mat, -extrema.min_x, -extrema.min_y); */
 /* } */
 
-void	translate_projection(t_matrix *mat, int x, int y)
-{
-	unsigned int	c2;
-
-	c2 = 0;
-	while (c2 < mat->n)
-	{
-		mat->mat[0][c2] += x;
-		mat->mat[1][c2] += y;
-		c2++;
-	}
-}
-
 void	norm_vectors(t_matrix *mat)
 {
 	double	max_norm;
@@ -185,8 +172,7 @@ t_projection	new_projection(char *filename, double width, double height)
 	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);
 	norm_vectors(&p.vectors);
-	p.kind = 1;
-	/* p.projection = get_parallel_projection(p.vectors); */
+	p.kind = ISOMETRIC;
 	p.projection = get_isometric_projection(p.vectors);
 	p.colors = map.colors;
 	p.init_scale = get_init_scale(p.projection, width, height);

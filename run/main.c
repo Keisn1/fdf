@@ -17,14 +17,30 @@
 #include <X11/X.h>
 #include <unistd.h>
 
-
-int	main(int argc, char **argv)
+void	setup_hooks(t_mlx_data mlx_data, t_projection p)
 {
-	t_mlx_data		mlx_data;
-	t_projection	p;
-	void			*hook_params[2] = {(void *)&mlx_data, (void *)&p};
+	void	*hook_params[2];
 
-	(void)argc;
+	hook_params[0] = (void *)&mlx_data;
+	hook_params[1] = (void *)&p;
+	mlx_hook(mlx_data.win_ptr, KeyPress, KeyPressMask, keypress_handler,
+		&hook_params);
+	mlx_hook(mlx_data.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_hook,
+		&hook_params);
+	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask, button_press_hook,
+		&hook_params);
+	mlx_hook(mlx_data.win_ptr, ButtonRelease, ButtonReleaseMask,
+		button_release_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, MotionNotify, Button1MotionMask,
+		button1_motion_hook, &hook_params);
+	mlx_loop(mlx_data.mlx_ptr);
+}
+
+int	fdf(char *filename)
+{
+	t_projection	p;
+	t_mlx_data		mlx_data;
+
 	mlx_data.button1_pressed = false;
 	mlx_data.mlx_ptr = mlx_init();
 	if (!(mlx_data.mlx_ptr))
@@ -32,18 +48,28 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Error: Could not establish a connection", STDERR_FILENO);
 		return (1);
 	}
-	/* get a window */
 	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "fdf");
-	p = new_projection(argv[1], 1920, 1080);
-
+	p = new_projection(filename, 1920, 1080);
 	display_wf(p, mlx_data);
-	/* setup hooks */
-	mlx_hook(mlx_data.win_ptr, KeyPress, KeyPressMask, keypress_handler, &hook_params);
-	mlx_hook(mlx_data.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_hook, &hook_params);
-	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask, button_press_hook, &hook_params); /* button1motionMask */
-
-	mlx_hook(mlx_data.win_ptr, MotionNotify, Button1MotionMask, button1_motion_hook, &hook_params);
-	mlx_hook(mlx_data.win_ptr, ButtonRelease, ButtonReleaseMask, button_release_hook, &hook_params);
-	mlx_loop(mlx_data.mlx_ptr);
+	setup_hooks(mlx_data, p);
 	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	int	fd;
+
+	if (argc != 2)
+	{
+		ft_putendl_fd("Error", STDERR_FILENO);
+		return (1);
+	}
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putendl_fd("Error", STDERR_FILENO);
+		return (1);
+	}
+	close(fd);
+	return (fdf(argv[1]));
 }

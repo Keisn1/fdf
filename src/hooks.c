@@ -43,9 +43,9 @@ void	rotate_left(t_projection *p)
 	rotated_vectors = mat_mul(rotation_z, p->vectors);
 	free_matrix(rotation_z);
 	free_matrix(p->projection);
-	if (p->kind == 1)
+	if (p->kind == ISOMETRIC)
 		p->projection = get_isometric_projection(rotated_vectors);
-	else
+	else if (p->kind == PARALLEL)
 		p->projection = get_parallel_projection(rotated_vectors);
 	free_matrix(rotated_vectors);
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
@@ -62,9 +62,9 @@ void	rotate_right(t_projection *p)
 	rotated_vectors = mat_mul(rotation_z, p->vectors);
 	free_matrix(rotation_z);
 	free_matrix(p->projection);
-	if (p->kind == 1)
+	if (p->kind == ISOMETRIC)
 		p->projection = get_isometric_projection(rotated_vectors);
-	else
+	else if (p->kind == PARALLEL)
 		p->projection = get_parallel_projection(rotated_vectors);
 	free_matrix(rotated_vectors);
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
@@ -91,57 +91,25 @@ int	button_press_hook(int button, int x, int y, void **params)
 	return (0);
 }
 
-void	translate_left(t_projection *p)
-{
-	p->translation_h--;
-	translate_projection(&p->projection, -1, 0);
-}
-void	translate_right(t_projection *p)
-{
-	p->translation_h++;
-	translate_projection(&p->projection, 1, 0);
-}
-void	translate_up(t_projection *p)
-{
-	p->translation_v--;
-	translate_projection(&p->projection, 0, -1);
-}
-void	translate_down(t_projection *p)
-{
-	p->translation_v++;
-	translate_projection(&p->projection, 0, 1);
-}
-
 void change_projection(t_projection *p) {
 	t_matrix rotation_z;
 	t_matrix rotated_vectors;
-	if (p->kind == 1 )
-		p->kind = 2;
+	if (p->kind == ISOMETRIC )
+		p->kind = PARALLEL;
 	else
-		p->kind = 1;
+		p->kind = ISOMETRIC;
 
-	if (p->kind == 1) {
-		rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
-		rotated_vectors = mat_mul(rotation_z, p->vectors);
-		free_matrix(rotation_z);
-		free_matrix(p->projection);
+	rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
+	rotated_vectors = mat_mul(rotation_z, p->vectors);
+	free_matrix(rotation_z);
+	free_matrix(p->projection);
+	if (p->kind == ISOMETRIC)
 		p->projection = get_isometric_projection(rotated_vectors);
-		free_matrix(rotated_vectors);
-		scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
-		translate_projection(&p->projection, p->translation_h , p->translation_v );
-	}
-	if (p->kind == 2) {
-		rotation_z = get_rot_matrix_z(p->rotation * p->drehwinkel);
-		rotated_vectors = mat_mul(rotation_z, p->vectors);
-		free_matrix(rotation_z);
-		free_matrix(p->projection);
+	else if (p->kind == PARALLEL)
 		p->projection = get_parallel_projection(rotated_vectors);
-		free_matrix(rotated_vectors);
-		scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
-		translate_projection(&p->projection, p->translation_h , p->translation_v );
-	}
-
-
+	free_matrix(rotated_vectors);
+	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
+	translate_projection(&p->projection, p->translation_h , p->translation_v );
 }
 
 int	keypress_handler(int keycode, void **params)

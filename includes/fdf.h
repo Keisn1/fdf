@@ -33,8 +33,13 @@ char				*advance_to_comma_or_ws(char *str);
 unsigned int		ft_hex_to_unsigned(char *hex_str);
 void	free_colors(unsigned int** colors, unsigned int rows);
 
+enum kind_p {
+	ISOMETRIC,
+	PARALLEL
+};
+
 typedef struct s_projection {
-	int kind;
+	enum kind_p kind;
 	t_matrix vectors;
 	t_matrix projection;
 	int zoom;
@@ -62,7 +67,6 @@ t_matrix	get_rot_matrix_z(double drehwinkel);
 void				translate_vectors_to_first_octant(t_matrix *mat);
 void				norm_vectors(t_matrix *mat);
 void display_wf(t_projection p, t_mlx_data mlx_data);
-void	translate_projection(t_matrix *mat, int x, int y);
 
 /* parsing */
 
@@ -74,5 +78,15 @@ int button_press_hook(int button, int x, int y, void **param);
 int button1_motion_hook(int x, int y, void **params);
 int button_release_hook(int button, int x, int y, void **params);
 
+/* translation */
+void	translate_projection(t_matrix *mat, int x, int y);
+void	translate_left(t_projection *p);
+void	translate_right(t_projection *p);
+void	translate_up(t_projection *p);
+void	translate_down(t_projection *p);
+
 double	ft_abs_double(double x);
+
+
+
 #endif // FDF_H
