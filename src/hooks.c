@@ -43,7 +43,7 @@ void	rotate_left(t_projection *p)
 	rotated_vectors = mat_mul(rotation_z, p->vectors);
 	free_matrix(rotation_z);
 	free_matrix(p->projection);
-	p->projection = get_isometric_projection(rotated_vectors);
+	p->projection = get_parallel_projection(rotated_vectors);
 	free_matrix(rotated_vectors);
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
 	translate_projection(&p->projection, p->translation_h , p->translation_v );
@@ -59,7 +59,7 @@ void	rotate_right(t_projection *p)
 	rotated_vectors = mat_mul(rotation_z, p->vectors);
 	free_matrix(rotation_z);
 	free_matrix(p->projection);
-	p->projection = get_isometric_projection(rotated_vectors);
+	p->projection = get_parallel_projection(rotated_vectors);
 	free_matrix(rotated_vectors);
 	scale_matrix(&p->projection, p->init_scale * pow(p->zoom_factor, p->zoom));
 	translate_projection(&p->projection, p->translation_h , p->translation_v );

@@ -56,6 +56,7 @@ typedef struct s_projection {
 t_projection	new_projection(char *filename, double width, double height);
 t_matrix			map_to_vectors(t_map map);
 t_matrix	get_isometric_projection(t_matrix vectors);
+t_matrix	get_parallel_projection(t_matrix vectors);
 t_matrix	get_rot_matrix(void);
 t_matrix	get_rot_matrix_z(double drehwinkel);
 void				translate_vectors_to_first_octant(t_matrix *mat);

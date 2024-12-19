@@ -185,8 +185,8 @@ t_projection	new_projection(char *filename, double width, double height)
 	p.cols = map.map.n;
 	p.vectors = map_to_vectors(map);
 	norm_vectors(&p.vectors);
-	/* p.projection = get_parallel_projection(p.vectors); */
-	p.projection = get_isometric_projection(p.vectors);
+	p.projection = get_parallel_projection(p.vectors);
+	/* p.projection = get_isometric_projection(p.vectors); */
 	p.colors = map.colors;
 	p.init_scale = get_init_scale(p.projection, width, height);
 	scale_matrix(&p.projection, p.init_scale);
