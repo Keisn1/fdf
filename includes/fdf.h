@@ -77,6 +77,10 @@ int button_press_handler(int button, int x, int y, void **param);
 int button1_motion_hook(int x, int y, void **params);
 int button_release_hook(int button, int x, int y, void **params);
 
+/* scaling */
+void	scale_up(t_projection *p);
+void	scale_down(t_projection *p);
+
 /* rotation */
 t_matrix	get_rot_matrix_z(double drehwinkel);
 void	rotate_left(t_projection *p);

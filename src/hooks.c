@@ -17,23 +17,6 @@
 #include <math.h>
 #include <stdio.h>
 
-void	scale_up(t_projection *p)
-{
-	p->zoom++;
-	scale_matrix(&p->projection, p->zoom_factor);
-	p->translation_h = p->translation_h * p->zoom_factor;
-	p->translation_v = p->translation_v * p->zoom_factor;
-}
-
-void	scale_down(t_projection *p)
-{
-	p->zoom--;
-	scale_matrix(&p->projection, 1 / p->zoom_factor);
-	p->translation_h = p->translation_h / p->zoom_factor;
-	p->translation_v = p->translation_v / p->zoom_factor;
-}
-
-
 int	button_press_handler(int button, int x, int y, void **params)
 {
 	t_mlx_data		*mlx_data;
