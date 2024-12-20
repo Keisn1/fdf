@@ -11,6 +11,7 @@ FSANITIZE :=
 
 # dirs
 SRC_DIR := src
+INCLUDES_DIR := includes
 RUN_DIR := run
 OBJ_DIR := obj
 BIN_DIR := bin
@@ -45,9 +46,11 @@ $(BIN_DIR):
 
 ############ PHONY ##################
 clean:
+	$(MAKE) -C libft $@
 	rm -f $(OBJ_FILES)
 
 fclean: clean
+	$(MAKE) -C libft $@
 	rm -rf $(OBJ_DIR)
 	rm -rf $(BIN_DIR)
 	rm -rf $(BUILD_DIR)
@@ -55,31 +58,15 @@ fclean: clean
 
 re: fclean all
 
-test:
-	cmake -S . -B build -DBUILD_TEST=ON && \
-	cmake --build build && \
-	./build/run_tests
-
-compile_commands:
-	cmake -S . -B build -DBUILD_TEST=ON -DBUILD_FDF=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
-	rm -f compile_commands.json
-	mv build/compile_commands.json ./compile_commands.json
-
 libft:
 	$(MAKE) -C libft
 
 libft-re:
 	$(MAKE) -C libft re
 
-libft-clean:
-	$(MAKE) -C libft clean
-
-libft-fclean:
-	$(MAKE) -C libft fclean
-
 norminette:
 	- norminette -R CheckForbiddenSourceHeader -R CheckDefine $(SRC_DIR)/
-	- norminette -R CheckForbiddenSourceHeader -R CheckDefine $(INCLUDES)/
+	- norminette -R CheckForbiddenSourceHeader -R CheckDefine $(INCLUDES_DIR)/
 
 .PHONY: all clean fclean test libft test-obj-files
 
