@@ -6,7 +6,6 @@
 
 #Compiler and flags
 CC := cc
-CXX := g++
 CFLAGS := -Wall -Wextra -Werror
 
 #Directories and extensions
@@ -30,11 +29,8 @@ all: $(NAME)
 $(NAME): $(OBJ_FILES)
 	ar rc $@ $^
 
-bonus: $(OBJ_FILES_BONUS)
-	ar r $(NAME) $^
-
 # Compile C source files to object files
-$%.o: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ############ PHONY ##################

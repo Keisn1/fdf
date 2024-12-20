@@ -16,6 +16,7 @@ RUN_DIR := run
 OBJ_DIR := obj
 BIN_DIR := bin
 BUILD_DIR := build
+LIBFT_DIR := libft
 
 # libs
 INCLUDES := -Iminilibx-linux -Ilibft -Iincludes
@@ -32,7 +33,7 @@ NAME := fdf
 ############ Rules ##################
 all: $(NAME)
 
-$(NAME): libft $(OBJ_FILES) $(RUN_DIR)/main.c
+$(NAME): $(LIBFT_DIR)/libft.a $(OBJ_FILES) $(RUN_DIR)/main.c
 	$(CC) $(CFLAGS) $(OBJ_FILES) $(FSANITIZE) $(RUN_DIR)/main.c -o $(NAME) $(LIBMLX) $(LIBFT) $(INCLUDES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
@@ -44,14 +45,17 @@ $(OBJ_DIR):
 $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)
 
+$(LIBFT_DIR)/libft.a:
+	$(MAKE) -C libft
+
 ############ PHONY ##################
 clean:
 	$(MAKE) -C libft $@
 	rm -f $(OBJ_FILES)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C libft $@
-	rm -rf $(OBJ_DIR)
 	rm -rf $(BIN_DIR)
 	rm -rf $(BUILD_DIR)
 	rm -f fdf
