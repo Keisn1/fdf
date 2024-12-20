@@ -74,6 +74,9 @@ libft-re:
 libft-clean:
 	$(MAKE) -C libft clean
 
+libft-fclean:
+	$(MAKE) -C libft fclean
+
 norminette:
 	- norminette -R CheckForbiddenSourceHeader -R CheckDefine $(SRC_DIR)/
 	- norminette -R CheckForbiddenSourceHeader -R CheckDefine $(INCLUDES)/
