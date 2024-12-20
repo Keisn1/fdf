@@ -1,9 +1,0 @@
-:PROPERTIES:
-:ID:       3b6a655c-3eb0-4333-abff-bf68bbfc8f9d
-:END:
-#+title: X11 masks
-#+date: [2024-10-25 Fri 20:40]
-#+startup: overview
-
-- whitelist/blacklist events from your event suscriptions
-- mask to register to only one key when it triggers, or to all keys if you leave your mask to the default

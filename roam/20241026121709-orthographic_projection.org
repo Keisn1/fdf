@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       7c5e3a94-89c4-428f-ad6a-08f023224b6a
-:END:
-#+title: orthographic projection
-#+date: [2024-10-26 Sat 12:17]
-#+startup: overview
-
-means of representing three-dimensional objects in 2 dimensions
