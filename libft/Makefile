@@ -10,7 +10,6 @@ CFLAGS := -Wall -Wextra -Werror
 
 #Directories and extensions
 BIN_DIR := ./bin
-TESTS_DIR := ./tests
 
 #Source files
 SRC_FILES := $(wildcard *.c)
@@ -49,19 +48,4 @@ norminette:
 #Phony targets
 .PHONY: all bonus clean fclean re bear test-fsanitize norminette
 
-#Printing
-print_srcs:
-	@echo $(SRC_FILES)
-
-print_objs:
-	@echo $(OBJ_FILES)
-
-print_test_files:
-	@echo $(TEST_FILES)
-
-print_test_objs:
-	@echo $(TEST_OBJ_FILES)
-
-print_test_target:
-	@echo $(TEST_TARGET)
 #end
