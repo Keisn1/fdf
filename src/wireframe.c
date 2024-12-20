@@ -66,7 +66,7 @@ void	display_wf(t_projection p, t_mlx_data mlx_data)
 {
 	t_img	img;
 
-	img = new_img(mlx_data.mlx_ptr, 1920, 1080);
+	img = new_img(mlx_data.mlx_ptr, mlx_data.size_x, mlx_data.size_y);
 	plot_projection_to_img(mlx_data, img, p);
 	mlx_clear_window(mlx_data.mlx_ptr, mlx_data.win_ptr);
 	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, img.img, 0, 0);

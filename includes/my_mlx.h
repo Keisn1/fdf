@@ -22,6 +22,9 @@ typedef struct s_mlx_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	bool	button1_pressed;
+	int		size_x;
+	int		size_y;
+
 }			t_mlx_data;
 
 typedef struct s_pixel

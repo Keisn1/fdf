@@ -41,15 +41,18 @@ int	fdf(char *filename)
 	t_projection	p;
 	t_mlx_data		mlx_data;
 
+
 	mlx_data.button1_pressed = false;
 	mlx_data.mlx_ptr = mlx_init();
+	mlx_data.size_x = 3840;
+	mlx_data.size_y = 2160;
 	if (!(mlx_data.mlx_ptr))
 	{
 		ft_putendl_fd("Error: Could not establish a connection", STDERR_FILENO);
 		return (1);
 	}
-	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, 1920, 1080, "fdf");
-	p = new_projection(filename, 1920, 1080);
+	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, mlx_data.size_x, mlx_data.size_y, "fdf");
+	p = new_projection(filename, mlx_data.size_x, mlx_data.size_y);
 	display_wf(p, mlx_data);
 	setup_hooks(mlx_data, p);
 	return (0);
