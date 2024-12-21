@@ -25,7 +25,7 @@ void	setup_hooks(t_mlx_data mlx_data, t_projection p)
 	hook_params[1] = (void *)&p;
 	mlx_hook(mlx_data.win_ptr, KeyPress, KeyPressMask, keypress_handler,
 		&hook_params);
-	mlx_hook(mlx_data.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_hook,
+	mlx_hook(mlx_data.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_handler,
 		&hook_params);
 	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask,
 		button_press_handler, &hook_params);
@@ -33,7 +33,7 @@ void	setup_hooks(t_mlx_data mlx_data, t_projection p)
 		button_release_handler, &hook_params);
 	mlx_hook(mlx_data.win_ptr, MotionNotify, Button1MotionMask,
 		button1_motion_hook, &hook_params);
-	mlx_hook(mlx_data.win_ptr, DestroyNotify, ButtonPressMask, destroy_hook,
+	mlx_hook(mlx_data.win_ptr, DestroyNotify, ButtonPressMask, destroy_handler,
 		&hook_params);
 	mlx_loop(mlx_data.mlx_ptr);
 }
