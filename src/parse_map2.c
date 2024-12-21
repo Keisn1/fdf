@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 unsigned int	ft_hex_to_unsigned(char *hex_str)
 {
