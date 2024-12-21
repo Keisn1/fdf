@@ -48,9 +48,9 @@ double	get_init_scale(t_matrix projection, double width, double height)
 	max_y = ft_abs_double(e.max_y);
 	if (ft_abs_double(e.min_y) > max_y)
 		max_y = ft_abs_double(e.min_y);
-	init_scale = width / 2.1 / max_x;
-	if (height / 2.1 / max_y < init_scale)
-		init_scale = height / 2.1 / max_y;
+	init_scale = width / 2.2 / max_x;
+	if (height / 2.2 / max_y < init_scale)
+		init_scale = height / 2.2 / max_y;
 	return (init_scale);
 }
 
