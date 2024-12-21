@@ -27,12 +27,14 @@ void	setup_hooks(t_mlx_data mlx_data, t_projection p)
 		&hook_params);
 	mlx_hook(mlx_data.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_hook,
 		&hook_params);
-	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask, button_press_handler,
-		&hook_params);
+	mlx_hook(mlx_data.win_ptr, ButtonPress, ButtonPressMask,
+		button_press_handler, &hook_params);
 	mlx_hook(mlx_data.win_ptr, ButtonRelease, ButtonReleaseMask,
 		button_release_handler, &hook_params);
 	mlx_hook(mlx_data.win_ptr, MotionNotify, Button1MotionMask,
 		button1_motion_hook, &hook_params);
+	mlx_hook(mlx_data.win_ptr, DestroyNotify, ButtonPressMask, destroy_hook,
+		&hook_params);
 	mlx_loop(mlx_data.mlx_ptr);
 }
 
@@ -40,7 +42,6 @@ int	fdf(char *filename)
 {
 	t_projection	p;
 	t_mlx_data		mlx_data;
-
 
 	mlx_data.button1_pressed = false;
 	mlx_data.mlx_ptr = mlx_init();
@@ -51,7 +52,8 @@ int	fdf(char *filename)
 		ft_putendl_fd("Error: Could not establish a connection", STDERR_FILENO);
 		return (1);
 	}
-	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, mlx_data.size_x, mlx_data.size_y, "fdf");
+	mlx_data.win_ptr = mlx_new_window(mlx_data.mlx_ptr, mlx_data.size_x,
+			mlx_data.size_y, "fdf");
 	p = new_projection(filename, mlx_data.size_x, mlx_data.size_y);
 	display_wf(p, mlx_data);
 	setup_hooks(mlx_data, p);
