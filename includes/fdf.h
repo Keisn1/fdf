@@ -76,14 +76,14 @@ void						display_wf(t_projection p, t_mlx_data mlx_data);
 
 /* hooks */
 /* int					exit_program(int keycode, t_mlx_data *mlx_data); */
-int							keyrelease_hook(int keycode, void **params);
+int							keyrelease_handler(int keycode, void **params);
 int							keypress_handler(int keycode, void **params);
 int							button_press_handler(int button, int x, int y,
 								void **param);
 int							button1_motion_hook(int x, int y, void **params);
 int							button_release_handler(int button, int x, int y,
 								void **params);
-int							destroy_hook(void **params);
+int							destroy_handler(void **params);
 
 /* scaling */
 void						scale_up(t_projection *p);
