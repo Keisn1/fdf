@@ -83,6 +83,7 @@ int							button_press_handler(int button, int x, int y,
 int							button1_motion_hook(int x, int y, void **params);
 int							button_release_handler(int button, int x, int y,
 								void **params);
+int							destroy_hook(void **params);
 
 /* scaling */
 void						scale_up(t_projection *p);
