@@ -21,7 +21,7 @@ LIBFT_DIR := libft
 # libs
 INCLUDES := -Iminilibx-linux -Ilibft -Iincludes
 LIBFT := -Llibft -lft
-LIBMLX := -lmlx -L/usr/lib -lXext -lX11 -lm -lz
+LIBMLX := -lmlx -lXext -lX11 -lm
 
 # files
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
