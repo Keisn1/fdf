@@ -1,4 +1,17 @@
 #+title: FDF
+#+macro: fdf-cover [[file:cover-fdf-bonus.png]]
+#+options: ^:nil
+
+{{{fdf-cover}}}
+
+#+begin_export markdown
+<p align="center">
+<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Keisn1/fdf?color=blueviolet" />
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Keisn1/fdf?color=blue" />
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Keisn1/fdf?color=brightgreen" />
+<img alt="GitHub Lines of Code" src="https://tokei.rs/b1/github/Keisn1/fdf?category=code" />
+</p>
+#+end_export
 
 * FDF
 - [ ] Executable must be named FDF
