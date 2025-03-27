@@ -1,6 +1,3 @@
-
-![](cover-fdf-bonus.png)
-
 <p align="center">
 <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Keisn1/fdf?color=blueviolet" />
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Keisn1/fdf?color=blue" />
